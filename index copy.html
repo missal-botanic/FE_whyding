@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <script src="js/jquery-1.9.1.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-----</title>
+    <meta property="og:title" content="---" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="./lib/jquery.ui.core.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.widget.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.mouse.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.draggable.1.10.3.min.js"></script>
+    <!-- wColorPicker -->
+    <link rel="Stylesheet" type="text/css" href="./lib/wColorPicker.min.css" />
+    <script type="text/javascript" src="./lib/wColorPicker.min.js"></script>
+    <!-- wPaint -->
+    <link rel="Stylesheet" type="text/css" href="./wPaint.min.css" />
+    <script type="text/javascript" src="./wPaint.min.js"></script>
+    <script type="text/javascript" src="./plugins/main/wPaint.menu.main.min.js"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+        </script>
+
+    <!-- bootstrap end -->
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="js/ajax.js" defer></script>
+    <script src="js/buttons.js" defer></script>
+    <script src="js/sub.js"></script>
+    <script src="js/wpaint.js"></script>
+    <style>
+        .oswald-unique {
+            font-family: "Oswald", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        #preview {
+          margin-top: 20px;
+          max-width: 100%;
+          height: auto;
+        }
+        .error {
+          color: red;
+        }
+        .upload-section {
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+        }
+      </style>
+    </head>
+    <body>
+      
+    
+      <div class="container mt-5">
+        <h1 class="text-center mb-4">이미지 업로드</h1>
+        
+        <!-- 업로드 섹션 -->
+        <div class="upload-section">
+          <div class="form-group">
+            <label for="imageUpload">이미지 파일 선택 (JPG, PNG)</label>
+            <input type="file" class="form-control-file" id="imageUpload" accept="image/jpeg, image/png">
+            <small id="fileHelp" class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small>
+          </div>
+          
+          <div id="error" class="error"></div>
+          
+          <div id="imageDetails"></div>
+          
+          <!-- 미리보기 이미지 -->
+          <img id="preview" src="" alt="미리보기 이미지" class="img-fluid" style="display: none;">
+        </div>
+      </div>
+    
+      <script>
+        $(document).ready(function() {
+          // 변수 선언
+          let imageBase64 = '';
+          let imageRatio = '';
+    
+          // 파일 업로드 처리
+          $('#imageUpload').on('change', function(e) {
+            const file = e.target.files[0];
+            
+            if (file) {
+              const fileType = file.type.split('/')[1];
+              const fileSize = file.size / 1024 / 1024; // MB 단위로 변환
+              
+              // 이미지 파일 형식 체크 (jpg, png만 허용)
+              if (fileType !== 'jpeg' && fileType !== 'png') {
+                $('#error').text('JPEG 또는 PNG 형식의 이미지 파일만 업로드 가능합니다.');
+                $('#preview').hide();
+                return;
+              }
+              
+              // 파일 크기 체크 (2MB 이하)
+              if (fileSize > 2) {
+                $('#error').text('이미지 크기는 2MB 이하만 업로드 가능합니다.');
+                $('#preview').hide();
+                return;
+              }
+    
+              // 에러 메시지 초기화
+              $('#error').text('');
+    
+              // 파일을 Base64로 변환
+              const reader = new FileReader();
+              reader.onload = function(event) {
+                imageBase64 = event.target.result;  // Base64 데이터
+                $('#preview').attr('src', imageBase64).show();
+    
+                // 이미지 비율 계산
+                const img = new Image();
+                img.onload = function() {
+                  const width = img.width;
+                  const height = img.height;
+                  imageRatio = (width / height).toFixed(2);  // 비율 계산
+    
+                  // 이미지 비율과 기타 정보 출력
+                  $('#imageDetails').html(`
+                    <p>이미지 비율: ${imageRatio}</p>
+                    <p>이미지 크기: ${fileSize.toFixed(2)} MB</p>
+                  `);
+                };
+                img.src = imageBase64; // 이미지 로드
+              };
+              reader.readAsDataURL(file);  // Base64로 파일 읽기
+            }
+          });
+        });
+      </script>
+</body>
+
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <script src="js/jquery-1.9.1.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-----</title>
+    <meta property="og:title" content="---" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="./lib/jquery.ui.core.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.widget.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.mouse.1.10.3.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.ui.draggable.1.10.3.min.js"></script>
+    <!-- wColorPicker -->
+    <link rel="Stylesheet" type="text/css" href="./lib/wColorPicker.min.css" />
+    <script type="text/javascript" src="./lib/wColorPicker.min.js"></script>
+    <!-- wPaint -->
+    <link rel="Stylesheet" type="text/css" href="./wPaint.min.css" />
+    <script type="text/javascript" src="./wPaint.min.js"></script>
+    <script type="text/javascript" src="./plugins/main/wPaint.menu.main.min.js"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+        </script>
+
+    <!-- bootstrap end -->
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <script src="js/ajax.js" defer></script>
+    <script src="js/buttons.js" defer></script>
+    <script src="js/sub.js"></script>
+    <script src="js/wpaint.js"></script>
+    <style>
+        .oswald-unique {
+            font-family: "Oswald", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        
+    </style>
+    </head>
+
+    <body>
+
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">이미지 업로드 및 조합</h1>
+
+            <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
+            <div class="image-result" id="imageResult">
+                <div class="dummy-image">
+                    <img id="combinedImage" src="" alt="조합된 이미지" style="display: none;">
+                </div>
+                <p>조합된 이미지</p>
+            </div>
+
+            <!-- 하단: 이미지 업로드 영역 -->
+            <div class="image-container">
+                <div class="image-box" id="source_image">
+                    <h4>Source 이미지 업로드</h4>
+                    <input type="file" class="form-control-file" id="imageUploadSource" accept="image/jpeg, image/png">
+                    <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small>
+                    <div id="errorSource" class="error"></div>
+                    <img id="previewSource" src="" alt="미리보기 이미지" style="display: none;">
+                </div>
+
+                <div class="image-box" id="target_image">
+                    <h4>Target 이미지 업로드</h4>
+                    <input type="file" class="form-control-file" id="imageUploadTarget" accept="image/jpeg, image/png">
+                    <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small>
+                    <div id="errorTarget" class="error"></div>
+                    <img id="previewTarget" src="" alt="미리보기 이미지" style="display: none;">
+                </div>
+            </div>
+
+            <!-- 생성 버튼 -->
+            <div class="text-center">
+                <button id="createImageButton" class="btn btn-primary">이미지 생성</button>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                let imageBase64Source = '';
+                let imageBase64Target = '';
+
+                // Source 이미지 업로드 처리
+                $('#imageUploadSource').on('change', function (e) {
+                    const file = e.target.files[0];
+
+                    if (file) {
+                        const fileType = file.type.split('/')[1];
+                        const fileSize = file.size / 1024 / 1024; // MB 단위로 변환
+
+                        if (fileType !== 'jpeg' && fileType !== 'png') {
+                            $('#errorSource').text('JPEG 또는 PNG 형식의 이미지 파일만 업로드 가능합니다.');
+                            $('#previewSource').hide();
+                            return;
+                        }
+
+                        if (fileSize > 2) {
+                            $('#errorSource').text('이미지 크기는 2MB 이하만 업로드 가능합니다.');
+                            $('#previewSource').hide();
+                            return;
+                        }
+
+                        $('#errorSource').text('');
+
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            imageBase64Source = event.target.result;
+                            $('#previewSource').attr('src', imageBase64Source).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Target 이미지 업로드 처리
+                $('#imageUploadTarget').on('change', function (e) {
+                    const file = e.target.files[0];
+
+                    if (file) {
+                        const fileType = file.type.split('/')[1];
+                        const fileSize = file.size / 1024 / 1024;
+
+                        if (fileType !== 'jpeg' && fileType !== 'png') {
+                            $('#errorTarget').text('JPEG 또는 PNG 형식의 이미지 파일만 업로드 가능합니다.');
+                            $('#previewTarget').hide();
+                            return;
+                        }
+
+                        if (fileSize > 2) {
+                            $('#errorTarget').text('이미지 크기는 2MB 이하만 업로드 가능합니다.');
+                            $('#previewTarget').hide();
+                            return;
+                        }
+
+                        $('#errorTarget').text('');
+
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            imageBase64Target = event.target.result;
+                            $('#previewTarget').attr('src', imageBase64Target).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // 이미지 생성 버튼 클릭
+                $('#createImageButton').on('click', function () {
+                    if (!imageBase64Source || !imageBase64Target) {
+                        alert('Source 이미지와 Target 이미지를 모두 업로드해주세요.');
+                        return;
+                    }
+
+                    // AJAX를 통해 서버에 데이터 전송
+                    $.ajax({
+                        url: 'https://whyding.bluest-dealers0m.workers.dev', // 서버 URL
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "source_image": imageBase64Source,
+                            "target_image": imageBase64Target,
+                            "source_faces_index": [0],
+                            "face_index": [0],
+                            "upscaler": "None",
+                            "scale": 1,
+                            "upscale_visibility": 1,
+                            "face_restorer": 'None',
+                            "restorer_visibility": 1,
+                            "codeformer_weight": 0.5,
+                            "restore_first": 1,
+                            "model": "inswapper_128.onnx",
+                            "gender_source": 0,
+                            "gender_target": 0,
+                            "save_to_file": 0,
+                            "result_file_path": "",
+                            "device": "CPU",
+                            "mask_face": 0,
+                            "select_source": 0,
+                            "face_model": "None",
+                            "source_folder": "",
+                            "random_image": 0,
+                            "upscale_force": 0,
+                            "det_thresh": 0.5,
+                            "det_maxnum": 0
+                        }),
+                        success: function (response) {
+                            // 서버에서 받은 응답을 기반으로 결과 처리
+                            // 예: 조합된 이미지를 상단에 표시
+                            if (response && response.image) {
+                                // 응답에서 받은 Base64 이미지를 img 태그에 넣기
+                                var imageSrc = 'data:image/jpeg;base64,' + response.image; // base64 문자열을 이미지 형식으로 처리
+                                $('#combinedImage').attr('src', imageSrc).show();
+                                $('#imageResult').show();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX 요청 실패:', status, error);
+                            alert('서버 요청에 실패했습니다. 다시 시도해주세요.');
+                        }
+                    });
+
+                });
+            });
+        </script>
+
+    </body>
+
+
+</html>
