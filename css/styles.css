@@ -31,7 +31,7 @@
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
     text-align: center;
 }
 
@@ -66,4 +66,3 @@
     height: 100%;
     object-fit: contain;  /* 비율을 유지하면서 이미지 크기를 맞춥니다 */
 }
-

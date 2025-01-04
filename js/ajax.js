@@ -5,10 +5,33 @@ function imageResult(response) {
         var imageSrc = 'data:image/jpeg;base64,' + response.image;
         $('#combinedImage').attr('src', imageSrc).show();
         $('#imageResult').show();
+        $('body').css('overflow', 'hidden');
     } else {
         alert('조합된 이미지를 받을 수 없습니다.');
     }
 }
+
+// 닫기 버튼 클릭 시 레이어 닫기
+function closeResult() {
+    $('#imageResult').hide();
+    $('body').css('overflow', 'auto');
+}
+
+// 저장 버튼 클릭 시 이미지 저장
+function saveImage() {
+
+}
+
+// 다운로드 버튼 클릭 시 이미지 다운로드
+function downloadImage() {
+    var imageSrc = $('#combinedImage').attr('src');
+    var link = document.createElement('a');
+    link.href = imageSrc;
+    link.download = 'combined-image.jpg'; // 다운로드 파일 이름 지정
+    link.click();
+}
+
+
 
 // 이미지 생성 버튼 클릭
 $('#createImageButton').on('click', function () {

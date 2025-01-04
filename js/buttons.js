@@ -29,3 +29,56 @@ function toggleSpinner(durationInSeconds) {
         $button.show();
     }, fadeOutDuration); // 밀리초 단위로 변환
 }
+
+
+//슬라이드
+var creativityTimeout;
+var c_denoisingValue;  // c_denoisingValue 변수 선언
+
+// 텍스트와 슬라이더 값을 업데이트하는 함수
+function updateCreativityText(sliderValue) {
+    $("#creativityText").text(sliderValue + '%');
+    clearTimeout(creativityTimeout);
+    creativityTimeout = setTimeout(function () {
+        $("#creativityText").text('Creativity');
+    }, 1000);
+}
+
+// 슬라이더 값 변경 및 텍스트 업데이트 함수
+function updateSliderValue(value) {
+    c_denoisingValue = value;  // c_denoisingValue에 슬라이더 값 저장
+    $('#DenoisingRange').val(value.toFixed(2));
+    $("#sliderValue").text(value.toFixed(2));
+    updateCreativityText((value * 100).toFixed(0)); 
+    // console.log(c_denoisingValue);
+}
+
+// 슬라이더 입력 처리
+$(".Denoisingslider").on("input", function (event) {
+    var value = parseFloat($(event.currentTarget).val());
+    updateSliderValue(value);
+});
+
+// 버튼 클릭 처리
+$(document).ready(function () {
+    var step = 0.01; // step 값
+
+    // + 버튼 클릭
+    $('#increase').on('click', function () {
+        var currentValue = parseFloat($('#DenoisingRange').val());
+        var maxValue = parseFloat($('#DenoisingRange').attr('max'));
+        if (currentValue + step <= maxValue) {
+            updateSliderValue(currentValue + step);
+        }
+    });
+
+    // - 버튼 클릭
+    $('#decrease').on('click', function () {
+        var currentValue = parseFloat($('#DenoisingRange').val());
+        var minValue = parseFloat($('#DenoisingRange').attr('min'));
+        if (currentValue - step >= minValue) {
+            updateSliderValue(currentValue - step);
+        }
+    });
+});
+

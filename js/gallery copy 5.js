@@ -105,7 +105,7 @@ function loadImages() {
                 // 클릭한 이미지에만 테두리 레이어 추가
                 var borderLayer = $(this).find('.border-layer');
                 if (borderLayer.length === 0) {
-                    $(this).append('<div class="border-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 15px solid#9b6117; box-sizing: border-box; z-index: 1; opacity:0.8;"></div>');
+                    $(this).append('<div class="border-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 8px solid #dc3545; box-sizing: border-box; z-index: 1;"></div>');
                 }
 
                 // 다른 이미지들의 테두리 레이어 제거
@@ -162,20 +162,26 @@ function loadImages() {
 
 // 새로 고침 버튼 클릭 이벤트 처리 함수
 function refreshButtonClick() {
-    var button = $("#gal-refreshButton"); // jQuery로 버튼 요소 선택
-
+    var button = $(this);
     baseImages(); // 더미 이미지 생성
+
     loadImages(); // 이미지 로딩
-    
-    button.addClass("animate"); // 애니메이션 시작
+// 애니메이션 시작
+this.classList.add("animate");
 
-    // 10초 후 애니메이션 완료 후 역방향 애니메이션 시작
-    setTimeout(function () {
-        button.addClass("reverse"); // 색이 빠지는 애니메이션 추가
-    }, 8000); // 10초 후 색 빠지는 효과 시작
+// 10초 후 애니메이션 리셋 (효과 반복을 위한 설정)
 
-    // 12초 후 원상태로 돌아가게 하기
+    // 스피너 보이기
+    // $('#spinner2').css('opacity', '0').show().animate({ opacity: 1 }, 300); // 스피너를 투명도 0에서 1로 보이게 함
+
+    // button.prop('disabled', true).css('opacity', '0.4').text('Loading');
+    // 일정 시간 후 버튼 활성화 및 스피너 숨기기
     setTimeout(function () {
-        button.removeClass("animate reverse"); // 애니메이션과 역방향 애니메이션 제거
-    }, 10000); // 12초 후 원상태로 돌아가기
+        // button.prop('disabled', false).css('opacity', '1').text('Refresh');
+
+        // 스피너 숨기기
+        // $('#spinner2').animate({ opacity: 0 }, 300, function () {
+        // });
+        this.classList.remove("animate");
+    }, 8000); // 스피너가 돌아가는 시간
 }

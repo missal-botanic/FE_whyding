@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/gallery.css" type="text/css">
     <link rel="stylesheet" href="css/reft.css" type="text/css">
     <script src="js/ajax.js" defer></script>
+    <script src="js/ajax2.js" defer></script>
     <script src="js/buttons.js" defer></script>
     <script src="js/image.js"></script>
     <script src="js/sample.js"></script>
@@ -62,17 +63,15 @@
                     <!-- gallery -->
                     <div id="gallery-area" class="col">
                         <div id="gal-refreshgallery-area" class="row">
-                            <div class="col-1 text-center">
-                                <div class="spinner-border text-danger" role="status" id="spinner2"
-                                    style="display: none; margin-left: 2.5rem">
-                                </div>
-                            </div>
                             <!-- gallery refresh -->
-                            <div class="col-3 text-center">
-                                <button id="gal-refreshButton" class="btn btn-sm btn-danger fw-lighter">Refresh</button>
+                            <div class="col-2 text-center">
+                                <button id="gal-refreshButton"
+                                    class="btn btn-outline-dark btn-sm fw-lighter">Refresh</button>
                             </div>
+                            <!-- gallery years -->
+
                             <!-- gallery style -->
-                            <div class="col-4 d-flex justify-content-center align-items-center">
+                            <div class="col-7 d-flex justify-content-center align-items-center">
                                 <form id="check-style-area" method="post" action="">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="form-switch d-flex align-items-center">
@@ -96,14 +95,15 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- gallery years -->
-                            <div class="col-4 text-center">
+
+                            <div class="col-2 text-center">
                                 <select id="gal-quarter" class="btn btn-sm btn-outline-dark dropdown-toggle"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <option value="dress">드레스</option>
                                     <option value="tuxedo">턱시도</option>
                                 </select>
                             </div>
+
                         </div>
                         <!-- gallery bottom -->
                         <div id="gal-text-area"></div>
@@ -115,55 +115,61 @@
                 </div>
             </section>
             <section class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-2">
-                <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
-                <div class="image-result" id="imageResult">
-                    <div class="dummy-image">
-                        <img id="combinedImage" src="" alt="조합된 이미지" style="display: none;">
-                    </div>
-                    <p>조합된 이미지</p>
-                </div>
-                <!-- <h4>Source 이미지 업로드</h4> -->
-                <!-- 카메라 활성화 버튼 -->
-                <!-- <button id="cameraToggleButton">카메라 켜기</button> -->
-                <!-- 하단: 이미지 업로드 영역 -->
-                <div class="imageContainerSource" style="height: 20vh;">
-                    <div class="image-box" id="source_image">
-                        <!-- 업로드 버튼을 스타일링한 label -->
-                        <label for="imageUploadSource" class="btn btn-danger">
-                            업로드
-                        </label>
 
+                <div class="imageContainerSource col-2" style="height: 20vh; width: 100%;">
+                    <div class="image-box row" id="source_image">
                         <!-- 실제 파일 입력 필드 (숨겨져 있음) -->
                         <input type="file" class="form-control-file" id="imageUploadSource"
                             accept="image/jpeg, image/png" style="display: none;">
-
                         <div id="errorSource" class="error"></div>
 
                         <!-- 미리보기 이미지 -->
-                        <img id="previewSource" src="" alt="미리보기 이미지" style="height: 10vh; display: none;">
+                        <img id="previewSource" src="" alt="미리보기 이미지"
+                            style="width: 25vh; display: none; object-fit: contain;">
+                            
+                            <div class="d-flex justify-content-center align-items-center">
+                                <label for="imageUploadSource" class="btn btn-outline-secondary btn-sm" style="width: auto; ">
+                                    <i class="bi bi-file-earmark-arrow-up"></i>내 얼굴 업로드</label>
+                            </div>
                     </div>
                 </div>
 
-                <div class="imageContainertarget" style="height: 80vh;">
-
+                <div class="imageContainertarget col-2 mt-2" style="height: 80vh; width: 100%;">
+                    
+                    <!-- 이미지 박스 -->
                     <div class="image-box" id="target_image">
-                        <!-- <h4>Target 이미지 업로드</h4> -->
-                        <!-- <input type="file" class="form-control-file" id="imageUploadTarget" -->
-                        <!-- accept="image/jpeg, image/png"> -->
-                        <!-- <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small> -->
                         <div id="errorTarget" class="error"></div>
-                        <img id="previewTarget" src="" alt="미리보기 이미지" style="height: 30vh; display: none;">
+                        <img id="previewTarget" src="" alt="미리보기 이미지" style="width: 30vh; display: none;">
+                        <!-- denoising range -->
+                        <div class="overlay-buttons row">
+                            <p id="creativityText" class="text-body-secondary" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                data-bs-title="Higher values ignore the original image.">
+                                Creativity
+                            </p>
+                            <div class="col d-flex align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary" id="increase">+</button>
+                                <input type="range" min="0.6" max="0.7" value="0.65" step="0.01" class="Denoisingslider mx-2" id="DenoisingRange" style="direction: rtl;">
+                                <button class="btn btn-sm btn-outline-secondary" id="decrease">-</button>
+                            </div>
+                            <button id="gen-generateButton" class="btn btn-danger btn-sm mt-5 mb-5"
+                                style="width: auto; min-width: 150px; height: auto; white-space: nowrap;">
+                                generate2
+                            </button>
+                        </div>
                     </div>
                     <!-- 스패너 -->
                     <!-- generateButton mt-5 mb-5 -->
+                    <!-- 생성버튼 -->
                     <div class="col-12 d-flex justify-content-center align-items-center">
                         <button id="createImageButton" style="display: none;" class="btn btn-danger btn-sm "
                             style="width: auto; min-width: 150px; height: auto; white-space: nowrap;">
                             generate
                         </button>
-                        <div id="spinner" class="spinner-border text-danger mt-5 mb-5" role="status">
+                        <div id="spinner" class="spinner-border text-danger" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
+
                         <div id="gen-error-text" style="display: none;">Please upload or select an image</div>
                         </p>
                     </div>
@@ -173,6 +179,19 @@
 
         </div>
     </div>
+                    <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
+                    <div class="image-result row" id="imageResult" style="display: none;">
+                        <div class="image-container">
+                            <img id="combinedImage" src="" alt="조합된 이미지">
+                        </div>
+                        <div class="button-container">
+                            <button id="closeButton" class="btn btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
+                            <button id="saveButton" class="btn btn btn-outline-dark btn-sm" onclick="saveImage()"><i
+                                    class="bi bi-folder-plus"></i>&nbsp;보관</button>
+                            <button id="downloadButton" class="btn btn-success btn-sm" onclick="downloadImage()"><i
+                                    class="bi bi-file-arrow-down"></i>&nbsp;다운로드</button>
+                        </div>
+                    </div>
     <script>
         $(document).ready(function () {
             window.addEventListener('load', function () {
