@@ -15,7 +15,7 @@ $(document).ready(function () {
 });
 
 var galleryImages = $('.gallery-images');
-var numImages = 8; // 로딩할 이미지 개수
+var numImages = 9; // 로딩할 이미지 개수
 // 더미 로딩 이미지 생성
 function baseImages() {
     // 기존 로딩 더미 요소 제거
@@ -24,7 +24,7 @@ function baseImages() {
     // 더미 로딩 이미지 생성
     for (var i = 0; i < numImages; i++) {
         galleryImages.append(`
-            <div class="loading-dummy" style="width: 100%; height: 0; padding-bottom: 133.33%; background-color: #ccc; position: relative; margin: 1px; opacity: 0.1;">
+            <div class="loading-dummy" style="width: 100%; height: 0; padding-bottom: 75%; background-color: #ccc; position: relative; margin: 1px; opacity: 0.1;">
                 <div id="dummy-loading-${i}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; color: #333;">
                     loading...
                 </div>
@@ -92,67 +92,80 @@ function loadImages() {
                 }, i * 800);
             });
 
-            // 공통 클릭 처리 함수
-            function handleImageClick(imageURL) {
-                // 타겟 이미지 미리보기로 설정
-                $('#previewTarget').attr('src', imageURL).show();
-                // 이미지를 Base64로 변환하여 imageBase64Target에 저장
-                convertImageToBase64(imageURL);
-            }
+           // 갤러리 이미지 클릭 이벤트
+galleryImages.on('click', '.loading-dummy.loaded', function () {
+    // 클릭한 이미지에만 테두리 레이어 추가
+    var borderLayer = $(this).find('.border-layer');
+    if (borderLayer.length === 0) {
+        $(this).append('<div class="border-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 8px solid #dc3545; box-sizing: border-box; z-index: 1;"></div>');
+    }
 
-            // 갤러리 이미지 클릭 이벤트
-            galleryImages.on('click', '.loading-dummy.loaded', function () {
-                // 클릭한 이미지에만 테두리 레이어 추가
-                var borderLayer = $(this).find('.border-layer');
-                if (borderLayer.length === 0) {
-                    $(this).append('<div class="border-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 8px solid #dc3545; box-sizing: border-box; z-index: 1;"></div>');
-                }
+    // 다른 이미지들의 테두리 레이어 제거
+    galleryImages.find('.loading-dummy.loaded').not(this).each(function () {
+        $(this).find('.border-layer').remove(); // 테두리 레이어 제거
+    });
 
-                // 다른 이미지들의 테두리 레이어 제거
-                galleryImages.find('.loading-dummy.loaded').not(this).each(function () {
-                    $(this).find('.border-layer').remove(); // 테두리 레이어 제거
-                });
+    // 이미지 URL 추출
+    var imageURL = $(this).css('background-image').replace(/url\(["']?/, '').replace(/["']?\)/, '');
 
-                // 클릭한 이미지 URL 추출
-                var imageURL = $(this).css('background-image').replace(/url\(["']?/, '').replace(/["']?\)/, '');
+    // 클릭한 이미지를 타겟에 미리보기로 표시
+    $('#previewTarget').attr('src', imageURL).show();
 
-                // 공통 클릭 처리 함수 호출
-                handleImageClick(imageURL);
+    // 이미지를 Base64로 변환하여 imageBase64Target에 저장
+    convertImageToBase64(imageURL);
 
-                lastClickedImage = $(this); // 클릭한 이미지 저장
-            });
+    lastClickedImage = $(this); // 클릭한 이미지 저장
+});
 
-            // 첫 번째 이미지 클릭 시 타겟 이미지로 표시 및 Base64 변환
-            setTimeout(function () {
-                var firstImage = galleryImages.find('.loading-dummy.loaded:first-child');
-            
-                // 첫 번째 이미지를 클릭한 것처럼 처리
-                var imageURL = firstImage.css('background-image').replace(/url\(["']?/, '').replace(/["']?\)/, '');
-            
-                // 클릭 이벤트를 직접 트리거하여 테두리 레이어 추가 및 미리보기 설정
-                firstImage.trigger('click');  // 첫 번째 이미지를 실제로 클릭한 것처럼 처리
-            
-                // 공통 클릭 처리 함수 호출
-                handleImageClick(imageURL);
-            }, 200);
+// 첫 번째 이미지 클릭 시 타겟 이미지로 표시 및 Base64 변환
+setTimeout(function () {
+    var firstImage = galleryImages.find('.loading-dummy.loaded:first-child');
+    
+    // 첫 번째 이미지를 클릭한 것처럼 처리
+    var imageURL = firstImage.css('background-image').replace(/url\(["']?/, '').replace(/["']?\)/, '');
+    
+    // 타겟 이미지 미리보기로 설정
+    $('#previewTarget').attr('src', imageURL).show();
+    
+    // 이미지를 Base64로 변환하여 imageBase64Target에 저장
+    convertImageToBase64(imageURL);
+}, 500);
 
-            // 이미지 URL을 Base64로 변환
-            function convertImageToBase64(imageURL) {
-                var xhr = new XMLHttpRequest();
-                xhr.onload = function () {
-                    var reader = new FileReader();
-                    reader.onloadend = function () {
-                        // Base64 데이터에서 불필요한 부분 제거하고 imageBase64Target에 저장
-                        imageBase64Target = reader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
-                        // 해당 Base64 데이터를 처리하는 함수 호출 (예: 버튼 활성화 등)
-                        genButtonDisableCheck();
-                    };
-                    reader.readAsDataURL(xhr.response);
-                };
-                xhr.open('GET', imageURL);
-                xhr.responseType = 'blob';
-                xhr.send();
-            }
+// 이미지 URL을 Base64로 변환
+function convertImageToBase64(imageURL) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            // Base64 데이터에서 불필요한 부분 제거하고 imageBase64Target에 저장
+            imageBase64Target = reader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+            // 해당 Base64 데이터를 처리하는 함수 호출 (예: 버튼 활성화 등)
+            genButtonDisableCheck();
+        };
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', imageURL);
+    xhr.responseType = 'blob';
+    xhr.send();
+}
+
+// 마우스 진입 이벤트 처리
+galleryImages.on('mouseenter', '.loading-dummy.loaded', function () {
+    // 이미지 확대
+    $(this).css({
+        // 'transition': 'transform 0.2s ease',
+        // 'transform': 'scale(1.5)',
+        // 'z-index': 2,
+    });
+}).on('mouseleave', '.loading-dummy.loaded', function () {
+    // 이미지 원래 크기로 복귀
+    $(this).css({
+        // 'transition': 'transform 0.2s ease',
+        // 'transform': 'scale(1)',
+        // 'z-index': 1,
+    });
+});
+
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -177,7 +190,7 @@ function refreshButtonClick() {
         button.prop('disabled', false).css('opacity', '1').text('Refresh');
 
         // 스피너 숨기기
-        $('#spinner2').animate({ opacity: 0 }, 300, function () {
+        $('#spinner2').animate({ opacity: 0 }, 300, function() {
         });
     }, 8000); // 스피너가 돌아가는 시간
 }

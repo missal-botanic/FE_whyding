@@ -22,7 +22,6 @@
     <!-- bootstrap end -->
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <link rel="stylesheet" href="css/gallery.css" type="text/css">
-    <link rel="stylesheet" href="css/reft.css" type="text/css">
     <script src="js/ajax.js" defer></script>
     <script src="js/buttons.js" defer></script>
     <script src="js/image.js"></script>
@@ -41,29 +40,82 @@
 
 <body>
 
-    <!-- first loading -->
-    <div id="first-loading" class="vw-100 min-vh-100 position-fixed z-3" style="background-color: #f8f9fa;">
-        <div class="spinner-grow text-dark position-fixed top-50 start-50 translate-middle z-3" role="status"
-            style="width: 4rem; height: 4rem;"></div>
-    </div>
-
-    <!-- loading -->
-    <div id="wrap-loading" class="bg-white vw-100 min-vh-100 opacity-75 position-fixed z-3 display-none">
-        <div class="spinner-grow text-dark position-fixed top-50 start-50 translate-middle z-3 " role="status"
-            style="width: 4rem; height: 4rem;"></div>
-    </div>
-
-
-    <h1 class="text-center mb-4">whyding</h1>
     <div style="height: 95vh;">
         <div class="row">
+            <section
+                class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-2 bg-body-tertiary">
+                <div class="container mt-5">
+                    <div id="cameraContainer"
+                        style="position: fixed; top: 50%; left: 50%; width: 320px; height: 240px; transform: translate(-50%, -50%); z-index: 9999;">
+
+                        <!-- 비디오 스트림 표시 -->
+                        <video id="videoSource" width="320" height="240" autoplay>
+                        </video>
+
+                        <!-- 촬영 버튼 (카메라 활성화 후 나타남) -->
+                        <button id="captureButton" style="display: none; z-index: 2;">
+                            촬영
+                        </button>
+
+                    </div>
+
+                    <h1 class="text-center mb-4">whyding</h1>
+
+                    <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
+                    <div class="image-result" id="imageResult">
+                        <div class="dummy-image">
+                            <img id="combinedImage" src="" alt="조합된 이미지" style="display: none;">
+                        </div>
+                        <p>조합된 이미지</p>
+                    </div>
+
+                    <!-- 하단: 이미지 업로드 영역 -->
+                    <div class="image-container">
+                        <div class="image-box" id="source_image">
+                            <h4>Source 이미지 업로드</h4>
+                            <!-- 카메라 활성화 버튼 -->
+                            <button id="cameraToggleButton">카메라 켜기</button>
+
+                            <input type="file" class="form-control-file" id="imageUploadSource"
+                                accept="image/jpeg, image/png">
+                            <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small>
+                            <div id="errorSource" class="error"></div>
+                            <img id="previewSource" src="" alt="미리보기 이미지" style="display: none;">
+                        </div>
+
+
+
+                        <div class="image-box" id="target_image">
+                            <h4>Target 이미지 업로드</h4>
+                            <input type="file" class="form-control-file" id="imageUploadTarget"
+                                accept="image/jpeg, image/png">
+                            <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small>
+                            <div id="errorTarget" class="error"></div>
+                            <img id="previewTarget" src="" alt="미리보기 이미지" style="display: none;">
+                        </div>
+                    </div>
+                    <!-- 스패너 -->
+                    <!-- generateButton -->
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <button id="createImageButton" style="display: none;" class="btn btn-danger btn-sm mt-5 mb-5"
+                            style="width: auto; min-width: 150px; height: auto; white-space: nowrap;">
+                            generate
+                        </button>
+                        <div id="spinner" class="spinner-border text-danger mt-5 mb-5" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div id="gen-error-text" style="display: none;">Please upload or select an image</div>
+                        </p>
+                    </div>
+            </section>
             <section class="col-12 col-md-8 mt-2">
+
                 <div class="accordion-body d-flex justify-content-center align-items-center">
                     <!-- gallery -->
                     <div id="gallery-area" class="col">
                         <div id="gal-refreshgallery-area" class="row">
                             <div class="col-1 text-center">
-                                <div class="spinner-border text-danger" role="status" id="spinner2"
+                                <div class="spinner-border text-danger" role="status" id="spinner"
                                     style="display: none; margin-left: 2.5rem">
                                 </div>
                             </div>
@@ -113,93 +165,16 @@
                             generation,<br> please click the “Generate” button on the left.</p>
                     </div>
                 </div>
-            </section>
-            <section class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-2">
-                <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
-                <div class="image-result" id="imageResult">
-                    <div class="dummy-image">
-                        <img id="combinedImage" src="" alt="조합된 이미지" style="display: none;">
-                    </div>
-                    <p>조합된 이미지</p>
-                </div>
-                <!-- <h4>Source 이미지 업로드</h4> -->
-                <!-- 카메라 활성화 버튼 -->
-                <!-- <button id="cameraToggleButton">카메라 켜기</button> -->
-                <!-- 하단: 이미지 업로드 영역 -->
-                <div class="imageContainerSource" style="height: 20vh;">
-                    <div class="image-box" id="source_image">
-                        <!-- 업로드 버튼을 스타일링한 label -->
-                        <label for="imageUploadSource" class="btn btn-danger">
-                            업로드
-                        </label>
-
-                        <!-- 실제 파일 입력 필드 (숨겨져 있음) -->
-                        <input type="file" class="form-control-file" id="imageUploadSource"
-                            accept="image/jpeg, image/png" style="display: none;">
-
-                        <div id="errorSource" class="error"></div>
-
-                        <!-- 미리보기 이미지 -->
-                        <img id="previewSource" src="" alt="미리보기 이미지" style="height: 10vh; display: none;">
-                    </div>
-                </div>
-
-                <div class="imageContainertarget" style="height: 80vh;">
-
-                    <div class="image-box" id="target_image">
-                        <!-- <h4>Target 이미지 업로드</h4> -->
-                        <!-- <input type="file" class="form-control-file" id="imageUploadTarget" -->
-                        <!-- accept="image/jpeg, image/png"> -->
-                        <!-- <small class="form-text text-muted">최대 2MB 크기의 이미지 파일만 업로드 가능합니다.</small> -->
-                        <div id="errorTarget" class="error"></div>
-                        <img id="previewTarget" src="" alt="미리보기 이미지" style="height: 30vh; display: none;">
-                    </div>
-                    <!-- 스패너 -->
-                    <!-- generateButton mt-5 mb-5 -->
-                    <div class="col-12 d-flex justify-content-center align-items-center">
-                        <button id="createImageButton" style="display: none;" class="btn btn-danger btn-sm "
-                            style="width: auto; min-width: 150px; height: auto; white-space: nowrap;">
-                            generate
-                        </button>
-                        <div id="spinner" class="spinner-border text-danger mt-5 mb-5" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <div id="gen-error-text" style="display: none;">Please upload or select an image</div>
-                        </p>
-                    </div>
-                </div>
-
-            </section>
-
         </div>
+        </section>
+    </div>
     </div>
     <script>
-        $(document).ready(function () {
-            window.addEventListener('load', function () {
-                // Run after the page is fully loaded
-                const loadingDiv = document.getElementById('first-loading');
-
-                // Transparency starts after 2 seconds
-                setTimeout(function () {
-                    // Transparency over 2 seconds
-                    loadingDiv.style.transition = 'opacity 2s';
-                    loadingDiv.style.opacity = '0';
-
-                    // Add display-none class after 2 seconds
-                    setTimeout(function () {
-                        loadingDiv.classList.add('display-none');
-                    }, 2000); // Add class 2 seconds after transparency is finished
-                }, 1000); // Keep loading for 1 second
-            });
-        });
-    </script>
-    <script>
-
         window.onload = function () {
             toggleSpinner(1); // 페이지 로드 후 3초 동안 spinner를 토글
             // 페이지 로드 시 자동으로 샘플 이미지 업로드
             loadSourceImage();
-            // loadTargetImage();
+            loadTargetImage();
         };
     </script>
 
