@@ -8,9 +8,7 @@
     transform: scale(1.1); /* 아이콘이 클릭 시 조금 커지는 효과 */
 }
 
-
-
-
+/* 결과 화면 */
 /* 화면 전체를 덮는 배경 */
 .image-result {
     position: fixed;
@@ -65,48 +63,9 @@ button:focus {
     outline: none;
 } */
 
-/* 재생성 부분 */
-/* 이미지 박스를 상대적으로 설정 */
-.image-box {
-    position: relative; /* 자식 요소들이 position을 사용하기 위해 필요 */
-    justify-content: center;
-    align-items: center;
+#DenoisingRange {
+    width: 100px; /* 슬라이드 길이를 300px로 설정 */
 }
 
-/* 오버레이 버튼들을 중앙에 배치 */
-.overlay-buttons {
-    position: absolute;
-    top: 50%;        /* 세로 중앙 */
-    left: 50%;       /* 가로 중앙 */
-    transform: translate(-50%, -50%);  /* 정확히 중앙에 오도록 이동 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* 버튼 사이의 간격 */
-    display: none;  /* 처음에는 숨기기 */
-}
 
-/* 이미지에 마우스를 올리면 오버레이 버튼들 표시 */
-.image-box:hover .overlay-buttons {
-    display: flex;
-}
 
-/* 버튼 스타일 */
-button {
-    font-size: 18px;
-    padding: 8px;
-}
-input[type="range"] {
-    width: 150px;
-}
-
-/* 이미지에 마우스를 올리면 투명도 50% */
-.image-box:hover #previewTarget {
-    opacity: 0.2; /* 투명도 50% */
-    transition: opacity 0.3s ease; /* 부드럽게 변하도록 애니메이션 추가 */
-}
-
-/* 이미지가 기본 상태에서 보이지 않도록 */
-#previewTarget {
-    display: none; /* 기본적으로 이미지는 보이지 않음 */
-}
