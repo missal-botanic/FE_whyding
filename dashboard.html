@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+        </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
+    <link rel="stylesheet" href="css/dashboard/style.css">
+    <!-- <script src="js/dashboard/script.js"></script> -->
+
+    <title>Whyding</title>
+
+    
+</head>
+
+<body>
+
+    <div class="left-section">
+        <div class="logo">
+            <img class="mb-3" src="img/logo.svg" style="width: 4vh;" alt="Logo">
+            <!-- <img class="item" src="img/logo_side.svg" style="width: 5vh;" alt="Logo"> -->
+            <!-- <img src="assets/images/logo.png"> -->
+            <a href="#"><img class="item" src="img/logo_side.svg" style="width: 7vh;" alt="Logo"> </a>
+        </div>
+
+        <div class="sidebar  mt-5">
+            <div class="item active" data-url="middle.html">
+                <i class="ri-home-4-line"></i>
+                <h3>Dashboard</h3>
+            </div>
+            <div class="item">
+                <i class="ri-movie-2-line"></i>
+                <h3>Generate</h3>
+            </div>
+            <div class="item">
+                <i class="ri-user-6-line"></i>
+                <h3>My Private Album</h3>
+            </div>
+            <div class="item">
+                <i class="ri-history-line"></i>
+                <h3>History</h3>
+            </div>
+            <div class="item">
+                <i class="ri-settings-3-line"></i>
+                <h3>Settings</h3>
+            </div>
+        </div>
+
+        <div class="sign-out  mt-5">
+            <i class="ri-logout-box-r-line"></i>
+            <h3>Sign Out</h3>
+        </div>
+
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div class="search">
+                <button><i class="ri-search-2-line"></i></button>
+                <input type="text" placeholder="Search for videos...">
+            </div>
+            <i class="ri-equalizer-2-line"></i>
+        </div>
+
+        <div class="main-content">
+            <!-- 중앙 콘텐츠가 로드될 영역 -->
+            <div id="content-area">Loading...</div>
+        </div>
+
+
+    </div>
+
+    <div class="right-section">
+        <div class="profile">
+            <div class="info">
+                <i class="ri-user-3-line"></i>
+                <h5>Welcome Reza!</h5>
+            </div>
+            <div class="user">
+                <i class="ri-notification-2-line"></i>
+                <img src="assets/images/profile.png">
+            </div>
+        </div>
+        <!-- 신부대기실 -->
+
+        <!-- 폐백실 -->
+        <div class="player">
+
+    </div>
+
+        <h3>COURTESY ROOM</h3> 
+
+        <div class="player">
+            <div class="content">
+                <img src="assets/images/c001.jpg">
+                <div class="info">
+                    <h5>Germany Travel Tour</h5>
+                    <div class="rate">
+                        <i class="ri-star-fill"></i>
+                        <h5>4.7</h5>
+                    </div>
+                </div>
+                <div class="desc">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero...</p>
+                </div>
+            </div>
+            <i class="ri-pause-large-line"></i>
+        </div>
+        <!-- 주간 인기 -->
+        <h3>WEEKLY POPULAR</h3>
+
+        <div class="weekly">
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w001.jpg">
+                    <div class="info">
+                        <h4>Sea Balloon</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,320</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w002.jpg">
+                    <div class="info">
+                        <h4>Flower</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,490</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w003.jpg">
+                    <div class="info">
+                        <h4>Street</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>1,420</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w004.jpg">
+                    <div class="info">
+                        <h4>Sea Water</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>9,610</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w001.jpg">
+                    <div class="info">
+                        <h4>Sea Balloon</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,320</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w002.jpg">
+                    <div class="info">
+                        <h4>Flower</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,490</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w003.jpg">
+                    <div class="info">
+                        <h4>Street</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>1,420</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img src="assets/images/w004.jpg">
+                    <div class="info">
+                        <h4>Sea Water</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>9,610</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <script src="script.js"></script> -->
+
+    <script>
+
+$(document).ready(function () {
+    // 기본적으로 첫 번째 메뉴의 HTML을 로드
+    $('#content-area').load('middle.html');
+
+    // 네비게이션 메뉴 클릭 이벤트
+    $('.sidebar .item').on('click', function () {
+        // 1. 모든 메뉴에서 active 클래스 제거
+        $('.sidebar .item').removeClass('active');
+
+        // 2. 클릭한 메뉴에 active 클래스 추가
+        $(this).addClass('active');
+
+        // 3. 클릭한 메뉴의 data-url 속성에서 HTML 파일 경로를 가져옴
+        var url = $(this).data('url');
+
+        // 4. 해당 HTML 파일을 #content-area에 로드
+        $('#content-area').load(url, function (response, status, xhr) {
+            if (status == "error") {
+                // 에러 처리 (예: HTML 파일이 없을 경우)
+                $('#content-area').html("<h1>Error</h1><p>Unable to load the page.</p>");
+            }
+        });
+    });
+});
+   
+</script>
+</body>
+
+</html>
