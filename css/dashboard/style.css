@@ -430,7 +430,7 @@ body{
 .right-section .player .content .desc p{
     color: #e5e5e5;
     font-size: 13px;
-    line-height: 1.1rem;
+    line-height: 1.1rem; 
     border-left: 1px solid #e5e5e5;
     padding-left: 10px;
 }
@@ -657,3 +657,7 @@ body{
     }
 
 }
+
+:root {
+    --bs-body-line-height: 1.1;
+  }

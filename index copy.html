@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whyding</title>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-    </script>
+      <!-- bootstrap -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+          </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
     <link rel="stylesheet" href="css/sign/style.css">
+    
     <script src="js/sign/sign_in.js"></script>
     <script src="js/sign/sign_up.js"></script>
+    <!-- <script src="js/sign/button.js"></script> -->
+    
 </head>
 
 <body>
@@ -32,7 +33,7 @@
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span id="email-password-message">또는 아이디 비밀번호로 가입하세요</span>
+                <span>또는 아이디 비밀번호로 가입하세요</span>
                 <input type="text" id="username" placeholder="이름" required value="test03">
                 <input type="email" id="email" placeholder="이메일" required value="test03@test.test">
                 <input type="password" id="password" placeholder="비밀번호" required value="Test031234">
@@ -48,32 +49,35 @@
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span id="email-password-message2">또는 이메일 비밀번호를 사용하세요</span>
+                <span>또는 이메일 비밀번호를 사용하세요</span>
+                <!-- 아이디 -> 이메일로 수정 -->
                 <input type="email" id="email2" placeholder="이메일" value="test553@test.test">
                 <input type="password" id="password2" placeholder="비밀번호" value="test45544">
                 <a href="#">비밀번호를 잊으셨나요?</a>
                 <button type="submit">로그인</button>
-                <span id="errorMessage" style="color:red;"></span>
             </form>
         </div>
-
+        
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <img class="mb-3 " src="img/sign/logo_white.svg" style="width: 70%;" alt="Logo">
+                    <!-- <h1>Whyding</h1> -->
+                    <img class="mb-3 " src="img/sign/logo_white.svg" style="width: 70%;"  alt="Logo">
+                    <!-- <p>Enter your personal details to use all of site features</p> -->
                     <button class="hidden" id="login">로그인</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <img class="mb-3" src="img/sign/logo_white.svg" style="width: 70%;" alt="Logo">
+                    <!-- <h1>Whyding</h1> -->
+                    <img class="mb-3" src="img/sign/logo_white.svg" style="width: 70%;"  alt="Logo">
+                    <!-- <p>사이트의 모든 기능을 사용하려면 개인 정보를 등록하세요.</p> -->
                     <button class="hidden" id="register">회원가입</button>
+                    <!-- <p>체험하기</p> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        
-    </script>
+    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>

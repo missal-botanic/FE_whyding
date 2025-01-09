@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="css/generations/styles.css" type="text/css">
+<link rel="stylesheet" href="css/generations/gallery.css" type="text/css">
+<link rel="stylesheet" href="css/generations/reft.css" type="text/css">
+<link rel="stylesheet" href="css/generations/regeneration.css" type="text/css">
+<link rel="stylesheet" href="css/generations/refresh.css" type="text/css">
+<!-- <script src="js/generations/jquery-1.9.1.js"></script> -->
+<script src="js/generations/ajax.js" defer></script>
+<script src="js/generations/ajax2.js" defer></script>
+<script src="js/generations/buttons.js" defer></script>
+<script src="js/generations/image.js"></script>
+<script src="js/generations/sample.js"></script>
+<script src="js/generations/gallery.js" defer></script>
+
+
+
+<div>
+    <!-- first loading -->
+    <div class="vw-100 min-vh-100 position-fixed z-3 display-none" style="background-color: #ffffff;" id="first-loading">
+        <div class="spinner-grow text-dark position-fixed top-50 start-50 translate-middle z-3" role="status"
+            style="width: 4rem; height: 4rem;"></div>
+    </div>
+
+    <div class="bg-white opacity-75 position-fixed z-3 display-none" id="wrap-loading">
+        <div class="spinner-grow text-dark position-fixed" role="status"></div>
+    </div>
+
+
+    <!-- <h1 class="text-center mb-4">whyding 8조</h1> -->
+    <div style="height: 95vh;">
+        <div class="row mt-5">
+            <section class="col-12 col-md-8 mt-2">
+                <div class="accordion-body d-flex justify-content-center align-items-center">
+                    <!-- gallery -->
+                    <div class="col" id="gallery-area">
+                        <div class="row" id="gal-refreshgallery-area">
+                            <!-- gallery refresh -->
+                            <div class="col-2 text-center">
+                                <button class="btn btn-outline-dark btn-sm fw-lighter"
+                                    id="gal-refreshButton">Refresh</button>
+                            </div>
+                            <!-- gallery years -->
+
+                            <!-- gallery style -->
+                            <div class="col-7 d-flex justify-content-center align-items-center">
+                                <form method="post" action="" id="check-style-area">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="form-switch d-flex align-items-center">
+                                            <input type="checkbox" role="switch" name="checkStyle[]" value="white"
+                                                checked id="white">
+                                            <label class="d-block text-dark-emphasis fw-lighter ms-2"
+                                                style="cursor: default;" for="white">white</label>
+                                        </div>
+                                        <div class="form-switch d-flex align-items-center">
+                                            <input type="checkbox" role="switch" name="checkStyle[]" value="black"
+                                                checked id="black">
+                                            <label for="black" class="d-block text-dark-emphasis fw-lighter ms-2"
+                                                style="cursor: default;">black</label>
+                                        </div>
+                                        <div class="form-switch d-flex align-items-center">
+                                            <input type="checkbox" role="switch" name="checkStyle[]" value="color"
+                                                checked id="color">
+                                            <label class="d-block text-dark-emphasis fw-lighter ms-2"
+                                                style="cursor: default;" for="color">color</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-2 text-center">
+                                <select class="btn btn-sm btn-outline-dark dropdown-toggle" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" id="gal-quarter">
+                                    <option value="dress">드레스</option>
+                                    <option value="tuxedo">턱시도</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <!-- gallery bottom -->
+                        <div id="gal-text-area"></div>
+                        <div class="gallery-images"></div>
+                        <p class="text-center text-body-secondary fw-lighter mt-3" id="gal-text-center">
+                            위의 이미지는 인공지능(AI) 기술을 활용하여 생성된 이미지로, 실제 인물과는 관련이 없습니다.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-2">
+                <div class="imageContainerSource col-md-4 flex-column justify-content-center align-items-center"
+                    style=" width: 100%;">
+                    <div class="image-box" id="source_image">
+                        <!-- 실제 파일 입력 필드 (숨겨져 있음) -->
+                        <input class="form-control-file" type="file" id="imageUploadSource"
+                            accept="image/jpeg, image/png" style="display: none;">
+                        <div class="error" id="errorSource"></div>
+
+                        <!-- 미리보기 이미지 -->
+                        <img src="" alt="미리보기 이미지" style="height: 20vh; display: none; object-fit: contain;"
+                            id="previewSource">
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <label class="btn btn-outline-secondary btn-sm mt-3" style="width: auto;"
+                                for="imageUploadSource">
+                                <i class="bi bi-file-earmark-arrow-up"></i>내 얼굴 업로드</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="imageContainertarget col-md-7 flex-column justify-content-center align-items-center"
+                    style=" width: 100%;">
+                    <!-- 이미지 박스 -->
+                    <div class="col image-box d-flex justify-content-center align-items-center" id="target_image">
+                        <div id="errorTarget" class="error"></div>
+                        <img id="previewTarget" src="" alt="미리보기 이미지" style="width: 25vh; display: none;">
+                        <!-- 디노이징 게이지 -->
+                        <div class="overlay-buttons row">
+                            <p class="text-white" style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);"
+                                id="creativityText">
+                                Creativity
+                            </p>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-sm btn-light shadow" id="increase">+</button>
+                                <input type="range" min="0.6" max="0.7" value="0.65" step="0.01"
+                                    class="Denoisingslider mx-2" id="DenoisingRange" style="direction: rtl;">
+                                <button class="btn btn-sm btn-light shadow" id="decrease">-</button>
+                            </div>
+                            <!-- 재생성버튼 -->
+                            <button class="btn btn-light btn-sm mt-2 shadow"
+                                style="width: auto; min-width: 150px; height: auto; white-space: nowrap;"
+                                id="gen-generateButton">
+                                Regenerate
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 스패너 -->
+                    <!-- 생성버튼 -->
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-dark btn-sm "
+                            style="width: auto; min-width: 150px; height: auto; white-space: nowrap; display: none;"
+                            id="createImageButton">
+                            착용하기
+                        </button>
+                        <div class="spinner-border text-danger" role="status" id="spinner">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+
+                        <div style="display: none;" id="gen-error-text">Please upload or select an image</div>
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+    <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
+    <div class="image-result row" id="imageResult" style="display: none;">
+        <div class="image-container">
+            <img src="" alt="조합된 이미지" id="combinedImage">
+        </div>
+        <div class="button-container">
+            <button id="closeButton" class="btn btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
+            <button id="saveButton" class="btn btn btn-outline-dark btn-sm" onclick="saveImage()"><i
+                    class="bi bi-folder-plus"></i>&nbsp;보관</button>
+            <button id="downloadButton" class="btn btn-success btn-sm" onclick="downloadImage()"><i
+                    class="bi bi-file-arrow-down"></i>&nbsp;다운로드</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // 페이지가 완전히 로드된 후 실행
+        $(window).on('load', function () {
+            const $loadingDiv = $('#first-loading');
+
+            // 2초 후 투명도 시작
+            setTimeout(function () {
+                // 2초 동안 투명도 처리
+                $loadingDiv.css({
+                    'transition': 'opacity 2s',
+                    'opacity': '0'
+                });
+
+                // 2초 후 display-none 클래스 추가
+                setTimeout(function () {
+                    $loadingDiv.addClass('display-none');
+                }, 2000); // 투명도 처리 후 2초 뒤 클래스 추가
+            }, 1000); // 1초 동안 로딩 유지
+        });
+    });
+</script>
+<script>
+    $(window).on('load', function () {
+        // toggleSpinner(1);
+        // 페이지 로드 시 자동으로 샘플 이미지 업로드
+        // loadSourceImage();
+        // loadTargetImage();
+    });
+</script>
+

@@ -71,3 +71,22 @@
     height: 100%;
     object-fit: contain;  /* 비율을 유지하면서 이미지 크기를 맞춥니다 */
 }
+
+
+#wrap-loading {
+    top: 0;               /* 화면의 맨 위 */
+    left: 0;              /* 화면의 맨 왼쪽 */
+    right: 0;             /* 화면의 맨 오른쪽 */
+    bottom: 0;            /* 화면의 맨 아래 */
+    width: 100vw;         /* 전체 화면 너비 */
+    height: 100vh;        /* 전체 화면 높이 */
+    display: flex;        /* 내부 아이템을 센터에 배치 */
+    justify-content: center;  /* 가로 가운데 정렬 */
+    align-items: center;      /* 세로 가운데 정렬 */
+}
+
+.spinner-grow {
+    width: 4rem;
+    height: 4rem;
+}
+
