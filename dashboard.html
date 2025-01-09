@@ -13,7 +13,7 @@
         </script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
     <link rel="stylesheet" href="css/dashboard/style.css">
-    <!-- <script src="js/dashboard/script.js"></script> -->
+    <script src="js/dashboard/script.js"></script>
 
     <title>Whyding</title>
 
@@ -29,25 +29,24 @@
             <!-- <img src="assets/images/logo.png"> -->
             <a href="#"><img class="item" src="img/logo_side.svg" style="width: 7vh;" alt="Logo"> </a>
         </div>
-
-        <div class="sidebar  mt-5">
+        <div class="sidebar mt-5">
             <div class="item active" data-url="middle.html">
                 <i class="ri-home-4-line"></i>
                 <h3>Dashboard</h3>
             </div>
-            <div class="item">
+            <div class="item" data-url="generate.html">
                 <i class="ri-movie-2-line"></i>
                 <h3>Generate</h3>
             </div>
-            <div class="item">
+            <div class="item" data-url="private-album.html">
                 <i class="ri-user-6-line"></i>
                 <h3>My Private Album</h3>
             </div>
-            <div class="item">
+            <div class="item" data-url="history.html">
                 <i class="ri-history-line"></i>
                 <h3>History</h3>
             </div>
-            <div class="item">
+            <div class="item" data-url="settings.html">
                 <i class="ri-settings-3-line"></i>
                 <h3>Settings</h3>
             </div>
@@ -229,30 +228,30 @@
 
     <script>
 
-$(document).ready(function () {
-    // 기본적으로 첫 번째 메뉴의 HTML을 로드
-    $('#content-area').load('middle.html');
+// $(document).ready(function () {
+//     // 기본적으로 첫 번째 메뉴의 HTML을 로드
+//     $('#content-area').load('middle.html');
 
-    // 네비게이션 메뉴 클릭 이벤트
-    $('.sidebar .item').on('click', function () {
-        // 1. 모든 메뉴에서 active 클래스 제거
-        $('.sidebar .item').removeClass('active');
+//     // 네비게이션 메뉴 클릭 이벤트
+//     $('.sidebar .item').on('click', function () {
+//         // 1. 모든 메뉴에서 active 클래스 제거
+//         $('.sidebar .item').removeClass('active');
 
-        // 2. 클릭한 메뉴에 active 클래스 추가
-        $(this).addClass('active');
+//         // 2. 클릭한 메뉴에 active 클래스 추가
+//         $(this).addClass('active');
 
-        // 3. 클릭한 메뉴의 data-url 속성에서 HTML 파일 경로를 가져옴
-        var url = $(this).data('url');
+//         // 3. 클릭한 메뉴의 data-url 속성에서 HTML 파일 경로를 가져옴
+//         var url = $(this).data('url');
 
-        // 4. 해당 HTML 파일을 #content-area에 로드
-        $('#content-area').load(url, function (response, status, xhr) {
-            if (status == "error") {
-                // 에러 처리 (예: HTML 파일이 없을 경우)
-                $('#content-area').html("<h1>Error</h1><p>Unable to load the page.</p>");
-            }
-        });
-    });
-});
+//         // 4. 해당 HTML 파일을 #content-area에 로드
+//         $('#content-area').load(url, function (response, status, xhr) {
+//             if (status == "error") {
+//                 // 에러 처리 (예: HTML 파일이 없을 경우)
+//                 $('#content-area').html("<h1>Error</h1><p>Unable to load the page.</p>");
+//             }
+//         });
+//     });
+// });
    
 </script>
 </body>
