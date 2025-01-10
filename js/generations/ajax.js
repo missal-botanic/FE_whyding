@@ -6,6 +6,7 @@ function imageResult(response) {
         $('#combinedImage').attr('src', imageSrc).show();
         $('#imageResult').show();
         $('body').css('overflow', 'hidden');
+        // console.log(response.image)
     } else {
         alert('조합된 이미지를 받을 수 없습니다.');
     }
