@@ -75,7 +75,7 @@ function uploadImageToServer(base64Image) {
         processData: false, // FormData는 자동으로 처리하지 않도록 설정
         contentType: false, // 자동으로 Content-Type을 설정하지 않도록 설정
         success: function(response) {
-            alert('이미지가 성공적으로 업로드되었습니다.');
+            alert('이미지가 성공적으로 보관되었습니다.');
             console.log(response);
         },
         error: function(xhr, status, error) {

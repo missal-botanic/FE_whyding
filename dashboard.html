@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whyding 8조</title>
 
-  
-    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -16,11 +14,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
         </script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="css/dashboard/style.css">
     <script src="js/dashboard/script.js"></script>
+    <script src="js/profile/profile.js"></script>
 
-<!-- 
+    <script src="js/dashboard/ranking.js"></script>
+    <link rel="stylesheet" href="css/dashboard/ranking.css">
+
+    <!-- 
     <script>
         // 페이지 로드 전에 실행될 스크립트
         (function () {
@@ -77,7 +81,9 @@
             <img class="mb-3" src="img/logo.svg" style="width: 4vh;" alt="Logo">
             <!-- <img class="item" src="img/logo_side.svg" style="width: 5vh;" alt="Logo"> -->
             <!-- <img src="assets/images/logo.png"> -->
-            <a href="#"><img class="item" src="img/logo_side.svg" style="width: 7vh;" alt="Logo"> </a>
+            <a href="https://rr720.synology.me/whyding/">
+                <img class="item" src="img/logo_side.svg" style="width: 7vh;" alt="Logo">
+            </a>
         </div>
         <div class="sidebar mt-5">
             <div class="item active" data-url="middle.html">
@@ -130,22 +136,22 @@
         <div class="profile">
             <div class="info">
                 <i class="ri-user-3-line"></i>
-                <h5>Welcome Reza!</h5>
+                <h5 id="profile-name-main">loading..</h5>
             </div>
             <div class="user">
                 <i class="ri-notification-2-line"></i>
-                <img src="assets/images/profile.png">
+                <img id="profile-image-main" src="" style=" width: 3vw; height: auto; object-fit: cover; object-position: top;">
             </div>
         </div>
         <!-- 신부대기실 -->
 
         <!-- 폐백실 -->
         <div class="player">
+            <p>생성하기</p>
 
-    
         </div>
 
-        <h3>COURTESY ROOM</h3> 
+        <h3>COURTESY ROOM</h3>
 
         <div class="player">
             <div class="content">
@@ -164,10 +170,10 @@
             <i class="ri-pause-large-line"></i>
         </div>
         <!-- 주간 인기 -->
-        <h3>WEEKLY POPULAR</h3>
+        <h3>POPULAR</h3>
 
         <div class="weekly">
-            <div class="item">
+            <div class="item" id="wItem01">
                 <div class="content">
                     <img src="assets/images/w001.jpg">
                     <div class="info">
@@ -180,7 +186,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem02">
                 <div class="content">
                     <img src="assets/images/w002.jpg">
                     <div class="info">
@@ -193,7 +199,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem03">
                 <div class="content">
                     <img src="assets/images/w003.jpg">
                     <div class="info">
@@ -206,7 +212,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem04">
                 <div class="content">
                     <img src="assets/images/w004.jpg">
                     <div class="info">
@@ -219,7 +225,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem05">
                 <div class="content">
                     <img src="assets/images/w001.jpg">
                     <div class="info">
@@ -232,7 +238,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem06">
                 <div class="content">
                     <img src="assets/images/w002.jpg">
                     <div class="info">
@@ -245,7 +251,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem07">
                 <div class="content">
                     <img src="assets/images/w003.jpg">
                     <div class="info">
@@ -258,7 +264,7 @@
                 </div>
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <div class="item">
+            <div class="item" id="wItem08">
                 <div class="content">
                     <img src="assets/images/w004.jpg">
                     <div class="info">
@@ -281,7 +287,7 @@
                 // 로컬 스토리지에서 토큰 가져오기
                 const accessToken = localStorage.getItem("access_token");
                 const refreshToken = localStorage.getItem("refresh_token");
-    
+
                 // 디버그 메시지를 화면에 출력하는 함수
                 const debugMessage = (message) => {
                     const div = document.createElement("div");
@@ -297,39 +303,39 @@
                     div.style.zIndex = "9999";
                     div.style.textAlign = "center"; // 메시지를 가운데 정렬
                     div.textContent = message;
-    
+
                     // 각 메시지 위로 margin-top을 증가시켜서 순차적으로 아래로 쌓이게 설정
                     let currentTop = parseInt(div.style.top, 10);
                     const existingMessages = document.querySelectorAll('.debug-message');
                     div.classList.add('debug-message');
                     div.style.top = `${currentTop + existingMessages.length * 30}px`; // 각 메시지에 45px 간격을 추가
-    
+
                     document.body.appendChild(div);
-    
+
                     // 2초 후에 메시지를 삭제하는 처리
                     setTimeout(() => {
                         div.remove(); // 메시지 삭제
                     }, 2000); // 2000ms (2초) 후에 메시지를 삭제
                 };
-    
+
                 // 화면에 토큰 정보 출력
                 debugMessage("Access Token: " + accessToken);
                 debugMessage("Refresh Token: " + refreshToken);
-    
+
                 // 3초 후 리다이렉트 함수
                 const redirectToHome = () => {
                     setTimeout(() => {
                         window.location.href = "https://rr720.synology.me/whyding/";
                     }, 3000);  // 3초 후 리다이렉트
                 };
-    
+
                 if (!accessToken || !refreshToken) {
                     // 토큰이 없는 경우 즉시 리다이렉트
                     debugMessage("토큰이 없습니다. 3초 후 리다이렉트합니다.");
                     redirectToHome();
                     return;
                 }
-    
+
                 // 토큰 검증 요청
                 const verifyToken = async () => {
                     try {
@@ -341,7 +347,7 @@
                                 "Authorization": `Bearer ${accessToken}`  // Authorization 헤더에 Bearer 토큰 추가
                             }
                         });
-    
+
                         if (response.ok) {
                             const data = await response.json();
                             if (data.message === "Token is valid.") {
@@ -361,18 +367,20 @@
                         redirectToHome();
                     }
                 };
-    
+
                 // 토큰 검증 실행
                 verifyToken();
             })();
         });
-    </script>
-    
-    
-    
-    
 
-<!-- 
+        // initializeProfilePage(); 
+    </script>
+
+
+
+
+
+    <!-- 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // 페이지 로드 전에 실행될 스크립트

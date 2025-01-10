@@ -1,0 +1,41 @@
+/* Transition for smooth movement when item moves */
+.item {
+    position: relative; /* Ensure items are positioned relative to each other */
+    transition: transform 1s ease, opacity 1s ease; /* Transition for smooth movement */
+}
+
+/* 애니메이션: 아래로 내려가는 아이템 */
+@keyframes moveDown {
+    0% {
+        transform: translateY(0); /* 시작 위치 */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(90px); /* 30px 아래로 내려감 */
+        opacity: 0.8;
+    }
+}
+
+/* 애니메이션: 위로 올라가는 아이템 */
+@keyframes moveUp {
+    0% {
+        transform: translateY(0); /* 시작 위치 */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-90px); /* 30px 위로 올라감 */
+        opacity: 0.8;
+    }
+}
+
+/* 내려가는 애니메이션을 적용하는 클래스 */
+.item.animation-down {
+    animation: moveUp 1s ease-in-out forwards;
+    
+}
+
+/* 올라가는 애니메이션을 적용하는 클래스 */
+.item.animation-up {
+    animation: moveDown 1s ease-in-out forwards;
+    
+}
