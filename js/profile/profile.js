@@ -19,7 +19,7 @@ $(document).ready(function () {
                 'Authorization': 'Bearer ' + accessToken
             },
             success: function (data) {
-                $('#profile-name-main').text(data.username || '없음');
+                $('#profile-name-main').text(data.username +"님" || '없음');
                 // $('#email').text(data.email || '없음');
                 if (data.profile_image) {
                     $('#profile-image-main').attr('src', data.profile_image);
