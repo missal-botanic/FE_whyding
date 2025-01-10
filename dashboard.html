@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whyding 8조</title>
+
+  
+    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,29 +20,53 @@
     <link rel="stylesheet" href="css/dashboard/style.css">
     <script src="js/dashboard/script.js"></script>
 
-    <title>Whyding</title>
+<!-- 
+    <script>
+        // 페이지 로드 전에 실행될 스크립트
+        (function () {
+            // 로컬 스토리지에서 토큰 가져오기
+            const accessToken = localStorage.getItem("access");
+            const refreshToken = localStorage.getItem("refresh");
 
-    <!-- <link rel="stylesheet" href="css/generations/styles.css" type="text/css">
-    <link rel="stylesheet" href="css/generations/gallery.css" type="text/css">
-    <link rel="stylesheet" href="css/generations/reft.css" type="text/css">
-    <link rel="stylesheet" href="css/generations/regeneration.css" type="text/css">
-    <link rel="stylesheet" href="css/generations/refresh.css" type="text/css">
-    <script src="js/generations/jquery-1.9.1.js"></script>
-    <script src="js/generations/ajax.js" defer></script>
-    <script src="js/generations/ajax2.js" defer></script>
-    <script src="js/generations/buttons.js" defer></script>
-    <script src="js/generations/image.js"></script>
-    <script src="js/generations/sample.js"></script>
-    <script src="js/generations/gallery.js" defer></script> -->
+            if (!accessToken || !refreshToken) {
+                // 토큰이 없는 경우 즉시 리다이렉트
+                window.location.href = "https://rr720.synology.me/whyding/";
+                return;
+            }
 
-    
-    <!-- <style>
-        .oswald-unique {
-            font-family: "Oswald", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-    </style> -->
+            // 토큰 검증 요청
+            const verifyToken = async () => {
+                try {
+                    const response = await fetch("http://127.0.0.1:8000/api/accounts/token/verify/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ token: accessToken }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.message !== "Token is valid.") {
+                            // 인증 실패 시 리다이렉트
+                            window.location.href = "https://rr720.synology.me/whyding/";
+                        }
+                    } else {
+                        const errorData = await response.json();
+                        console.error("인증 실패: ", errorData);
+                        window.location.href = "https://rr720.synology.me/whyding/";
+                    }
+                } catch (error) {
+                    console.error("네트워크 오류: ", error);
+                    window.location.href = "https://rr720.synology.me/whyding/";
+                }
+            };
+
+            // 토큰 검증 실행
+            verifyToken();
+        })();
+    </script> -->
+
 
 </head>
 
@@ -113,7 +142,8 @@
         <!-- 폐백실 -->
         <div class="player">
 
-    </div>
+    
+        </div>
 
         <h3>COURTESY ROOM</h3> 
 
@@ -244,37 +274,188 @@
         </div>
     </div>
 
-
-    <!-- <script src="script.js"></script> -->
-
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 페이지 로드 전에 실행될 스크립트
+            (function () {
+                // 로컬 스토리지에서 토큰 가져오기
+                const accessToken = localStorage.getItem("access_token");
+                const refreshToken = localStorage.getItem("refresh_token");
+    
+                // 디버그 메시지를 화면에 출력하는 함수
+                const debugMessage = (message) => {
+                    const div = document.createElement("div");
+                    div.style.position = "fixed";
+                    div.style.top = "10px"; // 위에서부터 차례대로 표시되게 하려면 top을 고정
+                    div.style.left = "50%"; // 화면 가운데 정렬
+                    div.style.transform = "translateX(-50%)"; // 가로 중앙 정렬
+                    div.style.width = "100%"; // 넓이를 80%로 설정하여, 너무 길게 표시되지 않도록 함
+                    div.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+                    div.style.color = "white";
+                    div.style.fontSize = "8px";
+                    div.style.padding = "10px";
+                    div.style.zIndex = "9999";
+                    div.style.textAlign = "center"; // 메시지를 가운데 정렬
+                    div.textContent = message;
+    
+                    // 각 메시지 위로 margin-top을 증가시켜서 순차적으로 아래로 쌓이게 설정
+                    let currentTop = parseInt(div.style.top, 10);
+                    const existingMessages = document.querySelectorAll('.debug-message');
+                    div.classList.add('debug-message');
+                    div.style.top = `${currentTop + existingMessages.length * 30}px`; // 각 메시지에 45px 간격을 추가
+    
+                    document.body.appendChild(div);
+    
+                    // 2초 후에 메시지를 삭제하는 처리
+                    setTimeout(() => {
+                        div.remove(); // 메시지 삭제
+                    }, 2000); // 2000ms (2초) 후에 메시지를 삭제
+                };
+    
+                // 화면에 토큰 정보 출력
+                debugMessage("Access Token: " + accessToken);
+                debugMessage("Refresh Token: " + refreshToken);
+    
+                // 3초 후 리다이렉트 함수
+                const redirectToHome = () => {
+                    setTimeout(() => {
+                        window.location.href = "https://rr720.synology.me/whyding/";
+                    }, 3000);  // 3초 후 리다이렉트
+                };
+    
+                if (!accessToken || !refreshToken) {
+                    // 토큰이 없는 경우 즉시 리다이렉트
+                    debugMessage("토큰이 없습니다. 3초 후 리다이렉트합니다.");
+                    redirectToHome();
+                    return;
+                }
+    
+                // 토큰 검증 요청
+                const verifyToken = async () => {
+                    try {
+                        debugMessage("토큰 검증 요청 중...");
+                        const response = await fetch("http://127.0.0.1:8000/api/accounts/token/verify/", {
+                            method: "GET",  // GET 방식
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${accessToken}`  // Authorization 헤더에 Bearer 토큰 추가
+                            }
+                        });
+    
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.message === "Token is valid.") {
+                                debugMessage("인증 성공.");
+                            } else {
+                                debugMessage("인증 실패: " + JSON.stringify(data));
+                                redirectToHome();
+                            }
+                        } else {
+                            const errorData = await response.json();
+                            debugMessage("인증 실패: " + JSON.stringify(errorData));
+                            redirectToHome();
+                        }
+                    } catch (error) {
+                        console.error("네트워크 오류: ", error);
+                        debugMessage("네트워크 오류 발생: " + error.message);
+                        redirectToHome();
+                    }
+                };
+    
+                // 토큰 검증 실행
+                verifyToken();
+            })();
+        });
+    </script>
+    
+    
+    
+    
 
-// $(document).ready(function () {
-//     // 기본적으로 첫 번째 메뉴의 HTML을 로드
-//     $('#content-area').load('middle.html');
+<!-- 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 페이지 로드 전에 실행될 스크립트
+            (function () {
+                // 로컬 스토리지에서 토큰 가져오기
+                const accessToken = localStorage.getItem("access");
+                const refreshToken = localStorage.getItem("refresh");
+    
+                const debugMessage = (message) => {
+                    // div 요소를 생성하여 디버그 메시지를 화면에 출력
+                    const div = document.createElement("div");
+                    div.style.position = "fixed";
+                    div.style.top = "0"; // 헤더 위치에 고정
+                    div.style.left = "0";
+                    div.style.width = "100%";
+                    div.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                    div.style.color = "white";
+                    div.style.fontSize = "14px";
+                    div.style.padding = "10px";
+                    div.style.zIndex = "9999";
+                    div.style.textAlign = "center"; // 메시지를 가운데 정렬
+                    div.textContent = message;
+    
+                    document.body.appendChild(div);
+                };
+    
+                // 디버그 메시지 출력
+                debugMessage("토큰 검사 시작...");
+    
+                // 3초 후 리다이렉트 함수
+                const redirectToHome = () => {
+                    setTimeout(() => {
+                        window.location.href = "https://rr720.synology.me/whyding/";
+                    }, 3000);  // 3초 후 리다이렉트
+                };
+    
+                if (!accessToken || !refreshToken) {
+                    // 토큰이 없는 경우 즉시 리다이렉트
+                    debugMessage("토큰이 없습니다. 3초 후 리다이렉트합니다.");
+                    redirectToHome();
+                    return;
+                }
+    
+                // 토큰 검증 요청
+                const verifyToken = async () => {
+                    try {
+                        debugMessage("토큰 검증 요청 중...");
+                        const response = await fetch("http://127.0.0.1:8000/api/accounts/token/verify/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ token: accessToken }),
+                        });
+    
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.message !== "Token is valid.") {
+                                // 인증 실패 시 3초 후 리다이렉트
+                                debugMessage("인증 실패. 3초 후 리다이렉트합니다.");
+                                redirectToHome();
+                            } else {
+                                debugMessage("인증 성공.");
+                            }
+                        } else {
+                            const errorData = await response.json();
+                            debugMessage("인증 실패: " + JSON.stringify(errorData));
+                            redirectToHome();
+                        }
+                    } catch (error) {
+                        console.error("네트워크 오류: ", error);
+                        debugMessage("네트워크 오류 발생: " + error.message);
+                        redirectToHome();
+                    }
+                };
+    
+                // 토큰 검증 실행
+                verifyToken();
+            })();
+        });
+    </script>
+     -->
 
-//     // 네비게이션 메뉴 클릭 이벤트
-//     $('.sidebar .item').on('click', function () {
-//         // 1. 모든 메뉴에서 active 클래스 제거
-//         $('.sidebar .item').removeClass('active');
-
-//         // 2. 클릭한 메뉴에 active 클래스 추가
-//         $(this).addClass('active');
-
-//         // 3. 클릭한 메뉴의 data-url 속성에서 HTML 파일 경로를 가져옴
-//         var url = $(this).data('url');
-
-//         // 4. 해당 HTML 파일을 #content-area에 로드
-//         $('#content-area').load(url, function (response, status, xhr) {
-//             if (status == "error") {
-//                 // 에러 처리 (예: HTML 파일이 없을 경우)
-//                 $('#content-area').html("<h1>Error</h1><p>Unable to load the page.</p>");
-//             }
-//         });
-//     });
-// });
-   
-</script>
 </body>
 
 </html>

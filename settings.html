@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 조회</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-container p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .profile-container .profile-info {
+            margin: 10px 0;
+        }
+        .profile-container .profile-info strong {
+            display: inline-block;
+            width: 120px;
+        }
+        .profile-container .profile-image {
+            display: block;
+            max-width: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h1>내 프로필</h1>
+        <div class="loading">로딩 중...</div>
+        <div class="profile-image">
+            <img id="profile-image" src="" alt="프로필 이미지" />
+        </div>
+        <div class="profile-info">
+            <p><strong>사용자명:</strong> <span id="username"></span></p>
+            <p><strong>이메일:</strong> <span id="email"></span></p>
+            <p><strong>자기소개:</strong> <span id="introduction"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // 디버그 메시지를 화면에 출력하는 함수
+        const debugMessage = (message) => {
+            const div = document.createElement("div");
+            div.style.position = "fixed";
+            div.style.top = "10px"; // 위에서부터 차례대로 표시되게 하려면 top을 고정
+            div.style.left = "50%"; // 화면 가운데 정렬
+            div.style.transform = "translateX(-50%)"; // 가로 중앙 정렬
+            div.style.width = "100%"; // 넓이를 100%로 설정하여, 너무 길게 표시되지 않도록 함
+            div.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+            div.style.color = "white";
+            div.style.fontSize = "8px";
+            div.style.padding = "10px";
+            div.style.zIndex = "9999";
+            div.style.textAlign = "center"; // 메시지를 가운데 정렬
+            div.textContent = message;
+
+            // 각 메시지 위로 margin-top을 증가시켜서 순차적으로 아래로 쌓이게 설정
+            let currentTop = parseInt(div.style.top, 10);
+            const existingMessages = document.querySelectorAll('.debug-message');
+            div.classList.add('debug-message');
+            div.style.top = `${currentTop + existingMessages.length * 25}px`; // 각 메시지에 25px 간격을 추가
+
+            document.body.appendChild(div);
+
+            // 2초 후에 메시지를 삭제하는 처리
+            setTimeout(() => {
+                div.remove(); // 메시지 삭제
+            }, 2000); // 2000ms (2초) 후에 메시지를 삭제
+        };
+
+        $(document).ready(function() {
+            // 로컬 스토리지에서 access 토큰 가져오기
+            const accessToken = localStorage.getItem('access_token');  // 'access_token'을 로컬 스토리지에서 가져옵니다.
+            debugMessage('Access Token: ' + accessToken);  // 디버깅 메시지 출력
+            
+            if (!accessToken) {
+                $('.loading').text('로그인이 필요합니다.');
+                debugMessage('로그인 토큰이 없습니다.');
+                return;
+            }
+
+            // API에서 사용자 정보 가져오기
+            debugMessage('사용자 프로필 정보 요청 중...');
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/accounts/profile/',  // API URL
+                type: 'GET',  // HTTP 메서드
+                dataType: 'json',  // 응답 데이터 타입
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + accessToken  // Authorization 헤더에 Bearer 토큰 추가
+                },
+                success: function(data) {
+                    // 성공적으로 데이터를 받은 경우
+                    debugMessage('프로필 정보 요청 성공!');
+                    $('#username').text(data.username || '없음');
+                    $('#email').text(data.email || '없음');
+                    $('#introduction').text(data.introduction || '없음');
+                    
+                    // 프로필 이미지 처리 (프로필 이미지가 없으면 기본 이미지 표시)
+                    if (data.profile_image) {
+                        $('#profile-image').attr('src', data.profile_image);
+                    } else {
+                        $('#profile-image').attr('src', 'default-profile.png'); // 기본 이미지 경로
+                    }
+
+                    // 로딩 메시지 숨기기
+                    $('.loading').hide();
+                },
+                error: function(xhr, status, error) {
+                    // 에러 발생 시
+                    console.error(error);
+                    if (xhr.status === 401) {
+                        $('.loading').text('인증 오류: 토큰이 유효하지 않습니다.');
+                        debugMessage('인증 오류: 토큰이 유효하지 않음');
+                    } else {
+                        $('.loading').text('프로필을 불러오는 데 오류가 발생했습니다.');
+                        debugMessage('프로필을 불러오는 데 오류 발생: ' + error);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

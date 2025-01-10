@@ -9,6 +9,8 @@ function toggleSpinner(durationInSeconds) {
     $spinner.show();
     $button.hide();
 
+
+
     // 애니메이션으로 투명도를 점차 감소
     var fadeOutDuration = durationInSeconds * 1000; // 밀리초로 변환
     var steps = 100; // 애니메이션을 몇 단계로 나눌지 설정
