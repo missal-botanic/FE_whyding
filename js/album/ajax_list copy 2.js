@@ -3,7 +3,6 @@ $(document).ready(function () {
   const pagination = $("#pagination"); // 페이지네이션을 표시할 곳
   var accessToken = localStorage.getItem('access_token');
   var currentPageUrl = "http://127.0.0.1:8000/api/articles/"; // 기본 URL (첫 페이지)
-  var currentPage = 1; // 현재 페이지 초기값
 
   // 데이터를 가져오는 함수
   function fetchGalleryData(url) {
@@ -16,7 +15,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (data) {
         renderGallery(data.results);
-        renderPagination(data.next, data.previous, data.count, currentPage);
+        renderPagination(data.next, data.previous);
       },
       error: function () {
         console.error("Failed to fetch gallery data.");
@@ -99,58 +98,40 @@ $(document).ready(function () {
   }
 
   // 페이지네이션 렌더링 함수
-  function renderPagination(nextUrl, prevUrl, totalCount, currentPage) {
+  function renderPagination(nextUrl, prevUrl) {
     pagination.empty(); // 페이지네이션 초기화
 
-    // 페이지 수 계산
-    const itemsPerPage = 9; // 한 페이지에 표시할 아이템 수
-    const totalPages = Math.ceil(totalCount / itemsPerPage); // 총 페이지 수 계산
+    // if (prevUrl) {
+    //   pagination.append('<button id="prev" class="btn btn-secondary">이전</button>');
+    // }
 
-    // 이전 페이지 버튼
+    // if (nextUrl) {
+    //   pagination.append('<button id="next" class="btn btn-secondary">다음</button>');
+    // }
+
+
     if (prevUrl) {
-      pagination.append('<button id="prev" class="btn btn-dark mx-2 btn-sm">이전</button>');
+      pagination.append('<button id="prev" class="btn btn-dark mx-2">이전</button>');
     } else {
-      pagination.append('<button id="prev" class="btn btn-secondary mx-2 btn-sm" disabled>이전</button>');
+      pagination.append('<button id="prev" class="btn btn-secondary mx-2" disabled>이전</button>');
     }
 
-    // 페이지 번호 버튼
-    for (let i = 1; i <= totalPages; i++) {
-      if (i === currentPage) {
-        pagination.append(`<button class="btn btn-dark mx-2 btn-sm">${i}</button>`);
-      } else {
-        pagination.append(`<button class="btn btn-secondary mx-2 btn-sm">${i}</button>`);
-      }
-    }
-
-    // 다음 페이지 버튼
     if (nextUrl) {
-      pagination.append('<button id="next" class="btn btn-dark mx-2 btn-sm">다음</button>');
+      pagination.append('<button id="next" class="btn btn-dark mx-2">다음</button>');
     } else {
-      pagination.append('<button id="next" class="btn btn-secondary mx-2 btn-sm" disabled>다음</button>');
+      pagination.append('<button id="next" class="btn btn-secondary mx-2" disabled>다음</button>');
     }
-
-    // 페이지 번호 클릭 이벤트
-    pagination.find('button').not('#prev, #next').click(function () {
-      const pageNum = $(this).text();
-      const newPageUrl = `http://127.0.0.1:8000/api/articles/?page=${pageNum}`;
-      currentPage = parseInt(pageNum); // 현재 페이지 번호 업데이트
-      fetchGalleryData(newPageUrl); // 해당 페이지 데이터 로드
-    });
 
     // 이전 페이지 버튼 클릭 이벤트
     $("#prev").click(function () {
-      if (prevUrl) {
-        fetchGalleryData(prevUrl);
-        currentPage--; // 현재 페이지 번호 업데이트
-      }
+      fetchGalleryData(prevUrl);
+      currentPageUrl = prevUrl; // 현재 페이지 URL 업데이트
     });
 
     // 다음 페이지 버튼 클릭 이벤트
     $("#next").click(function () {
-      if (nextUrl) {
-        fetchGalleryData(nextUrl);
-        currentPage++; // 현재 페이지 번호 업데이트
-      }
+      fetchGalleryData(nextUrl);
+      currentPageUrl = nextUrl; // 현재 페이지 URL 업데이트
     });
   }
 
