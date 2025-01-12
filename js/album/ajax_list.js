@@ -31,16 +31,21 @@ $(document).ready(function () {
     if (items.length > 0) {
       items.forEach((item) => {
         const galleryItem = `
-          <div class="col-md-4">
-            <div class="gallery-item">
-              <div class="gallery-image" style="background-image: url('${item.image || ''}');"></div>
-              <div class="gallery-info fs-8">
-                <p><i class="ri-calendar-fill"></i> ${formatDate(item.created_at)}</p>
-                <p><i class="ri-git-repository-private-fill"></i> ${item.is_public ? "공개" : "비공개"}</p>
-                <button class="btn btn-dark btn-sm btn-delete mb-2" data-id="${item.id}">Delete</button>
-              </div>
-            </div>
-          </div>
+<div class="col-md-4">
+    <div class="gallery-item">
+        <div class="gallery-image" style="background-image: url('${item.image || ''}');">
+            <!-- 공유 버튼 추가 -->
+            <button class="btn-share">
+                <i class="ri-share-forward-line"></i>
+            </button>
+        </div>
+        <div class="gallery-info fs-8">
+            <p><i class="ri-calendar-fill"></i> ${formatDate(item.created_at)}</p>
+            <p><i class="ri-git-repository-private-fill"></i> ${item.is_public ? "공개" : "비공개"}</p>
+            <button class="btn btn-dark btn-sm btn-delete mb-2" data-id="${item.id}">Delete</button>
+        </div>
+    </div>
+</div>
         `;
         gallery.append(galleryItem);
       });

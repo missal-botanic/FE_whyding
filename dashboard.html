@@ -24,7 +24,7 @@
 
 
     <script src="js/dashboard/sign_out.js"></script>
-    
+
 
     <script src="js/dashboard/ranking.js"></script>
     <link rel="stylesheet" href="css/dashboard/ranking.css">
@@ -36,7 +36,9 @@
 
     <div class="left-section">
         <div class="logo">
-            <img class="mb-3" src="img/logo.svg" style="width: 40px;" alt="Logo">
+            <a href="https://rr720.synology.me/whyding/">
+                <img class="mb-3" src="img/logo.svg" style="width: 40px;" alt="Logo">
+            </a>
             <!-- <img class="item" src="img/logo_side.svg" style="width: 5vh;" alt="Logo"> -->
             <!-- <img src="assets/images/logo.png"> -->
             <a href="https://rr720.synology.me/whyding/">
@@ -346,7 +348,7 @@
         //     window.location.href = 'https://rr720.synology.me/whyding/';
         // });
 
-        document.querySelector('.sign-out').addEventListener('click', function() {
+        document.querySelector('.sign-out').addEventListener('click', function () {
             signOut(); // logout.js에 정의된 logout 함수 호출
         });
 
