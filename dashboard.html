@@ -21,6 +21,11 @@
     <script src="js/dashboard/script.js"></script>
     <script src="js/profile/profile.js"></script>
 
+
+
+    <script src="js/dashboard/sign_out.js"></script>
+    
+
     <script src="js/dashboard/ranking.js"></script>
     <link rel="stylesheet" href="css/dashboard/ranking.css">
 
@@ -40,14 +45,15 @@
         </div>
         <div class="profile">
             <div class="info d-flex justify-content-start align-items-center text-center mt-3 ">
-                <img id="profile-image-main" src="your-image-url.jpg" style="width: 40px; height: 40px; border-radius: 10px; object-fit: cover; object-position: center;">
+                <img id="profile-image-main" src="your-image-url.jpg"
+                    style="width: 40px; height: 40px; border-radius: 10px; object-fit: cover; object-position: center;">
                 <h5 class="ms-3 text-2xl" id="profile-name-main">loading..</h5>
             </div>
         </div>
         <div class="separator" style="border-bottom: 2px solid #5f5f5f; margin-top: 15px;" id="profile-underbar"></div>
         <!-- <div class="user"> -->
-            <!-- <i class="ri-notification-2-line"></i> -->
-            <!-- <i class="ri-user-3-line"></i> -->
+        <!-- <i class="ri-notification-2-line"></i> -->
+        <!-- <i class="ri-user-3-line"></i> -->
         <!-- </div> -->
 
 
@@ -61,7 +67,7 @@
                 <i class="ri-movie-2-line"></i>
                 <h3>Generate</h3>
             </div>
-            <div class="item" data-url="private-album.html">
+            <div class="item" data-url="album.html">
                 <i class="ri-user-6-line"></i>
                 <h3>My Private Album</h3>
             </div>
@@ -329,6 +335,19 @@
                 // 토큰 검증 실행
                 verifyToken();
             })();
+        });
+
+        // document.querySelector('.sign-out').addEventListener('click', function () {
+        //     // localStorage에서 access_token과 refresh_token 삭제
+        //     localStorage.removeItem('access_token');
+        //     localStorage.removeItem('refresh_token');
+
+        //     // 리다이렉트
+        //     window.location.href = 'https://rr720.synology.me/whyding/';
+        // });
+
+        document.querySelector('.sign-out').addEventListener('click', function() {
+            signOut(); // logout.js에 정의된 logout 함수 호출
         });
 
         // initializeProfilePage(); 

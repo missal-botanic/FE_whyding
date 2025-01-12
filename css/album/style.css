@@ -1,0 +1,26 @@
+.gallery-item {
+    aspect-ratio: 3 / 5;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .gallery-image {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd;
+  }
+  
+  .gallery-info {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .btn-delete {
+    margin-top: 0px;
+  }
