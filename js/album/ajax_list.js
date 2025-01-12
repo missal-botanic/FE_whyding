@@ -2,7 +2,7 @@ $(document).ready(function () {
   const gallery = $("#gallery");
   const pagination = $("#pagination"); // 페이지네이션을 표시할 곳
   var accessToken = localStorage.getItem('access_token');
-  var currentPageUrl = "http://127.0.0.1:8000/api/articles/"; // 기본 URL (첫 페이지)
+  var currentPageUrl = "http://127.0.0.1:8000/api/articles/my_articles/"; // 기본 URL (첫 페이지)
   var currentPage = 1; // 현재 페이지 초기값
 
   // 데이터를 가져오는 함수
