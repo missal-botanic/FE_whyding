@@ -2,8 +2,14 @@ $(document).ready(function () {
     // 기본적으로 첫 번째 메뉴의 HTML을 로드
     $('#content-area').load('middle.html');
 
+    // 첫 번째 메뉴를 강제로 클릭하게 해서 초기화
+    $('.sidebar .item').first().click();
+
     // 네비게이션 메뉴 클릭 이벤트
     $('.sidebar .item').on('click', function () {
+        
+        toggleSpinner75(0.5, 1)
+
         // 1. 모든 메뉴에서 active 클래스 제거
         $('.sidebar .item').removeClass('active');
 
@@ -27,5 +33,16 @@ $(document).ready(function () {
         } else {
             $('.right-section').show();  // 다른 메뉴 클릭 시 다시 보이기
         }
+
+        if ($(this).data('id') === "sign-out") {
+            signOut();
+        }
+
+        if ($(this).data('id') === "generations") {
+        }
+
+        // 메뉴 클릭 시 토큰 검증 함수 호출
+        verifyToken();  // 토큰 검증 함수 호출
+        
     });
 });

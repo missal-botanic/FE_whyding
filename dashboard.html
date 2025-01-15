@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="css/dashboard/style.css">
 
     <!-- 사용자 정의 스크립트 파일들 -->
+    <script src="js/dashboard/toggle-spinner.js"></script>
     <script src="js/dashboard/script.js"></script>
     <script src="js/dashboard/token_verify.js"></script>
     <script src="js/profile/profile.js"></script>
@@ -77,27 +78,27 @@
         <!-- 사이드바 항목들 -->
         <div class="sidebar mt-3">
             <!-- 대시보드 항목 (현재 페이지는 'active' 클래스를 통해 강조됨) -->
-            <div class="item active" data-url="middle.html">
+            <div id="" class="item active" data-url="middle.html">
                 <i class="ri-home-4-line"></i> <!-- 아이콘 -->
                 <h3>Dashboard</h3> <!-- 항목 제목 -->
             </div>
             <!-- 생성 항목 -->
-            <div class="item" data-url="generations.html">
+            <div id="generations" class="item" data-url="generations.html">
                 <i class="ri-movie-2-line"></i>
                 <h3>Generate</h3>
             </div>
             <!-- 내 개인 앨범 항목 -->
-            <div class="item" data-url="album.html">
+            <div id="" class="item" data-url="album.html">
                 <i class="ri-user-6-line"></i>
                 <h3>My Private Album</h3>
             </div>
             <!-- 설정 항목 -->
-            <div class="item" data-url="settings.html">
+            <div id="" class="item" data-url="settings.html">
                 <i class="ri-settings-3-line"></i>
                 <h3>Settings</h3>
             </div>
             <!-- 로그아웃 항목 -->
-            <div class="sign-out">
+            <div id="sign-out" class="sign-out">
                 <i class="ri-logout-box-r-line"></i>
                 <h3>Sign Out</h3>
             </div>
@@ -106,17 +107,17 @@
 </body>
 
 <div class="main">
-    <div class="header">
+    <!-- <div class="header"> -->
         <!-- 검색 영역 -->
-        <div class="search">
+        <!-- <div class="search"> -->
             <!-- 검색 버튼 아이콘 -->
-            <button><i class="ri-search-2-line"></i></button>
+            <!-- <button><i class="ri-search-2-line"></i></button> -->
             <!-- 검색 입력란 -->
-            <input type="text" placeholder="Search for videos...">
-        </div>
+            <!-- <input type="text" placeholder="Search for videos...">
+        </div> -->
         <!-- 설정 아이콘 (우측 상단) -->
-        <i class="ri-equalizer-2-line"></i>
-    </div>
+        <!-- <i class="ri-equalizer-2-line"></i> -->
+    <!-- </div> -->
 
     <!-- 중앙 콘텐츠 영역 -->
     <div class="main-content">
@@ -285,12 +286,9 @@
 
 
     <script>
-
-
-        document.querySelector('.sign-out').addEventListener('click', function () {
-            signOut(); // logout.js에 정의된 logout 함수 호출
-        });
-        // initializeProfilePage(); 
+        window.onload = function () {
+            toggleSpinner100(1, 1); // 페이지 로드 후 3초 동안 spinner를 토글
+        };
     </script>
     </body>
 

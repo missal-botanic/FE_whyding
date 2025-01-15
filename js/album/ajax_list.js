@@ -97,6 +97,7 @@ $(document).ready(function () {
 
   // 삭제 요청 함수
   function deleteItem(id) {
+    toggleSpinner100(0.5, 0.5);
     $.ajax({
       url: `http://127.0.0.1:8000/api/articles/${id}/`,
       method: "DELETE",

@@ -58,7 +58,7 @@ function loadImages() {
         dataType: 'json',
         success: function (data) {
             // 이미지들을 하나로 모음
-            console.log(data);
+            // console.log(data);
             for (var i = 0; i < selectedFolders.length; i++) {
                 var folder = selectedFolders[i];
                 if (data.hasOwnProperty(folder)) {
@@ -165,8 +165,12 @@ function loadImages() {
 function refreshButtonClick() {
     var button = $("#gal-refreshButton"); // jQuery로 버튼 요소 선택
 
-    baseImages(); // 더미 이미지 생성
+    setTimeout(function() {
+    }, 100);
+    baseImages();
     loadImages(); // 이미지 로딩
+
+    
     
     button.addClass("animate"); // 애니메이션 시작
 
