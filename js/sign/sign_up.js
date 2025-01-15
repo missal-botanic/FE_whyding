@@ -7,11 +7,13 @@ $(document).ready(function () {
         var email = $('#email').val();
         var username = $('#username').val();
         var password = $('#password').val();
+        var password_confirm = $('#password_confirm').val();
 
         var data = {
             "email": email,
             "username": username,
-            "password": password
+            "password": password,
+            "password_confirm": password_confirm,
         };
 
         // AJAX 요청
