@@ -1,4 +1,4 @@
-/* Transition for smooth movement when item moves */
+Transition for smooth movement when item moves
 .item {
     position: relative; /* Ensure items are positioned relative to each other */
     transition: transform 1s ease, opacity 1s ease; /* Transition for smooth movement */

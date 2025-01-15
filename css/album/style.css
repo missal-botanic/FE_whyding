@@ -1,10 +1,13 @@
+.font-small {
+  font-size: 13px;
+}
 .gallery-item {
-    aspect-ratio: 3 / 5;
+    aspect-ratio: 3 / 4;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 20px;
     overflow: hidden;
   }
@@ -18,12 +21,10 @@
   
   .gallery-info {
     padding: 10px;
-    text-align: center;
+    /* text-align: center; */
   }
   
-  .btn-delete {
-    margin-top: 0px;
-  }
+
 
   공유 버튼
 

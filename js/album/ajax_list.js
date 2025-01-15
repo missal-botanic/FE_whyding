@@ -45,11 +45,13 @@ $(document).ready(function () {
             <button class="btn-download"><i class="ri-file-download-line"></i></button>
             <button class="btn-delete" data-id="${item.id}"><i class="ri-delete-bin-line"></i></button>
           </div>
-          <div class="gallery-info fs-8">
-            <p><i class="ri-calendar-fill"></i> ${formatDate(item.created_at)}</p>
-            <p><i class="ri-git-repository-private-fill"></i> ${item.is_public ? "공개" : "비공개"}</p>
-          </div>
+
         </div>
+                  <div class="gallery-info ">
+            <p class="fw-bold mt-2"><i class="ri-git-repository-private-fill fs-8"></i> ${item.is_public ? "공개" : "비공개"}</p>
+            <p class="font-small"> <i class="ri-calendar-fill fs-8"></i> ${formatDate(item.created_at)}</p>
+            
+          </div>
       </div>
     `;
   }
@@ -77,9 +79,13 @@ $(document).ready(function () {
 
   // 날짜 포맷 함수
   function formatDate(dateString) {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
+    const date = new Date(dateString);
+    const year = date.getFullYear().toString().slice(-2); // 연도의 마지막 두 자리
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월 (1부터 시작하므로 +1)
+    const day = date.getDate().toString().padStart(2, '0'); // 일
+
+    return `${year}${month}${day}`;
+}
 
   // 삭제 버튼 클릭 이벤트
   gallery.on("click", ".btn-delete", function () {
@@ -132,6 +138,12 @@ $(document).ready(function () {
       pagination.append('<button id="next" class="btn btn-secondary mx-2 btn-sm" disabled>다음</button>');
     }
   }
+
+
+  // function formatDate(dateString) {
+  //   const options = { year: "numeric", month: "long", day: "numeric" };
+  //   return new Date(dateString).toLocaleDateString(undefined, options);
+  // } 
 
   // 페이지 번호 버튼 생성 함수
   function createPageButton(pageNum, currentPage) {

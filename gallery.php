@@ -35,7 +35,7 @@ foreach ($folders as $key => $folder) {
 
     // 랜덤한 이미지 9개 선택
     if (count($files) > 0) {
-        $randomFiles = array_rand($files, min(9, count($files)));
+        $randomFiles = array_rand($files, min(12, count($files)));
 
         // 선택된 이미지들의 경로를 배열로 반환
         $randomFileUrls = array();

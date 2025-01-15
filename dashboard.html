@@ -29,7 +29,6 @@
     <script src="js/dashboard/ranking.js"></script>
     <link rel="stylesheet" href="css/dashboard/ranking.css">
 
-
 </head>
 
 <body>
@@ -255,34 +254,34 @@
                 const refreshToken = localStorage.getItem("refresh_token");
 
                 // 디버그 메시지를 화면에 출력하는 함수
-                const debugMessage = (message) => {
-                    const div = document.createElement("div");
-                    div.style.position = "fixed";
-                    div.style.top = "10px"; // 위에서부터 차례대로 표시되게 하려면 top을 고정
-                    div.style.left = "50%"; // 화면 가운데 정렬
-                    div.style.transform = "translateX(-50%)"; // 가로 중앙 정렬
-                    div.style.width = "100%"; // 넓이를 80%로 설정하여, 너무 길게 표시되지 않도록 함
-                    div.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-                    div.style.color = "white";
-                    div.style.fontSize = "8px";
-                    div.style.padding = "10px";
-                    div.style.zIndex = "9999";
-                    div.style.textAlign = "center"; // 메시지를 가운데 정렬
-                    div.textContent = message;
+                // const debugMessage = (message) => {
+                //     const div = document.createElement("div");
+                //     div.style.position = "fixed";
+                //     div.style.top = "10px"; // 위에서부터 차례대로 표시되게 하려면 top을 고정
+                //     div.style.left = "50%"; // 화면 가운데 정렬
+                //     div.style.transform = "translateX(-50%)"; // 가로 중앙 정렬
+                //     div.style.width = "100%"; // 넓이를 80%로 설정하여, 너무 길게 표시되지 않도록 함
+                //     div.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+                //     div.style.color = "white";
+                //     div.style.fontSize = "8px";
+                //     div.style.padding = "10px";
+                //     div.style.zIndex = "9999";
+                //     div.style.textAlign = "center"; // 메시지를 가운데 정렬
+                //     div.textContent = message;
 
-                    // 각 메시지 위로 margin-top을 증가시켜서 순차적으로 아래로 쌓이게 설정
-                    let currentTop = parseInt(div.style.top, 10);
-                    const existingMessages = document.querySelectorAll('.debug-message');
-                    div.classList.add('debug-message');
-                    div.style.top = `${currentTop + existingMessages.length * 30}px`; // 각 메시지에 45px 간격을 추가
+                //     // 각 메시지 위로 margin-top을 증가시켜서 순차적으로 아래로 쌓이게 설정
+                //     let currentTop = parseInt(div.style.top, 10);
+                //     const existingMessages = document.querySelectorAll('.debug-message');
+                //     div.classList.add('debug-message');
+                //     div.style.top = `${currentTop + existingMessages.length * 30}px`; // 각 메시지에 45px 간격을 추가
 
-                    document.body.appendChild(div);
+                //     document.body.appendChild(div);
 
-                    // 2초 후에 메시지를 삭제하는 처리
-                    setTimeout(() => {
-                        div.remove(); // 메시지 삭제
-                    }, 2000); // 2000ms (2초) 후에 메시지를 삭제
-                };
+                //     // 2초 후에 메시지를 삭제하는 처리
+                //     setTimeout(() => {
+                //         div.remove(); // 메시지 삭제
+                //     }, 2000); // 2000ms (2초) 후에 메시지를 삭제
+                // };
 
                 // 화면에 토큰 정보 출력
                 debugMessage("Access Token: " + accessToken);
