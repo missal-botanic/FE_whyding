@@ -203,7 +203,9 @@ $(document).ready(function () {
         </li>
     </ul>
     <div class="chat-input">
-        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <textarea placeholder="Enter a message..." spellcheck="false"></textarea>
+        <label for="image-upload" class="material-symbols-rounded">add_photo_alternate</label>
+        <input type="file" id="image-upload" accept="image/*" style="display: none;">
         <span id="send-btn" class="material-symbols-rounded">send</span>
     </div>
 </div>

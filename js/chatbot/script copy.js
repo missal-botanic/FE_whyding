@@ -29,7 +29,7 @@ $(document).ready(function () {
     }
 
     if (image) {
-      $chatLi.append(` 
+      $chatLi.append(`
         <p>
           <img src="${image}" alt="uploaded-image" style="max-width: 100px; max-height: 100px; display: block;">
           ${message}
@@ -78,20 +78,14 @@ $(document).ready(function () {
 
       const tagString = sortedTags.join(", ");
 
-      // 랜덤 메시지 생성
-      const responses = [
-        `이 이쁜 그림에 들어간 태그는 ' ${tagString} ' 이야!`,
-        `오! 이 그림의 프롬프트는 ' ${tagString} '으로 넣으면 나올꺼야!`,
-        `이 사진의 대표 태그는 ' ${tagString} ' 이야.`,
-        `이 그림에서 ' ${tagString} '를 연상했어.`,
-        `내가 보기엔 ' ${tagString} ' 태그가 딱 어울려!`
-      ];
-
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-
       // Thinking 메시지 제거 후 응답 메시지 표시
       $thinkingMessage.remove();
-      const $responseMessage = createChatLi(randomResponse, "incoming", null, "img/chatbot/ch.png");
+      const $responseMessage = createChatLi(
+        `이 이쁜 그림에 들어간 태그는 '${tagString}' 이야!`,
+        "incoming",
+        null,
+        "img/chatbot/ch.png"
+      );
       $chatbox.append($responseMessage);
       $chatbox.scrollTop($chatbox[0].scrollHeight);
     }
