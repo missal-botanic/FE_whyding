@@ -1,3 +1,24 @@
+
+
+<!-- jQuery UI -->
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.core.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.widget.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.mouse.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.draggable.1.10.3.min.js"></script>
+<!-- wColorPicker -->
+<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/lib/wColorPicker.min.css" />
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/wColorPicker.min.js"></script>
+<!-- wPaint -->
+<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/wPaint.min.css" />
+<script type="text/javascript" src="https://rr720.synology.me/paint/wPaint.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/plugins/main/wPaint.menu.main.min.js"></script>
+
+<link rel="stylesheet" href="https://rr720.synology.me/paint/css/main.css" type="text/css">
+<script src="https://rr720.synology.me/paint/js/sub.js"></script>
+<script src="js/generations/edit.js"></script>
+<script src="js/generations/wpaint.js"></script>
+
+
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet"
@@ -18,6 +39,10 @@
 <script src="js/generations/gallery.js" defer></script>
 <script src="js/generations/ajax_profile_change.js" defer></script>
 <script src="js/chatbot/script.js" defer></script>
+
+
+
+
 
 
 <!-- first loading -->
@@ -116,17 +141,7 @@
                     <img id="previewTarget" src="" alt="미리보기 이미지"
                         style="width: 20vh; height: 30vh; background-color: #ccc; border-radius: 10px; display: none;">
 
-                    <!-- 디노이징 게이지 -->
                     <div class="overlay-buttons row">
-                        <p class="text-white" style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);" id="creativityText">
-                            Creativity
-                        </p>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-sm btn-light shadow" id="increase">+</button>
-                            <input type="range" min="0.6" max="0.7" value="0.65" step="0.01"
-                                class="Denoisingslider mx-2" id="DenoisingRange" style="direction: rtl;">
-                            <button class="btn btn-sm btn-light shadow" id="decrease">-</button>
-                        </div>
                         <!-- 재생성버튼 -->
                         <button class="btn btn-light btn-sm mt-2 shadow"
                             style="width: auto; min-width: 150px; height: auto; white-space: nowrap;"
@@ -175,25 +190,74 @@
     <div class="feedback-section d-flex flex-column align-items-center mt-3">
         <!-- <p class="text-light mt-2 fs-6">피드백을 남겨주세요</p> -->
         <div class="input-container position-relative" style="width: 40%;">
-            <textarea class="form-control rounded-3" id="feedbackText" rows="4" placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 상품을 드릴 예정입니다." onfocus="clearPlaceholder()" onblur="restorePlaceholder()"></textarea>
-            <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback" onclick="submitFeedback()">제출</button>
+            <textarea class="form-control rounded-3" id="feedbackText" rows="4"
+                placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다." onfocus="clearPlaceholder()"
+                onblur="restorePlaceholder()"></textarea>
+            <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback"
+                onclick="submitFeedback()">제출</button>
         </div>
     </div>
 </div>
-<script> 
-$(document).ready(function () {
-    // 페이지가 로드되면 #wrap-loading의 display-none 클래스를 제거하고, 서서히 보이게 함
-    $('#wrap-loading').removeClass('display-none').fadeIn(500); // 0.5초 동안 서서히 나타남
 
-    // 2초 후에 #wrap-loading을 서서히 숨기기
-    setTimeout(function() {
-        $('#wrap-loading').fadeOut(1000, function() {
-            // fadeOut이 끝난 후 display-none 클래스를 추가하여 완전히 숨김
-            $(this).addClass('display-none');
-        });
-    }, 1000); // 2초 후
-});
+<div class="image-edit" id="image-edit" style="display: none;">
+    <!-- 프롬프트 입력 창-->
+    <section class="col-12 col-md-8 mt-2">
+        <div class="accordion" id="accordionMain">
+            <!-- 체크박스 추가 -->
+            <div id="wpDrop-area-div"
+                class="accordion-body d-flex flex-column justify-content-center align-items-center mt-4 mb-4"
+                style="display: none; ">
+                <!-- wPaint -->
+                <div id="wpDrop-area"
+                    class="flex-grow-2 position-relative justify-content-center align-items-center mb-2">
+                    <div id="wPaint" class="dropzone"></div>
+                </div>
+                <div id="wpBGbutton-area" class="d-flex flex-wrap justify-content-center align-items-center w-100">
+                    <!-- 배경 이미지 버튼 예시 (주석처리된 부분) -->
+                    <!-- <img class="wpBGbutton" src="img/wpBG/bg00.jpg"></button> -->
+                </div>
+                <div id="wpButton-area">
+                    <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
+                    <input type="file" id="uploadInput" style="display: none;" onchange="handleFileSelect(event)">
+                    <!-- <button id="wpClear" class="btn btn-sm me-2 mb-4">Image Reset</button> -->
+                    <button id="wpreset" class="btn btn-dark  btn-sm me-2 mb-4"> 초기화 </button>
+                    <button id="wpClose" class="btn btn-dark  btn-sm me-2 mb-4"> 닫기 </button>
+                    <button id="wpGen" class="btn btn-dark  btn-sm me-2 mb-4"> 생성 </button>
+                    <button id="wpApp" class="btn btn-dark  btn-sm me-2 mb-4"> 적용 </button>
 
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">prompt</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea2" class="form-label">N prompt</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea2" rows="5.5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // 페이지가 로드되면 #wrap-loading의 display-none 클래스를 제거하고, 서서히 보이게 함
+        $('#wrap-loading').removeClass('display-none').fadeIn(500); // 0.5초 동안 서서히 나타남
+
+        // 2초 후에 #wrap-loading을 서서히 숨기기
+        setTimeout(function () {
+            $('#wrap-loading').fadeOut(1000, function () {
+                // fadeOut이 끝난 후 display-none 클래스를 추가하여 완전히 숨김
+                $(this).addClass('display-none');
+            });
+        }, 1000); // 2초 후
+    });
+    $(document).ready(function () {
+        var wpaintImageUrl = null
+        var ajaxBase64Image = null
+        var wpaintFi = null
+
+    })
 </script>
 <script>
     // 텍스트 입력창 클릭 시 안내 문구 사라지기
@@ -201,7 +265,7 @@ $(document).ready(function () {
         const feedbackText = document.getElementById('feedbackText');
         // 기본 placeholder 내용이 표시될 때만 텍스트를 지움
         if (feedbackText.value === feedbackText.placeholder) {
-            feedbackText.value = ''; 
+            feedbackText.value = '';
         }
     }
 
@@ -224,4 +288,22 @@ $(document).ready(function () {
             alert('피드백을 입력해주세요.');
         }
     }
+</script>
+<script>
+$('#gen-generateButton').click(function(){
+    $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
+    $("#wPaint").wPaint("image", wpaintImageUrl);
+});
+$('#wpClose').click(function(){
+    $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
+});
+
+$('#wpreset').click(function() {
+    $("#wPaint").wPaint("image", wpaintImageUrl);
+});
+
+$('#wpApp').click(function() {
+    $('#previewTarget').attr('src', wpaintRe).show();
+    imageBase64Target = wpaintFi
+});
 </script>

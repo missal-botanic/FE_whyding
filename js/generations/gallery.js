@@ -14,6 +14,7 @@ $(document).ready(function () {
     });
 });
 
+
 var galleryImages = $('.gallery-images');
 var numImages = 12; // 로딩할 이미지 개수
 // 더미 로딩 이미지 생성
@@ -121,6 +122,12 @@ function loadImages() {
                 handleImageClick(imageURL);
 
                 lastClickedImage = $(this); // 클릭한 이미지 저장
+
+                wpaintImageUrl = imageURL;
+
+                // $("#wPaint").wPaint("image", imageURL);
+                // console.log(imageURL,"확인요망");
+            
             });
 
             // 첫 번째 이미지 클릭 시 타겟 이미지로 표시 및 Base64 변환
@@ -135,6 +142,8 @@ function loadImages() {
             
                 // 공통 클릭 처리 함수 호출
                 handleImageClick(imageURL);
+                
+        
             }, 200);
 
             // 이미지 URL을 Base64로 변환
