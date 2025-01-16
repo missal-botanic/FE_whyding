@@ -42,7 +42,7 @@ $('#createImageButton').on('click', function () {
         return;
     }
     $('body').css('overflow', 'hidden');
-    $('#wrap-loading').removeClass('display-none');
+    
     // AJAX를 통해 서버에 데이터 전송
     $.ajax({
         url: 'https://whyding.bluest-dealers0m.workers.dev', // 서버 URL
@@ -76,23 +76,25 @@ $('#createImageButton').on('click', function () {
             "det_maxnum": 0
         }),
         beforeSend: function () {
+            $('#wrap-loading').removeClass('display-none').fadeIn(500); 
             toggleSpinner(5); // 5~6초 기본 값
+            
 
         },
         success: function (response) {
             // imageResult 함수에 response 전달
             imageResult(response);
-            $('#wrap-loading').addClass('display-none');
         },
         error: function (xhr, status, error) {
             console.error('AJAX 요청 실패:', status, error);
             alert('서버 요청에 실패했습니다. 다시 시도해주세요.');
-            $('#wrap-loading').addClass('display-none');
+            
         },
         complete: function () {
             // 요청이 완료된 후 실행 (성공/실패 상관없이)
             console.log('Request completed');
             $('body').css('overflow', 'auto');
+            $('#wrap-loading').addClass('display-none');
         }
     });
 });

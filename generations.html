@@ -16,8 +16,8 @@
 <script src="js/generations/image.js"></script>
 <script src="js/generations/sample.js"></script>
 <script src="js/generations/gallery.js" defer></script>
-<script src="js/chatbot/script.js" defer></script>
 <script src="js/generations/ajax_profile_change.js" defer></script>
+<script src="js/chatbot/script.js" defer></script>
 
 
 <!-- first loading -->
@@ -81,8 +81,8 @@
                     <div id="gal-text-area"></div>
                     <div class="gallery-images">
                     </div>
-                    <p class="text-center text-body-secondary fw-lighter mt-3" id="gal-text-center">
-                        위의 이미지는 인공지능(AI) 기술을 활용하여 생성된 이미지로, 실제 인물과는 관련이 없습니다.</p>
+                    <p class="text-center text-body-secondary fw-lighter mt-3 fs-6" id="gal-text-center">
+                        위의 이미지는 인공지능 기술을 활용하여 생성된 이미지로, 실제 인물과는 관련이 없습니다.</p>
                 </div>
             </div>
         </section>
@@ -139,7 +139,7 @@
                 <!-- 생성버튼 -->
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-dark btn-sm "
-                        style="width: auto; min-width: 150px; height: auto; white-space: nowrap; display: none;"
+                        style="width: auto; min-width: 150px; height: auto; white-space: nowrap; cursor: pointer; display: none;"
                         id="createImageButton">
                         착용하기
                     </button>
@@ -160,15 +160,24 @@
         <img src="" alt="조합된 이미지" id="combinedImage">
     </div>
     <div class="button-container">
-        <button id="closeButton" class="btn btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
+        <button id="closeButton" class="btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
         <button id="SetProfile" class="btn btn-dark btn-sm">
-            <i class="bi bi-folder-plus"></i>&nbsp;프로필 변경
+            <i class="bi bi-file-person"></i>&nbsp;프로필 변경
         </button>
         <button id="saveButton" class="btn btn-dark btn-sm">
             <i class="bi bi-folder-plus"></i>&nbsp;보관
         </button>
         <button id="downloadButton" class="btn btn-success btn-sm" onclick="downloadImage()"><i
                 class="bi bi-file-arrow-down"></i>&nbsp;다운로드</button>
+    </div>
+
+    <!-- 피드백 공간 -->
+    <div class="feedback-section d-flex flex-column align-items-center mt-3">
+        <!-- <p class="text-light mt-2 fs-6">피드백을 남겨주세요</p> -->
+        <div class="input-container position-relative" style="width: 40%;">
+            <textarea class="form-control rounded-3" id="feedbackText" rows="4" placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 상품을 드릴 예정입니다." onfocus="clearPlaceholder()" onblur="restorePlaceholder()"></textarea>
+            <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback" onclick="submitFeedback()">제출</button>
+        </div>
     </div>
 </div>
 <script> 
@@ -186,26 +195,33 @@ $(document).ready(function () {
 });
 
 </script>
+<script>
+    // 텍스트 입력창 클릭 시 안내 문구 사라지기
+    function clearPlaceholder() {
+        const feedbackText = document.getElementById('feedbackText');
+        // 기본 placeholder 내용이 표시될 때만 텍스트를 지움
+        if (feedbackText.value === feedbackText.placeholder) {
+            feedbackText.value = ''; 
+        }
+    }
 
-<button class="chatbot-toggler">
-    <span class="material-symbols-rounded">mode_comment</span>
-    <span class="material-symbols-outlined">close</span>
-</button>
-<div class="chatbot">
-    <header>
-        <h2>Whyding 챗봇</h2>
-        <span class="close-btn material-symbols-outlined">close</span>
-    </header>
-    <ul class="chatbox">
-        <li class="chat incoming">
-            <img src="img/chatbot/ch.png" alt="smart_toy" style="width: 35px; height: 35px;">
-            <p>안녕! 👋<br />웨딩 촬영 준비에 도움을 줄게!</p>
-        </li>
-    </ul>
-    <div class="chat-input">
-        <textarea placeholder="Enter a message..." spellcheck="false"></textarea>
-        <label for="image-upload" class="material-symbols-rounded">add_photo_alternate</label>
-        <input type="file" id="image-upload" accept="image/*" style="display: none;">
-        <span id="send-btn" class="material-symbols-rounded">send</span>
-    </div>
-</div>
+    // 텍스트 입력창 클릭 후 입력하지 않으면 안내 문구 복원
+    function restorePlaceholder() {
+        const feedbackText = document.getElementById('feedbackText');
+        // 사용자가 아무것도 입력하지 않았다면 placeholder 복원
+        if (feedbackText.value === '') {
+            feedbackText.value = feedbackText.placeholder;
+        }
+    }
+
+    // 피드백 제출 처리 (추가 구현 필요)
+    function submitFeedback() {
+        const feedbackText = document.getElementById('feedbackText').value;
+        if (feedbackText && feedbackText !== feedbackText.placeholder) {
+            // 서버로 피드백 전송 코드 추가
+            alert('피드백이 제출되었습니다!');
+        } else {
+            alert('피드백을 입력해주세요.');
+        }
+    }
+</script>

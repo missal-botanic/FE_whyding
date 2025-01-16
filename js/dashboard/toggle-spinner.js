@@ -8,7 +8,7 @@ const firstLoadingHTML = `
 
 // 두 번째 로딩 스피너 HTML
 const wrapLoadingHTML = `
-<div id="toggleSpinner75" class="bg-white vw-100 min-vh-100 opacity-75 position-fixed z-10 display-none" style="top: 0; left: 0; width: 100%; height: 100%;">
+<div id="toggleSpinner75" class="bg-white vw-100 min-vh-100 opacity-75 position-fixed z-10 display-none" style="top: 0; left: 0; width: 100%; height: 100%; ">
     <div class="spinner-grow text-dark position-fixed top-50 start-50 translate-middle z-10" role="status"
         style="width: 4rem; height: 4rem;"></div>
 </div>
