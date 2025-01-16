@@ -1,6 +1,6 @@
-$(document).ready(function () {
+// $(document).ready(function () {
     // 페이지 로드 시 기본 프로필 정보를 불러오는 함수 호출
-    initializeProfilePage();
+    // initializeProfilePage();
 
     // 프로필 페이지에 필요한 AJAX 요청을 처리하는 함수
     function initializeProfilePage() {
@@ -39,4 +39,4 @@ $(document).ready(function () {
         });
     }
 
-});
+// });
