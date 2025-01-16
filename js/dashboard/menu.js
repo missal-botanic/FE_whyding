@@ -42,7 +42,7 @@ $(document).ready(function () {
         }
 
         // 메뉴 클릭 시 토큰 검증 함수 호출
-        verifyToken();  // 토큰 검증 함수 호출
+        // verifyToken();  // 토큰 검증 함수 호출
         
     });
 });
