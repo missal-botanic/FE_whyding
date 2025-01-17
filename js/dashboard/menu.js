@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // 기본적으로 첫 번째 메뉴의 HTML을 로드
-    $('#content-area').load('middle.html');
+    // $('#content-area').load('middle.html');
+    $('#content-area').load('settings.html');
 
     // 첫 번째 메뉴를 강제로 클릭하게 해서 초기화
     $('.sidebar .item').first().click();
@@ -40,9 +41,6 @@ $(document).ready(function () {
 
         if ($(this).data('id') === "generations") {
         }
-
-        // 메뉴 클릭 시 토큰 검증 함수 호출
-        // verifyToken();  // 토큰 검증 함수 호출
-        
+        // verifyToken();  // 토큰 검증 함수 호출   
     });
 });

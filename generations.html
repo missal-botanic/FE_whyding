@@ -18,6 +18,16 @@
 <script src="js/generations/sample.js"></script>
 <script src="js/generations/gallery.js" defer></script>
 
+<style>
+    /* 배경 이미지 설정을 위한 커스텀 CSS */
+    body {
+        background-image: url('img/bg/gbg.png'); 
+        background-size: cover;           
+        background-position: center;      
+        background-repeat: no-repeat;     
+        height: 100vh;                    
+    }
+</style>
 
 <!-- first loading -->
 <div class="vw-100 min-vh-100 position-fixed z-3 display-none" style="background-color: #ffffff;" id="first-loading">
@@ -30,7 +40,7 @@
 </div>
 <!-- <h1 class="text-center mb-4">whyding 8조</h1> -->
 <div>
-    <div class="row mt-2">
+    <div class="row mt-2" id="gbg">
         <section class="col-12 col-md-8 mt-2">
             <div class="accordion-body d-flex justify-content-center align-items-center">
                 <!-- gallery -->
@@ -117,11 +127,11 @@
 
                     <div class="overlay-buttons row">
                         <!-- 재생성버튼 -->
-                        <button class="btn btn-light btn-sm mt-2 shadow"
+                        <!-- <button class="btn btn-light btn-sm mt-2 shadow"
                             style="width: auto; min-width: 150px; height: auto; white-space: nowrap;"
                             id="gen-generateButton">
                             Regenerate
-                        </button>
+                        </button> -->
                     </div>
                 </div>
                 <!-- 스패너 -->
@@ -297,6 +307,43 @@
     });
 </script>
 
+<!-- <link rel="stylesheet" href="css/chatbot/style.css" /> -->
+<!-- <script src="js/chatbot/script.js" defer></script> -->
+
+<button class="chatbot-toggler">
+    <span class="material-symbols-rounded">mode_comment</span>
+    <span class="material-symbols-outlined">close</span>
+</button>
+<div class="chatbot">
+    <header>
+        <h2 class="mt-2">Whyding 챗봇</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <img src="img/chatbot/ch.png" alt="smart_toy" style="width: 35px; height: 35px;">
+            <p>안녕! 👋<br/>웨딩 촬영 준비에 도움을 줄게! <br/>원하는 웨딩 이미지를 올리면 적절한 프롬프트를 찾아줄게!! </p>
+        </li>
+    </ul>
+    <div class="chat-input d-flex justify-content-center ">
+        <label class="material-symbols-rounded fs-6 my-3" for="image-upload" >
+            add_photo_alternate
+            <span class="fs-6 my-3">이미지 업로드</span>
+        </label>
+        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+    </div>
+    <style>
+        /* 마우스 올리면 손가락 모양으로 변경되고, 투명도 0.5 */
+        .chat-input label {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+    
+        .chat-input label:hover {
+            opacity: 0.3;
+        }
+    </style>
+
 <script src="js/generations/ajax.js" defer></script>
 <script src="js/generations/ajax_re.js" defer></script>
 <script src="js/generations/ajax_article.js" defer></script>
@@ -319,5 +366,4 @@
 <script src="js/generations/wpaint.js"></script>
 
 <script src="js/generations/ajax_profile_change.js" defer></script>
-
 <script src="js/chatbot/script.js" defer></script>
