@@ -2,6 +2,7 @@
 //     signOut();
 // });
 
+
 function signOut() {
     // localStorage에서 refresh_token 가져오기
     var refreshToken = localStorage.getItem('refresh_token');

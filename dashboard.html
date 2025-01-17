@@ -26,26 +26,21 @@
         </script>
 
     <!-- jQuery 라이브러리 (DOM 조작, AJAX 등에 사용) -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-        
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 
     <!-- 사용자 정의 스타일 시트 링크 -->
     <link rel="stylesheet" href="css/dashboard/style.css">
 
     <!-- 사용자 정의 스크립트 파일들 -->
-    <script src="js/dashboard/toggle-spinner.js"></script>
     <script src="js/dashboard/script.js"></script>
+    <script src="js/dashboard/menu.js"></script>
+    <script src="js/dashboard/toggle-spinner.js"></script>
     <script src="js/dashboard/token_verify.js"></script>
     <script src="js/dashboard/profile.js"></script>
-    <script src="js/dashboard/sign_out.js"></script>
-
-    <script src="js/dashboard/menu.js"></script>
-
-
 </head>
 
 <body>
@@ -56,8 +51,8 @@
         <!-- 로고 영역 -->
         <div class="logo">
             <!-- 메인 로고 이미지 (클릭 시 홈 페이지로 이동) -->
-  
-                <img class="mb-3" src="img/logo.svg" style="width: 40px;" alt="Logo">
+
+            <img class="mb-3" src="img/logo.svg" style="width: 40px;" alt="Logo">
 
             <!-- 사이드로 보이는 작은 로고 이미지 -->
             <a href="https://rr720.synology.me/whyding/">
@@ -107,195 +102,184 @@
                 <i class="ri-logout-box-r-line"></i>
                 <h3>Sign Out</h3>
             </div>
+            </div>
         </div>
     </div>
-</body>
 
-<div class="main">
-    <!-- <div class="header"> -->
-        <!-- 검색 영역 -->
-        <!-- <div class="search"> -->
-            <!-- 검색 버튼 아이콘 -->
-            <!-- <button><i class="ri-search-2-line"></i></button> -->
-            <!-- 검색 입력란 -->
-            <!-- <input type="text" placeholder="Search for videos..."></div> -->
-        <!-- 설정 아이콘 (우측 상단) -->
-        <!-- <i class="ri-equalizer-2-line"></i> -->
-    <!-- </div> -->
 
-    <!-- 중앙 콘텐츠 영역 -->
-    <div class="main-content">
-        <!-- 콘텐츠가 동적으로 로드될 영역 -->
-        <div id="content-area">Loading...</div>
-    </div>
-</div>
-
-<!-- 우측 사이드바 영역 -->
-<div class="right-section">
-
-    <!-- 'COURTESY ROOM' 제목 -->
-    <h3>COURTESY ROOM</h3>
-
-    <!-- 상단 베스트 영역 -->
-    <div class="player">
-        <div class="content">
-            <!-- 동영상 썸네일 이미지 -->
-            <img src="assets/images/c001.jpg">
-            <div class="info">
-                <!-- 제목 -->
-                <h5>Germany Travel Tour</h5>
-                <div class="rate">
-                    <!-- 별점 아이콘 -->
-                    <i class="ri-star-fill"></i>
-                    <!-- 별점 표시 -->
-                    <h5>4.7</h5>
-                </div>
-            </div>
+    <div class="main">
+        <!-- 중앙 콘텐츠 영역 -->
+        <div class="main-content">
+            <!-- 콘텐츠가 동적으로 로드될 영역 -->
+            <div id="content-area">Loading...</div>
         </div>
-        <!-- 일시정지 버튼 -->
-        <i class="ri-pause-large-line"></i>
     </div>
 
-    <!-- 주간 인기 콘텐츠 제목 -->
-    <h3>POPULAR</h3>
-    <div class="weekly">
-        <!-- 주간 인기 이미지 목록 시작 -->
+    <!-- 우측 사이드바 영역 -->
+    <div class="right-section">
 
-        <!-- 첫 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem01">
+        <!-- 'COURTESY ROOM' 제목 -->
+        <h3>COURTESY ROOM</h3>
+
+        <!-- 상단 베스트 영역 -->
+        <div class="player">
             <div class="content">
-                <!-- 이미지 썸네일 -->
-                <img src="assets/images/w001.jpg">
+                <!-- 동영상 썸네일 이미지 -->
+                <img src="assets/images/c001.jpg">
                 <div class="info">
-                    <!-- 이미지 제목 -->
-                    <h4>Sea Balloon</h4>
-                    <div class="view">
-                        <!-- 조회수 아이콘 -->
-                        <i class="ri-eye-fill"></i>
-                        <!-- 조회수 표시 -->
-                        <h5>2,320</h5>
+                    <!-- 제목 -->
+                    <h5>Germany Travel Tour</h5>
+                    <div class="rate">
+                        <!-- 별점 아이콘 -->
+                        <i class="ri-star-fill"></i>
+                        <!-- 별점 표시 -->
+                        <h5>4.7</h5>
                     </div>
                 </div>
             </div>
-            <!-- 즐겨찾기 아이콘 -->
-            <i class="ri-heart-3-fill"></i>
+            <!-- 일시정지 버튼 -->
+            <i class="ri-pause-large-line"></i>
         </div>
 
-        <!-- 두 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem02">
-            <div class="content">
-                <img src="assets/images/w002.jpg">
-                <div class="info">
-                    <h4>Flower</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>2,490</h5>
+        <!-- 주간 인기 콘텐츠 제목 -->
+        <h3>POPULAR</h3>
+        <div class="weekly">
+            <!-- 주간 인기 이미지 목록 시작 -->
+
+            <!-- 첫 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem01">
+                <div class="content">
+                    <!-- 이미지 썸네일 -->
+                    <img src="assets/images/w001.jpg">
+                    <div class="info">
+                        <!-- 이미지 제목 -->
+                        <h4>Sea Balloon</h4>
+                        <div class="view">
+                            <!-- 조회수 아이콘 -->
+                            <i class="ri-eye-fill"></i>
+                            <!-- 조회수 표시 -->
+                            <h5>2,320</h5>
+                        </div>
                     </div>
                 </div>
+                <!-- 즐겨찾기 아이콘 -->
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 세 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem03">
-            <div class="content">
-                <img src="assets/images/w003.jpg">
-                <div class="info">
-                    <h4>Street</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>1,420</h5>
+            <!-- 두 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem02">
+                <div class="content">
+                    <img src="assets/images/w002.jpg">
+                    <div class="info">
+                        <h4>Flower</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,490</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 네 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem04">
-            <div class="content">
-                <img src="assets/images/w004.jpg">
-                <div class="info">
-                    <h4>Sea Water</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>9,610</h5>
+            <!-- 세 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem03">
+                <div class="content">
+                    <img src="assets/images/w003.jpg">
+                    <div class="info">
+                        <h4>Street</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>1,420</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 다섯 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem05">
-            <div class="content">
-                <img src="assets/images/w001.jpg">
-                <div class="info">
-                    <h4>Sea Balloon</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>2,320</h5>
+            <!-- 네 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem04">
+                <div class="content">
+                    <img src="assets/images/w004.jpg">
+                    <div class="info">
+                        <h4>Sea Water</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>9,610</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 여섯 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem06">
-            <div class="content">
-                <img src="assets/images/w002.jpg">
-                <div class="info">
-                    <h4>Flower</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>2,490</h5>
+            <!-- 다섯 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem05">
+                <div class="content">
+                    <img src="assets/images/w001.jpg">
+                    <div class="info">
+                        <h4>Sea Balloon</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,320</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 일곱 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem07">
-            <div class="content">
-                <img src="assets/images/w003.jpg">
-                <div class="info">
-                    <h4>Street</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>1,420</h5>
+            <!-- 여섯 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem06">
+                <div class="content">
+                    <img src="assets/images/w002.jpg">
+                    <div class="info">
+                        <h4>Flower</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>2,490</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
-        <!-- 여덟 번째 인기 이미지 아이템 -->
-        <div class="item" id="wItem08">
-            <div class="content">
-                <img src="assets/images/w004.jpg">
-                <div class="info">
-                    <h4>Sea Water</h4>
-                    <div class="view">
-                        <i class="ri-eye-fill"></i>
-                        <h5>9,610</h5>
+            <!-- 일곱 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem07">
+                <div class="content">
+                    <img src="assets/images/w003.jpg">
+                    <div class="info">
+                        <h4>Street</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>1,420</h5>
+                        </div>
                     </div>
                 </div>
+                <i class="ri-heart-3-fill"></i>
             </div>
-            <i class="ri-heart-3-fill"></i>
-        </div>
 
+            <!-- 여덟 번째 인기 이미지 아이템 -->
+            <div class="item" id="wItem08">
+                <div class="content">
+                    <img src="assets/images/w004.jpg">
+                    <div class="info">
+                        <h4>Sea Water</h4>
+                        <div class="view">
+                            <i class="ri-eye-fill"></i>
+                            <h5>9,610</h5>
+                        </div>
+                    </div>
+                </div>
+                <i class="ri-heart-3-fill"></i>
+            </div>
+        </div>
     </div>
-
 
     <script>
-        window.onload = function () {
-            toggleSpinner100(1, 1); // 페이지 로드 후 3초 동안 spinner를 토글
-            initializeProfilePage()
-        };
+            toggleSpinner100(1, 1);
+            initializeProfilePage();
     </script>
-    </body>
+
+<script src="js/dashboard/sign_out.js"></script>
+</body>
 
 
 

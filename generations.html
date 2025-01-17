@@ -1,24 +1,4 @@
 
-
-<!-- jQuery UI -->
-<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.core.1.10.3.min.js"></script>
-<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.widget.1.10.3.min.js"></script>
-<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.mouse.1.10.3.min.js"></script>
-<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.draggable.1.10.3.min.js"></script>
-<!-- wColorPicker -->
-<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/lib/wColorPicker.min.css" />
-<script type="text/javascript" src="https://rr720.synology.me/paint/lib/wColorPicker.min.js"></script>
-<!-- wPaint -->
-<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/wPaint.min.css" />
-<script type="text/javascript" src="https://rr720.synology.me/paint/wPaint.min.js"></script>
-<script type="text/javascript" src="https://rr720.synology.me/paint/plugins/main/wPaint.menu.main.min.js"></script>
-
-<link rel="stylesheet" href="https://rr720.synology.me/paint/css/main.css" type="text/css">
-<script src="https://rr720.synology.me/paint/js/sub.js"></script>
-<script src="js/generations/edit.js"></script>
-<script src="js/generations/wpaint.js"></script>
-
-
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet"
@@ -28,21 +8,15 @@
 <link rel="stylesheet" href="css/generations/reft.css" type="text/css">
 <link rel="stylesheet" href="css/generations/regeneration.css" type="text/css">
 <link rel="stylesheet" href="css/generations/refresh.css" type="text/css">
-<link rel="stylesheet" href="css/chatbot/style.css" />
+<link rel="stylesheet" href="https://rr720.synology.me/paint/css/main.css" type="text/css">
+<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/lib/wColorPicker.min.css" />
+<link rel="Stylesheet" type="text/css" href="https://rr720.synology.me/paint/wPaint.min.css" />
+<link rel="stylesheet" href="css/chatbot/style.css"/>
 
-<script src="js/generations/ajax.js" defer></script>
-<script src="js/generations/ajax_re.js" defer></script>
-<script src="js/generations/ajax_article.js" defer></script>
 <script src="js/generations/buttons.js" defer></script>
 <script src="js/generations/image.js"></script>
 <script src="js/generations/sample.js"></script>
 <script src="js/generations/gallery.js" defer></script>
-<script src="js/generations/ajax_profile_change.js" defer></script>
-<script src="js/chatbot/script.js" defer></script>
-
-
-
-
 
 
 <!-- first loading -->
@@ -52,7 +26,7 @@
 </div>
 
 <div class="bg-white opacity-75 position-fixed z-3 display-none" id="wrap-loading">
-    <div class="spinner-grow text-dark position-fixed" role="status"></div>
+    <div class="spinner-grow text-dark position-fixed z-3" role="status"></div>
 </div>
 <!-- <h1 class="text-center mb-4">whyding 8조</h1> -->
 <div>
@@ -121,7 +95,7 @@
                     <div class="error" id="errorSource"></div>
 
                     <!-- 미리보기 이미지 -->
-                    <img src="" alt="미리보기 이미지" style="height: 20vh; display: none; object-fit: contain;"
+                    <img src="" alt="미리보기 이미지" style="width: 20vh; border-radius: 50px; object-fit: contain;"
                         id="previewSource">
 
                     <div class="d-flex justify-content-center align-items-center">
@@ -139,7 +113,7 @@
                     <div id="errorTarget" class="error"></div>
                     <!-- <img id="previewTarget" src="" alt="미리보기 이미지" style="width: 25vh; display: none;"> -->
                     <img id="previewTarget" src="" alt="미리보기 이미지"
-                        style="width: 20vh; height: 30vh; background-color: #ccc; border-radius: 10px; display: none;">
+                        style="width: 20vh; height: 30vh; background-color: #ccc; border-radius: 50px;">
 
                     <div class="overlay-buttons row">
                         <!-- 재생성버튼 -->
@@ -158,7 +132,7 @@
                         id="createImageButton">
                         착용하기
                     </button>
-                    <div class="spinner-border text-danger" role="status" id="spinner">
+                    <div class="spinner-border text-dark" role="status" id="spinner">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                     <div style="display: none;" id="gen-error-text">Please upload or select an image</div>
@@ -190,7 +164,7 @@
     <div class="feedback-section d-flex flex-column align-items-center mt-3">
         <!-- <p class="text-light mt-2 fs-6">피드백을 남겨주세요</p> -->
         <div class="input-container position-relative" style="width: 40%;">
-            <textarea class="form-control rounded-3" id="feedbackText" rows="4"
+            <textarea class="form-control rounded-3" style="font-size: 0.7rem" id="feedbackText" rows="4"
                 placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다." onfocus="clearPlaceholder()"
                 onblur="restorePlaceholder()"></textarea>
             <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback"
@@ -199,45 +173,59 @@
     </div>
 </div>
 
-<div class="image-edit" id="image-edit" style="display: none;">
+<div class="image-edit z-2" id="image-edit" style="display: none;">
     <!-- 프롬프트 입력 창-->
     <section class="col-12 col-md-8 mt-2">
-        <div class="accordion" id="accordionMain">
+        <div class="d-flex justify-content-center" id="accordionMain">
             <!-- 체크박스 추가 -->
             <div id="wpDrop-area-div"
                 class="accordion-body d-flex flex-column justify-content-center align-items-center mt-4 mb-4"
                 style="display: none; ">
                 <!-- wPaint -->
-                <div id="wpDrop-area"
-                    class="flex-grow-2 position-relative justify-content-center align-items-center mb-2">
-                    <div id="wPaint" class="dropzone"></div>
-                </div>
+                <div id="wPaint" class="dropzone"></div>
                 <div id="wpBGbutton-area" class="d-flex flex-wrap justify-content-center align-items-center w-100">
                     <!-- 배경 이미지 버튼 예시 (주석처리된 부분) -->
                     <!-- <img class="wpBGbutton" src="img/wpBG/bg00.jpg"></button> -->
                 </div>
-                <div id="wpButton-area">
+
+            </div>
+            <div class="row d-flex flex-column align-items-center justify-content-center" style="margin-top: 3.8rem;">
+                <div class="mb-3" style="font-size: 0.6rem">
+                    <label for="exampleFormControlTextarea1" class="form-label text-white">prompt</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                </div>
+                <div class="mb-3" style="font-size: 0.6rem">
+                    <label for="exampleFormControlTextarea2" class="form-label text-white">N prompt</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                </div>
+                <p class="text-white" style="font-size: 0.6rem" id="creativityText">
+                    Creativity
+                </p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-sm btn-light" id="increase">+</button>
+                    <input type="range" min="0.45" max="0.7" value="0.55" step="0.001" class="Denoisingslider"
+                        id="DenoisingRange" style="direction: rtl;">
+                    <button class="btn btn-sm btn-light" id="decrease">-</button>
+                </div>
+                <!-- 스피너 -->
+                <div class="spinner-border text-light mt-4 mb-2" role="status" id="spinner-re" style="display: none;">
+                </div>
+                <div class="mt-4" id="wpButton-area">
                     <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
                     <input type="file" id="uploadInput" style="display: none;" onchange="handleFileSelect(event)">
                     <!-- <button id="wpClear" class="btn btn-sm me-2 mb-4">Image Reset</button> -->
-                    <button id="wpreset" class="btn btn-dark  btn-sm me-2 mb-4"> 초기화 </button>
-                    <button id="wpClose" class="btn btn-dark  btn-sm me-2 mb-4"> 닫기 </button>
-                    <button id="wpGen" class="btn btn-dark  btn-sm me-2 mb-4"> 생성 </button>
-                    <button id="wpApp" class="btn btn-dark  btn-sm me-2 mb-4"> 적용 </button>
 
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">prompt</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea2" class="form-label">N prompt</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea2" rows="5.5"></textarea>
-                    </div>
+                    <button id="wpreset" class="btn btn-outline-light btn-sm me-2 mb-4"> <i
+                            class="bi bi-arrow-repeat"></i> </button>
+                    <button id="wpClose" class="btn btn-outline-light  btn-sm me-2 mb-4"> 닫기 </button>
+                    <button id="wpGen" class="btn btn btn-dark  btn-sm me-2 mb-4"> 생성 </button>
+                    <button id="wpApp" class="btn btn-light  btn-sm me-2 mb-4"> 적용 </button>
                 </div>
             </div>
         </div>
-    </div>
+
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -254,8 +242,8 @@
     });
     $(document).ready(function () {
         var wpaintImageUrl = null
-        var ajaxBase64Image = null
-        var wpaintFi = null
+        // var ajaxBase64Image = null
+        // var wpaintFi = null
 
     })
 </script>
@@ -290,20 +278,46 @@
     }
 </script>
 <script>
-$('#gen-generateButton').click(function(){
-    $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
-    $("#wPaint").wPaint("image", wpaintImageUrl);
-});
-$('#wpClose').click(function(){
-    $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
-});
+    $('#gen-generateButton').click(function () {
+        $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
+        $("#wPaint").wPaint("image", wpaintImageUrl);
+    });
+    $('#wpClose').click(function () {
+        $('#image-edit').toggle(); // #imageResult의 display 속성을 토글 (보이기/숨기기)
+    });
 
-$('#wpreset').click(function() {
-    $("#wPaint").wPaint("image", wpaintImageUrl);
-});
+    $('#wpreset').click(function () {
+        $("#wPaint").wPaint("image", wpaintImageUrl);
+    });
 
-$('#wpApp').click(function() {
-    $('#previewTarget').attr('src', wpaintRe).show();
-    imageBase64Target = wpaintFi
-});
+    $('#wpApp').click(function () {
+        $('#previewTarget').attr('src', wpaintRe).show();
+        imageBase64Target = wpaintFi
+        $('#image-edit').toggle();
+    });
 </script>
+
+<script src="js/generations/ajax.js" defer></script>
+<script src="js/generations/ajax_re.js" defer></script>
+<script src="js/generations/ajax_article.js" defer></script>
+
+<!-- jQuery UI -->
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.core.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.widget.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.mouse.1.10.3.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/jquery.ui.draggable.1.10.3.min.js"></script>
+<!-- wColorPicker -->
+
+<script type="text/javascript" src="https://rr720.synology.me/paint/lib/wColorPicker.min.js"></script>
+<!-- wPaint -->
+<script type="text/javascript" src="https://rr720.synology.me/paint/wPaint.min.js"></script>
+<script type="text/javascript" src="https://rr720.synology.me/paint/plugins/main/wPaint.menu.main.min.js"></script>
+
+
+<script src="https://rr720.synology.me/paint/js/sub.js"></script>
+<script src="js/generations/edit.js"></script>
+<script src="js/generations/wpaint.js"></script>
+
+<script src="js/generations/ajax_profile_change.js" defer></script>
+
+<script src="js/chatbot/script.js" defer></script>

@@ -50,8 +50,8 @@ function apiAjax() {
     var negativePromptValue = $('#exampleFormControlTextarea2').val();  // negative_prompt 텍스트 값
 
     // 추가적인 기본 텍스트 값들
-    var basicPromptValue = " 4k, high resolution, uhd, ultra high res, super detail, hyper detail, masterpiece, best quality";  // 여기에 기본 prompt를 넣으세요
-    var basicNegativePromptValue = "signature, watermark, text, title, logo, username,  gross proportions, malformed limbs, (text), (sign), naked, nude, NFSW";  // 여기에 기본 negative prompt를 넣으세요
+    var basicPromptValue = " 4k, high resolution, uhd, ultra high res, super detail, hyper detail, masterpiece, best quality, no nudity, no sexual, no explicit";  // 여기에 기본 prompt를 넣으세요
+    var basicNegativePromptValue = "signature, watermark, text, title, logo, username,  gross proportions, malformed limbs, (text), (sign), naked, nude, NFSW, young, nudity, sexual, explicit, erotic, pornographic";  // 여기에 기본 negative prompt를 넣으세요
 
     // JSON 객체 생성, 텍스트 영역에서 가져온 값과 기본값을 결합
     var A_json = {
@@ -78,11 +78,18 @@ function apiAjax() {
         contentType: 'application/json',  // 서버에 JSON 형식으로 요청
         timeout: 100000,
         beforeSend: function () {
+            $('#wrap-loading').removeClass('display-none').fadeIn(500); 
+            $('#spinner-re').removeClass('display-none').fadeIn(500); 
+            $('#wpButton-area').addClass('display-none').fadeIn(500);
             toggleSpinner(10); // 5~6초 기본 값
+           
 
         },
         success: function (msg) {
-            console.log('API response received:', msg);
+            $('#wrap-loading').addClass('display-none');
+            $('#spinner-re').addClass('display-none');
+            $('#wpButton-area').removeClass('display-none').fadeIn(500); 
+            // console.log('API response received:', msg);
             handleSuccess(msg); // 필수ss
             
             // hideSpinner()
@@ -95,7 +102,10 @@ function apiAjax() {
         },
         complete: function () {
             // 요청이 완료된 후 실행 (성공/실패 상관없이)
+            
             console.log('Request completed');
+            
+            
         }
     });
 }

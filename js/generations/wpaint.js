@@ -33,7 +33,7 @@ $(document).ready(function () {
         mode: 'pencil',
         lineWidth: '20',
         fillStyle: '#666666',
-        strokeStyle: '#FFFFFF',
+        strokeStyle: '#CCCCCC',
         bg: '#CCCCCC',
     });
 

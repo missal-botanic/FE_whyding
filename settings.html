@@ -1,40 +1,162 @@
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/chatbot/style.css" />
-<script src="js/chatbot/script.js" defer></script>
+<link rel="stylesheet" href="css/settings/style.css" type="text/css">
 
-
-
-<button class="chatbot-toggler">
-    <span class="material-symbols-rounded">mode_comment</span>
-    <span class="material-symbols-outlined">close</span>
-</button>
-<div class="chatbot">
-    <header>
-        <h2 class="mt-2">Whyding 챗봇</h2>
-        <span class="close-btn material-symbols-outlined">close</span>
-    </header>
-    <ul class="chatbox">
-        <li class="chat incoming">
-            <img src="img/chatbot/ch.png" alt="smart_toy" style="width: 35px; height: 35px;">
-            <p>안녕! 👋<br/>웨딩 촬영 준비에 도움을 줄게! <br/>원하는 웨딩 이미지를 올리면 적절한 프롬프트를 찾아줄게!! </p>
-        </li>
-    </ul>
-    <div class="chat-input d-flex justify-content-center ">
-        <label class="material-symbols-rounded fs-6 my-3" for="image-upload" >
-            add_photo_alternate
-            <span class="fs-6 my-3">이미지 업로드</span>
-        </label>
-        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+    <div class="profile-container">
+        <h1>내 프로필</h1>
+        <div class="loading">로딩 중...</div>
+        <div class="profile-image">
+            <img id="profile-image" src="" alt="프로필 이미지" style="width: 10vw;" />
+        </div>
+        <div class="profile-info">
+            <p><strong>사용자명:</strong> <span id="username"></span></p>
+            <p><strong>이메일:</strong> <span id="email"></span></p>
+            <p><strong>자기소개:</strong> <span id="introduction"></span></p>
+            <button id="edit-profile">회원 정보 수정</button>
+            <button id="change-password">비밀번호 변경</button>
+            <button id="delete-account">회원 탈퇴</button>
+        </div>
     </div>
-    <style>
-        /* 마우스 올리면 손가락 모양으로 변경되고, 투명도 0.5 */
-        .chat-input label {
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-    
-        .chat-input label:hover {
-            opacity: 0.3;
-        }
-    </style>
-</div>
+
+    <!-- Form Containers -->
+    <div class="form-container" id="edit-profile-form">
+        <form>
+            <h2>회원 정보 수정</h2>
+            <input type="text" id="new-username" placeholder="새로운 사용자명" required />
+            <input type="text" id="new-introduction" placeholder="새로운 자기소개" required />
+            <button type="button" id="submit-edit">수정하기</button>
+            <button type="button" class="cancel">취소</button>
+        </form>
+    </div>
+
+    <div class="form-container" id="change-password-form">
+        <form>
+            <h2>비밀번호 변경</h2>
+            <input type="password" id="old-password" placeholder="현재 비밀번호" required />
+            <input type="password" id="new-password" placeholder="새로운 비밀번호" required />
+            <button type="button" id="submit-password-change">변경하기</button>
+            <button type="button" class="cancel">취소</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const accessToken = localStorage.getItem('access_token');
+            if (!accessToken) {
+                alert('로그인이 필요합니다.');
+                return;
+            }
+
+            // 유저 정보 불러오기
+            function loadUserProfile2() {
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/api/accounts/profile/',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                    success: function (data) {
+                        $('#username').text(data.username || '없음');
+                        $('#email').text(data.email || '없음');
+                        $('#introduction').text(data.introduction || '없음');
+                        if (data.profile_image) {
+                            $('#profile-image').attr('src', data.profile_image);
+                        } else {
+                            $('#profile-image').attr('src', 'default-profile.jpg');
+                        }
+                        $('.loading').hide();
+                    },
+                    error: function () {
+                        $('.loading').text('프로필을 불러오는 중 오류 발생');
+                    }
+                });
+            }
+
+            // 초기 프로필 로드
+            loadUserProfile2();
+
+            // 회원 정보 수정 페이지
+            $('#edit-profile').click(function () {
+                $('#edit-profile-form').fadeIn();
+            });
+
+            $('#submit-edit').click(function () {
+                const username = $('#new-username').val();
+                const introduction = $('#new-introduction').val();
+                if (username && introduction) {
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/api/accounts/profile/',
+                        type: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({ username, introduction }),
+                        success: function () {
+                            alert('회원 정보가 수정되었습니다.');
+                            loadUserProfile();
+                            $('.form-container').fadeOut();
+                        },
+                        error: function () {
+                            alert('회원 정보 수정 중 오류 발생');
+                        }
+                    });
+                }
+            });
+
+            // 비밀번호 변경 페이지
+            $('#change-password').click(function () {
+                $('#change-password-form').fadeIn();
+            });
+
+            $('#submit-password-change').click(function () {
+                const oldPassword = $('#old-password').val();
+                const newPassword = $('#new-password').val();
+                if (oldPassword && newPassword) {
+                    $.ajax({
+                        url: `http://127.0.0.1:8000/api/accounts/password/${$('#username').text()}/`,
+                        type: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({ old_password: oldPassword, new_password: newPassword }),
+                        success: function () {
+                            alert('비밀번호가 변경되었습니다.');
+                            $('.form-container').fadeOut();
+                        },
+                        error: function () {
+                            alert('비밀번호 변경 중 오류 발생');
+                        }
+                    });
+                }
+            });
+
+            // 폼 취소 버튼 처리
+            $('.cancel').click(function () {
+                $('.form-container').fadeOut();
+            });
+
+            // 계정 삭제
+            $('#delete-account').click(function () {
+                const password = prompt('비밀번호를 입력하세요:');
+                if (password) {
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/api/accounts/delete/',
+                        type: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({ password }),
+                        success: function () {
+                            alert('계정이 삭제되었습니다.');
+                            localStorage.removeItem('access_token');
+                            window.location.href = 'login.html';
+                        },
+                        error: function () {
+                            alert('계정 삭제 중 오류 발생');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
