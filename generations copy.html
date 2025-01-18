@@ -153,36 +153,35 @@
     </div>
 </div>
 <!-- 상단: 두 이미지 조합 결과를 보여주는 영역 -->
-<div class="image-result row" id="imageResult" style="display: none;">
-    <div class="image-container2">
-        <img src="" alt="조합된 이미지" id="combinedImage">
-    </div>
-    <div class="button-container mt-3">
-        <button id="closeButton" class="btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
-        <button id="SetProfile" class="btn btn-dark btn-sm">
-            <i class="bi bi-file-person"></i>&nbsp;프로필 변경
-        </button>
-        <button id="saveButton" class="btn btn-dark btn-sm">
-            <i class="bi bi-folder-plus"></i>&nbsp;보관
-        </button>
-        <button id="downloadButton" class="btn btn-success btn-sm" onclick="downloadImage()"><i
-                class="bi bi-file-arrow-down"></i>&nbsp;다운로드</button>
-    </div>
-
-    <!-- 피드백 공간 -->
-    <div class="feedback-section d-flex flex-column align-items-center mt-3">
-        <!-- <p class="text-light mt-2 fs-6">피드백을 남겨주세요</p> -->
-        <div class="input-container position-relative" style="width: 40%;">
-            <textarea class="form-control rounded-3" style="font-size: 0.7rem" id="feedbackText" rows="4"
-                placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다." onfocus="clearPlaceholder()"
-                onblur="restorePlaceholder()"></textarea>
-            <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback"
-                onclick="submitFeedback()">제출</button>
+<div style="display: none;" class="position-fixed d-flex justify-content-center align-items-center top-0 start-0 w-100 h-100 z-index-1000"
+    id="imageResult" >
+    <div class="row d-flex flex-column w-50 h-50">
+        <div lass="col-8">
+            <img src="" alt="조합된 이미지" id="combinedImage">
+        </div>
+        <div class="col-2 button-container d-flex justify-content-between">
+            <button id="closeButton" class="btn btn-dark btn-sm" onclick="closeResult()">닫기</button>
+            <button id="SetProfile" class="btn btn-dark btn-sm">
+                <i class="bi bi-file-person"></i>&nbsp;프로필 변경
+            </button>
+            <button id="saveButton" class="btn btn-dark btn-sm">
+                <i class="bi bi-folder-plus"></i>&nbsp;보관
+            </button>
+            <button id="downloadButton" class="btn btn-success btn-sm" onclick="downloadImage()"><i
+                    class="bi bi-file-arrow-down"></i>&nbsp;다운로드</button>
+        </div>
+        <!-- 피드백 공간 -->
+        <div class="col-2 feedback-section d-flex flex-column align-items-center mt-3">
+            <div class="input-container position-relative" style="width: 40%;">
+                <textarea class="form-control rounded-3" style="font-size: 0.7rem" id="feedbackText" rows="4"
+                    placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다."
+                    onfocus="clearPlaceholder()" onblur="restorePlaceholder()"></textarea>
+                <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback"
+                    onclick="submitFeedback()">제출</button>
+            </div>
         </div>
     </div>
-   
 </div>
-
 
 
 <div class="image-edit z-2" id="image-edit" style="display: none;">
@@ -234,34 +233,32 @@
                 </div>
             </div>
         </div>
-        <div id="chatbot-toggle" style="all: unset;">
-            <button class="chatbot-toggler">
-                <span class="material-symbols-rounded">mode_comment</span>
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            <div class="chatbot">
-                <header>
-                    <h2 class="mt-2">Whyding 챗봇</h2>
-                    <span class="close-btn material-symbols-outlined">close</span>
-                </header>
-                <ul class="chatbox">
-                    <li class="chat incoming">
-                        <img src="img/chatbot/ch.png" alt="smart_toy" style="width: 35px; height: 35px;">
-                        <p>안녕! 👋<br />웨딩 촬영 준비에 도움을 줄게! <br />원하는 웨딩 이미지를 올리면 적절한 프롬프트를 찾아줄게!! </p>
-                    </li>
-                </ul>
-                <div class="chat-input d-flex justify-content-center ">
-                    <label class="material-symbols-rounded fs-6 my-3" for="image-upload">
-                        add_photo_alternate
-                        <span class="fs-6 my-3">이미지 업로드</span>
-                    </label>
-                    <input type="file" id="image-upload" accept="image/*" style="display: none;">
-                </div>
-            </div>
-        </div>
 </div>
 
-
+<button class="chatbot-toggler">
+    <span class="material-symbols-rounded">mode_comment</span>
+    <span class="material-symbols-outlined">close</span>
+</button>
+<div class="chatbot">
+    <header>
+        <h2 class="mt-2">Whyding 챗봇</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <img src="img/chatbot/ch.png" alt="smart_toy" style="width: 35px; height: 35px;">
+            <p>안녕! 👋<br />웨딩 촬영 준비에 도움을 줄게! <br />원하는 웨딩 이미지를 올리면 적절한 프롬프트를 찾아줄게!! </p>
+        </li>
+    </ul>
+    <div class="chat-input d-flex justify-content-center ">
+        <label class="material-symbols-rounded fs-6 my-3" for="image-upload">
+            add_photo_alternate
+            <span class="fs-6 my-3">이미지 업로드</span>
+        </label>
+        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+    </div>
+</div>
+</div>
 
 
 <script>

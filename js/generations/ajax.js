@@ -1,10 +1,10 @@
-
 function imageResult(response) {
     // 서버에서 받은 응답을 기반으로 결과 처리
     if (response && response.image) {
         var imageSrc = 'data:image/jpeg;base64,' + response.image;
         $('#combinedImage').attr('src', imageSrc).show();
         $('#imageResult').show();
+        
         $('body').css('overflow', 'hidden');
         // console.log(response.image)
     } else {
@@ -84,6 +84,7 @@ $('#createImageButton').on('click', function () {
         success: function (response) {
             // imageResult 함수에 response 전달
             imageResult(response);
+            $('#chatbot-toggle').show();
         },
         error: function (xhr, status, error) {
             console.error('AJAX 요청 실패:', status, error);

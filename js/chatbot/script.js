@@ -3,6 +3,7 @@ $(document).ready(function () {
   const $closeBtn = $(".close-btn");
   const $imageUpload = $("#image-upload");
   const $chatbox = $(".chatbox");
+  const $textArea = $('#exampleFormControlTextarea1'); // 텍스트 영역 참조
 
   // 챗봇 열기/닫기 기능
   $chatbotToggler.on("click", () => $("body").toggleClass("show-chatbot"));
@@ -76,7 +77,8 @@ $(document).ready(function () {
         .map(([key]) => key)
         .slice(0, 20);
 
-      const tagString = sortedTags.join(", ");
+      let tagString = sortedTags.join(", ");
+      tagString = tagString.replace(/_/g, " "); // 언더스코어 제거
 
       // 랜덤 메시지 생성
       const responses = [
@@ -100,6 +102,16 @@ $(document).ready(function () {
       const $responseMessage = createChatLi(randomResponse, "incoming", null, "img/chatbot/ch.png");
       $chatbox.append($responseMessage);
       $chatbox.scrollTop($chatbox[0].scrollHeight);
+
+      // "바로입력" 버튼 추가
+      const $button = $('<button class="btn btn-link btn-sm">적용</button>');
+      $responseMessage.append($button);
+
+      // 버튼 클릭 시 textarea에 내용 추가ㅁ
+      $button.on('click', function() {
+        $textArea.val((i, val) => `${val} ${tagString} man`);
+        $("body").toggleClass("show-chatbot")
+      });
     }
   });
 });
