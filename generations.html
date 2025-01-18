@@ -109,9 +109,9 @@
                         id="previewSource">
 
                     <div class="d-flex justify-content-center align-items-center">
-                        <label class="btn btn-outline-secondary btn-sm mt-3" style="width: auto;"
+                        <label class="btn btn-dark btn-sm mt-3" style="width: auto;"
                             for="imageUploadSource">
-                            <i class="bi bi-file-earmark-arrow-up"></i>내 얼굴 업로드</label>
+                            내 얼굴 업로드</label>
                     </div>
                 </div>
             </div>
@@ -238,6 +238,15 @@
 
 
 <script>
+
+if (generationsT === true) {
+    // #gal-quarter의 "턱시도" 옵션을 선택된 상태로 고정
+    $('#gal-quarter').val('tuxedo');  // '턱시도' 옵션을 기본값으로 설정
+    // $('#gal-quarter option[value="tuxedo"]').prop('selected', true);  // '턱시도' 옵션을 활성화 상태로 설정
+}
+
+
+
     $(document).ready(function () {
         // 페이지가 로드되면 #wrap-loading의 display-none 클래스를 제거하고, 서서히 보이게 함
         $('#wrap-loading').removeClass('display-none').fadeIn(500); // 0.5초 동안 서서히 나타남

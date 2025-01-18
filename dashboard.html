@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- 페이지 제목 설정 -->
-    <title>Whyding 8조</title>
+    <title>Whyding</title>
 
     <!-- 아이콘 사용을 위한 Remixicon 스타일 시트 링크 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
@@ -34,25 +34,29 @@
 
     <!-- 사용자 정의 스타일 시트 링크 -->
     <link rel="stylesheet" href="css/dashboard/style.css">
+    <link rel="stylesheet" href="css/dashboard/extension.css">
 
     <!-- 사용자 정의 스크립트 파일들 -->
+    <script src="js/dashboard/sign_out.js"></script>
     <script src="js/dashboard/script.js"></script>
     <script src="js/dashboard/menu.js"></script>
     <script src="js/dashboard/toggle-spinner.js"></script>
     <script src="js/dashboard/token_verify.js"></script>
     <script src="js/dashboard/profile.js"></script>
 
+
+
     <style>
         /* 배경 이미지 설정을 위한 커스텀 CSS */
         body {
-            background-image: url('img/bg/dbg.png'); 
-            background-size: cover;          
-            background-position: center;    
-            background-repeat: no-repeat;   
-            background-attachment: fixed;  
-            height: 100%;               
-            margin: 0;   
-            font-family: Arial, sans-serif; 
+            background-image: url('img/bg/dbg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
     </style>
 
@@ -100,12 +104,16 @@
             </div>
             <!-- 생성 항목 -->
             <div id="generations" class="item" data-url="generations.html">
-                <i class="ri-movie-2-line"></i>
+                <i class="ri-women-line"></i>
+                <h3>Generate</h3>
+            </div>
+            <div id="generations-t" class="item" data-url="generations.html">
+                <i class="ri-men-line"></i>
                 <h3>Generate</h3>
             </div>
             <!-- 내 개인 앨범 항목 -->
             <div id="" class="item" data-url="album.html">
-                <i class="ri-user-6-line"></i>
+                <i class="ri-archive-drawer-line"></i>
                 <h3>My Private Album</h3>
             </div>
             <!-- 설정 항목 -->
@@ -118,8 +126,8 @@
                 <i class="ri-logout-box-r-line"></i>
                 <h3>Sign Out</h3>
             </div>
-            </div>
         </div>
+    </div>
     </div>
 
 
@@ -290,11 +298,18 @@
     </div>
 
     <script>
-            toggleSpinner100(1, 1);
-            initializeProfilePage();
+        var generationsT = false;
+
+        toggleSpinner100(1, 1);
+        initializeProfilePage();
+
+        document.querySelector('.sign-out').addEventListener('click', function () {
+            signOut();
+        });
     </script>
 
-<script src="js/dashboard/sign_out.js"></script>
+
+
 </body>
 
 

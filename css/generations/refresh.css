@@ -23,7 +23,7 @@
     height: 100%;
     background-color: #000000; /* 물이 차오르는 색 */
     z-index: -1; /* 버튼 텍스트 위에 보이지 않도록 설정 */
-    transition: width 8s ease-out; /* 애니메이션 */
+    transition: width 4s ease-out; /* 애니메이션 */
   }
   
   /* 버튼 클릭 시 애니메이션 효과 추가 */

@@ -91,7 +91,7 @@ function loadImages() {
                     // 'loading' 텍스트 숨기기 (투명하게 만들기)
                     $('#dummy-loading-' + i).css('color', 'transparent');
 
-                }, i * 800);
+                }, i * 200);
             });
 
             // 공통 클릭 처리 함수
@@ -170,6 +170,7 @@ function loadImages() {
     });
 }
 
+
 // 새로 고침 버튼 클릭 이벤트 처리 함수
 function refreshButtonClick() {
     var button = $("#gal-refreshButton"); // jQuery로 버튼 요소 선택
@@ -179,17 +180,20 @@ function refreshButtonClick() {
     baseImages();
     loadImages(); // 이미지 로딩
 
-    
-    
+    button.prop("disabled", true); // 버튼을 비활성화
+    button.css("pointer-events", "none"); // 클릭 이벤트 차단
     button.addClass("animate"); // 애니메이션 시작
 
     // 10초 후 애니메이션 완료 후 역방향 애니메이션 시작
     setTimeout(function () {
         button.addClass("reverse"); // 색이 빠지는 애니메이션 추가
-    }, 8000); // 10초 후 색 빠지는 효과 시작
+    }, 4000); // 10초 후 색 빠지는 효과 시작
 
     // 12초 후 원상태로 돌아가게 하기
     setTimeout(function () {
         button.removeClass("animate reverse"); // 애니메이션과 역방향 애니메이션 제거
-    }, 10000); // 12초 후 원상태로 돌아가기
+
+        button.prop("disabled", false); // 버튼을 활성화
+        button.css("pointer-events", "auto"); // 클릭 이벤트 복구
+    }, 6000); // 12초 후 원상태로 돌아가기
 }

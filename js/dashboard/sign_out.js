@@ -1,6 +1,4 @@
-// document.querySelector('.sign-out').addEventListener('click', function() {
-//     signOut();
-// });
+
 
 
 function signOut() {
@@ -8,10 +6,15 @@ function signOut() {
     var refreshToken = localStorage.getItem('refresh_token');
     var accessToken = localStorage.getItem('access_token');
     
-    if (!refreshToken) {
-        alert('No refresh token found!');
-        return;
-    }
+    // if (!refreshToken) {
+    //     alert('No refresh token found!');
+    //     return;
+    // }
+
+
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    window.location.href = 'index.html';
 
     // 로그아웃 API에 보내기 위한 데이터
     var signOutData = {
@@ -41,7 +44,8 @@ function signOut() {
             localStorage.removeItem('refresh_token');
 
             // 성공적으로 로그아웃되면 리다이렉트
-            window.location.href = 'https://rr720.synology.me/whyding/';
+            // window.location.href = 'https://rr720.synology.me/whyding/';
+            window.location.href = 'index.html';
         } else {
             console.error('signOut failed:', data);
         }

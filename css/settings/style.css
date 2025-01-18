@@ -4,14 +4,14 @@
     background-color: #f4f4f9;
 } */
 
-.profile-container {
+/* .profile-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
     border-radius: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 /* 
 .profile-container h1 {
     text-align: center;
@@ -23,7 +23,7 @@
     line-height: 1.6;
 } */
 
-.profile-container .profile-info {
+/* .profile-container .profile-info {
     margin: 10px 0;
 }
 
@@ -76,4 +76,4 @@
 
 .form-container form button:hover {
     background-color: #0056b3;
-}
+} */

@@ -1,0 +1,73 @@
+/* Custom Bootstrap margin classes (starting from mt-6) */
+.mt-6 { margin-top: 3rem !important; }
+.mt-7 { margin-top: 3.5rem !important; }
+.mt-8 { margin-top: 4rem !important; }
+.mt-9 { margin-top: 4.5rem !important; }
+.mt-10 { margin-top: 5rem !important; }
+.mt-11 { margin-top: 5.5rem !important; }
+.mt-12 { margin-top: 6rem !important; }
+.mt-13 { margin-top: 6.5rem !important; }
+.mt-14 { margin-top: 7rem !important; }
+.mt-15 { margin-top: 7.5rem !important; }
+
+/* Custom classes for other margin directions */
+.mb-6 { margin-bottom: 3rem !important; }
+.mb-7 { margin-bottom: 3.5rem !important; }
+.mb-8 { margin-bottom: 4rem !important; }
+.mb-9 { margin-bottom: 4.5rem !important; }
+.mb-10 { margin-bottom: 5rem !important; }
+.mb-11 { margin-bottom: 5.5rem !important; }
+.mb-12 { margin-bottom: 6rem !important; }
+.mb-13 { margin-bottom: 6.5rem !important; }
+.mb-14 { margin-bottom: 7rem !important; }
+.mb-15 { margin-bottom: 7.5rem !important; }
+
+.ms-6 { margin-left: 3rem !important; }
+.ms-7 { margin-left: 3.5rem !important; }
+.ms-8 { margin-left: 4rem !important; }
+.ms-9 { margin-left: 4.5rem !important; }
+.ms-10 { margin-left: 5rem !important; }
+.ms-11 { margin-left: 5.5rem !important; }
+.ms-12 { margin-left: 6rem !important; }
+.ms-13 { margin-left: 6.5rem !important; }
+.ms-14 { margin-left: 7rem !important; }
+.ms-15 { margin-left: 7.5rem !important; }
+
+.me-6 { margin-right: 3rem !important; }
+.me-7 { margin-right: 3.5rem !important; }
+.me-8 { margin-right: 4rem !important; }
+.me-9 { margin-right: 4.5rem !important; }
+.me-10 { margin-right: 5rem !important; }
+.me-11 { margin-right: 5.5rem !important; }
+.me-12 { margin-right: 6rem !important; }
+.me-13 { margin-right: 6.5rem !important; }
+.me-14 { margin-right: 7rem !important; }
+.me-15 { margin-right: 7.5rem !important; }
+
+.mx-6 { margin-left: 3rem !important; margin-right: 3rem !important; }
+.mx-7 { margin-left: 3.5rem !important; margin-right: 3.5rem !important; }
+.mx-8 { margin-left: 4rem !important; margin-right: 4rem !important; }
+.mx-9 { margin-left: 4.5rem !important; margin-right: 4.5rem !important; }
+.mx-10 { margin-left: 5rem !important; margin-right: 5rem !important; }
+.mx-11 { margin-left: 5.5rem !important; margin-right: 5.5rem !important; }
+.mx-12 { margin-left: 6rem !important; margin-right: 6rem !important; }
+.mx-13 { margin-left: 6.5rem !important; margin-right: 6.5rem !important; }
+.mx-14 { margin-left: 7rem !important; margin-right: 7rem !important; }
+.mx-15 { margin-left: 7.5rem !important; margin-right: 7.5rem !important; }
+
+.my-6 { margin-top: 3rem !important; margin-bottom: 3rem !important; }
+.my-7 { margin-top: 3.5rem !important; margin-bottom: 3.5rem !important; }
+.my-8 { margin-top: 4rem !important; margin-bottom: 4rem !important; }
+.my-9 { margin-top: 4.5rem !important; margin-bottom: 4.5rem !important; }
+.my-10 { margin-top: 5rem !important; margin-bottom: 5rem !important; }
+.my-11 { margin-top: 5.5rem !important; margin-bottom: 5.5rem !important; }
+.my-12 { margin-top: 6rem !important; margin-bottom: 6rem !important; }
+.my-13 { margin-top: 6.5rem !important; margin-bottom: 6.5rem !important; }
+.my-14 { margin-top: 7rem !important; margin-bottom: 7rem !important; }
+.my-15 { margin-top: 7.5rem !important; margin-bottom: 7.5rem !important; }
+
+/* Custom font size classes */
+.fs-7 { font-size: 0.875rem !important; } /* 14px */
+.fs-8 { font-size: 0.75rem !important; }  /* 12px */
+.fs-9 { font-size: 0.625rem !important; } /* 10px */
+.fs-10 { font-size: 0.5rem !important; }  /* 8px */
