@@ -18,11 +18,11 @@ function signOut() {
 
     // 로그아웃 API에 보내기 위한 데이터
     var signOutData = {
-        refresh: refreshToken
+        "refresh_token": refreshToken
     };
 
     // AJAX POST 요청 보내기
-    fetch('http://127.0.0.1:8000/api/accounts/logout/', {
+    fetch(apiGlobalURL + 'api/accounts/logout/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -42,9 +42,6 @@ function signOut() {
             // 백엔드에서 로그아웃이 성공하면 localStorage에서 토큰 삭제
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
-
-            // 성공적으로 로그아웃되면 리다이렉트
-            // window.location.href = 'https://rr720.synology.me/whyding/';
             window.location.href = 'index.html';
         } else {
             console.error('signOut failed:', data);

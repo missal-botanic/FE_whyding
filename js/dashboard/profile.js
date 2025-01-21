@@ -11,7 +11,7 @@
         }
 
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/accounts/profile/',
+            url: apiGlobalURL + '/api/accounts/profile/',
             type: 'GET',
             dataType: 'json',
             headers: {
@@ -22,7 +22,8 @@
                 $('#profile-name-main').text(data.username +"님" || '없음');
                 // $('#email').text(data.email || '없음');
                 if (data.profile_image) {
-                    $('#profile-image-main').attr('src', data.profile_image);
+                    $('#profile-image-main').attr('src', apiGlobalURL + data.profile_image);
+                    // $('#profile-image-main').attr('src', 'img/profile/default-profile2.jpg');
                 } else {
                     $('#profile-image-main').attr('src', 'img/profile/default-profile.jpg');
                 }

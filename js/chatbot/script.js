@@ -72,13 +72,27 @@ $(document).ready(function () {
 
       const data = await response.json();
       const tags = data.caption.tag;
+      
+      // 태그들을 내림차순으로 정렬하고, 상위 20개 태그를 가져옵니다.
       const sortedTags = Object.entries(tags)
         .sort(([, valueA], [, valueB]) => valueB - valueA)
         .map(([key]) => key)
         .slice(0, 20);
-
+      
+      // 특정 단어들을 제외할 배열을 정의합니다.
+      const excludedTags = ['no humans', 'chinese clothes', 'see-through']; // 예시로 제외할 단어들
+      
+      // 태그 문자열 생성
       let tagString = sortedTags.join(", ");
-      tagString = tagString.replace(/_/g, " "); // 언더스코어 제거
+      
+      // 언더스코어를 공백으로 교체
+      tagString = tagString.replace(/_/g, " ");
+      
+      // 제외할 단어들을 필터링합니다.
+      tagString = tagString
+        .split(", ")  // 문자열을 배열로 변환
+        .filter(tag => !excludedTags.includes(tag))  // 제외할 단어를 필터링
+        .join(", ");  // 다시 문자열로 합칩니다.
 
       // 랜덤 메시지 생성
       const responses = [

@@ -2,7 +2,7 @@ $(document).ready(function () {
   const gallery = $("#gallery");
   const pagination = $("#pagination");
   const accessToken = localStorage.getItem('access_token');
-  const baseUrl = "http://127.0.0.1:8000/api/articles/my_articles/";
+  const baseUrl = apiGlobalURL + '/api/articles/my_articles/';
   let currentPage = 1; // 현재 페이지 초기값
 
   // 데이터를 가져오는 함수
@@ -99,7 +99,7 @@ $(document).ready(function () {
   function deleteItem(id) {
     toggleSpinner100(0.5, 0.5);
     $.ajax({
-      url: `http://127.0.0.1:8000/api/articles/${id}/`,
+      url: apiGlobalURL + `/api/articles/${id}/`,
       method: "DELETE",
       headers: { 'Authorization': 'Bearer ' + accessToken },
       success: function () {

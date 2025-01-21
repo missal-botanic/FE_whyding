@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <script src="js/dashboard/token_verify.js"></script>
+    <script>verifyToken();</script>
     <!-- 문자 인코딩 설정 (UTF-8) -->
     <meta charset="UTF-8">
     <!-- 반응형 웹을 위한 뷰포트 설정 (화면 크기에 맞춰 조정) -->
@@ -37,11 +39,11 @@
     <link rel="stylesheet" href="css/dashboard/extension.css">
 
     <!-- 사용자 정의 스크립트 파일들 -->
+    <script src="js/dashboard/menu.js"></script>
+    <script src="js/dashboard/global_variables.js"></script>
     <script src="js/dashboard/sign_out.js"></script>
     <script src="js/dashboard/script.js"></script>
-    <script src="js/dashboard/menu.js"></script>
     <script src="js/dashboard/toggle-spinner.js"></script>
-    <script src="js/dashboard/token_verify.js"></script>
     <script src="js/dashboard/profile.js"></script>
 
 
@@ -298,8 +300,7 @@
     </div>
 
     <script>
-        var generationsT = false;
-
+    
         toggleSpinner100(1, 1);
         initializeProfilePage();
 

@@ -174,7 +174,7 @@
         <!-- <p class="text-light mt-2 fs-6">피드백을 남겨주세요</p> -->
         <div class="input-container position-relative" style="width: 40%;">
             <textarea class="form-control rounded-3" style="font-size: 0.7rem" id="feedbackText" rows="4"
-                placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 좋은 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다." onfocus="clearPlaceholder()"
+                placeholder="귀중한 시간을 내셔서 참여해 주신 만큼 피드백을 남겨주신 분께 추첨을 통해 상품을 드릴 예정입니다." onfocus="clearPlaceholder()"
                 onblur="restorePlaceholder()"></textarea>
             <button class="btn btn-dark btn-sm position-absolute bottom-0 end-0 mb-2 me-2" id="submitFeedback"
                 onclick="submitFeedback()">제출</button>
@@ -269,10 +269,10 @@
     if (generationsT === true) {
         // #gal-quarter의 "턱시도" 옵션을 선택된 상태로 고정
         $('#gal-quarter').val('tuxedo');  // '턱시도' 옵션을 기본값으로 설정
-        $('#exampleFormControlTextarea1').val((i, val) => val + "man, ");
+        $('#exampleFormControlTextarea1').val((i, val) => val + "man, suit, ");
         // $('#gal-quarter option[value="tuxedo"]').prop('selected', true);  // '턱시도' 옵션을 활성화 상태로 설정
     } else {
-        $('#exampleFormControlTextarea1').val((i, val) => val + "woman, ");
+        $('#exampleFormControlTextarea1').val((i, val) => val + "woman, dress, ");
     }
 
 

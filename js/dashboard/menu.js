@@ -8,8 +8,9 @@ $(document).ready(function () {
 
     // 네비게이션 메뉴 클릭 이벤트
     $('.sidebar .item').on('click', function () {
-        
+        verifyToken();
         toggleSpinner75(0.5, 1)
+        
 
         // 1. 모든 메뉴에서 active 클래스 제거
         $('.sidebar .item').removeClass('active');
@@ -50,4 +51,5 @@ $(document).ready(function () {
             // $('#gal-quarter option[value="tuxedo"]').prop('selected', true);
         }
     });
+    
 });

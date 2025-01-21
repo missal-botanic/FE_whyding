@@ -16,18 +16,30 @@ $(document).ready(function () {
             "password_confirm": password_confirm,
         };
 
-        // AJAX 요청
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/accounts/signup/', // API URL
+            url: apiGlobalURL + '/api/accounts/signup/',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) {
+                // 회원가입 성공 시 처리
                 $('#email-password-message').text('회원가입이 성공했습니다! 로그인하세요.').css('color', 'green');
                 $('#login').trigger('click');
             },
             error: function (xhr, status, error) {
-                $('#email-password-message').text('회원가입에 실패했습니다. 다시 시도해주세요.').css('color', 'red');
+                var response = xhr.responseJSON;  // 서버에서 반환한 JSON 응답
+                var errorMessage = '';
+        
+                // 'email'과 'username'에 대한 오류가 있는지 체크
+                if (response.email) {
+                    errorMessage += response.email.join(", ") + "\n";  // email 관련 오류 추가
+                }
+                if (response.username) {
+                    errorMessage += response.username.join(", ") + "\n";  // username 관련 오류 추가
+                }
+        
+                // 오류 메시지를 하나로 합쳐서 표시
+                $('#email-password-message').text(errorMessage).css('color', 'red');
             }
         });
     });

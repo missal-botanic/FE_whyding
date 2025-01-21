@@ -13,7 +13,7 @@ $(document).ready(function () {
 
         // AJAX 요청
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/accounts/token/', // 로그인 API URL
+            url: apiGlobalURL + '/api/accounts/token/', // 로그인 API URL
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                $('#email-password-message2').text('로그인 실패: 이메일과 비밀번호를 확인하세요.').css('color', 'red');
+                $('#email-password-message2').text('로그인 실패: 이메일 혹은 비밀번호를 확인하세요.').css('color', 'red');
             }
         });
     });

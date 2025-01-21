@@ -34,7 +34,7 @@ function uploadProfileImage(base64Image) {
 
     // AJAX PUT 요청
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/accounts/profile/', // API 엔드포인트
+        url: apiGlobalURL + '/api/accounts/profile/', // API 엔드포인트
         type: 'PUT',
         headers: {
             'Authorization': 'Bearer ' + accessToken // Authorization 헤더에 access_token 추가

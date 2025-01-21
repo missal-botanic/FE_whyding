@@ -50,8 +50,8 @@ function apiAjax() {
     var negativePromptValue = $('#exampleFormControlTextarea2').val();  // negative_prompt 텍스트 값
 
     // 추가적인 기본 텍스트 값들
-    var basicPromptValue = " 4k, high resolution, uhd, ultra high res, super detail, hyper detail, masterpiece, best quality, no nudity, no sexual, no explicit";  // 여기에 기본 prompt를 넣으세요
-    var basicNegativePromptValue = "signature, watermark, text, title, logo, username,  gross proportions, malformed limbs, (text), (sign), naked, nude, NFSW, young, nudity, sexual, explicit, erotic, pornographic";  // 여기에 기본 negative prompt를 넣으세요
+    var basicPromptValue = " 4k, high resolution, uhd, ultra high res, super detail, hyper detail, masterpiece, best quality, wedding";  // 여기에 기본 prompt를 넣으세요
+    var basicNegativePromptValue = "signature, watermark, text, title, logo, username,  gross proportions, malformed limbs, (text), (sign), naked, nude, NFSW, young, nudity, sexual, explicit, erotic, pornographic, explicit, sexual";  // 여기에 기본 negative prompt를 넣으세요
 
     // JSON 객체 생성, 텍스트 영역에서 가져온 값과 기본값을 결합
     var A_json = {

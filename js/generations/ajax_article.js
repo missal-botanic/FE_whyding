@@ -66,7 +66,7 @@ function uploadImageToServer(base64Image) {
 
     // AJAX 요청으로 이미지 업로드
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/articles/', // API 엔드포인트 (실제 서버 URL로 변경)
+        url: apiGlobalURL + '/api/articles/', // API 엔드포인트 (실제 서버 URL로 변경)
         type: 'POST',
         headers: {
             'Authorization': 'Bearer ' + accessToken // Authorization 헤더에 access_token 추가

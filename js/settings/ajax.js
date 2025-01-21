@@ -11,7 +11,7 @@ $(document).ready(function () {
     // 유저 정보 불러오기
     function loadUserProfile() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/accounts/profile/',
+            url: apiGlobalURL + '/api/accounts/profile/',
             type: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`
@@ -21,7 +21,7 @@ $(document).ready(function () {
                 $('#email').text(data.email || '없음');
                 $('#introduction').text(data.introduction || '');
                 if (data.profile_image) {
-                    $('#profile-image').attr('src', data.profile_image);
+                    $('#profile-image').attr('src', apiGlobalURL + data.profile_image);
                 } else {
                     $('#profile-image').attr('src', 'img/profile/default-profile.jpg');
                 }
@@ -49,13 +49,13 @@ $(document).ready(function () {
         const introduction = $('#new-introduction').val();
         if (username && introduction) {
             $.ajax({
-                url: 'http://127.0.0.1:8000/api/accounts/profile/',
+                url: apiGlobalURL + '/api/accounts/profile/',
                 type: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 },
                 contentType: 'application/json',
-                data: JSON.stringify({ username, introduction }),
+                data: JSON.stringify({ "username" : username, "introduction" : introduction }),
                 success: function () {
                     loadUserProfile();
                     alert('회원 정보가 수정되었습니다.');
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         if (oldPassword && newPassword) {
             $.ajax({
-                url: `http://127.0.0.1:8000/api/accounts/password/${$('#username').text()}/`,
+                url: apiGlobalURL + `/api/accounts/password/${$('#username').text()}/`,
                 type: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -95,11 +95,28 @@ $(document).ready(function () {
                 data: JSON.stringify({ old_password: oldPassword, new_password: newPassword, new_password_confirm: newPasswordconfirm }),
                 success: function () {
                     alert('비밀번호가 변경되었습니다.');
-                    // $('.form-container').fadeOut();
                     $('#change-password-modal').modal('hide');
                 },
-                error: function () {
-                    alert('비밀번호 변경 중 오류 발생');
+                error: function (xhr) {
+                    // 서버에서 보내준 에러 메시지를 확인
+                    const errors = xhr.responseJSON;
+        
+                    if (errors) {
+                        // 'old_password'와 같은 특정 오류를 처리
+                        if (errors.old_password) {
+                            alert(errors.old_password.join(', ')); // "현재 비밀번호가 올바르지 않습니다."
+                        } else {
+                            // 모든 오류 메시지를 출력
+                            for (const field in errors) {
+                                if (errors.hasOwnProperty(field)) {
+                                    alert(errors[field].join(', ')); // 각 필드의 오류 메시지를 출력
+                                }
+                            }
+                        }
+                    } else {
+                        // 서버 오류나 다른 네트워크 에러 처리
+                        alert('비밀번호 변경 중 오류 발생');
+                    }
                 }
             });
         }
@@ -129,7 +146,7 @@ $(document).ready(function () {
         const password = $('#delete-password').val();
         if (password) {
             $.ajax({
-                url: 'http://127.0.0.1:8000/api/accounts/delete/',
+                url: apiGlobalURL + '/api/accounts/delete/',
                 type: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -139,10 +156,25 @@ $(document).ready(function () {
                 success: function () {
                     localStorage.removeItem('access_token');
                     $('#change-password-modal').modal('hide');
+                    alert('삭제 되었습니다.');
                     window.location.href = 'https://rr720.synology.me/whyding/';
                 },
-                error: function () {
-                    alert('계정 삭제 중 오류 발생');
+                error: function (xhr) {
+                    // 서버에서 반환된 오류 메시지를 확인
+                    const errors = xhr.responseJSON;
+            
+                    if (errors) {
+                        // 여러 개의 오류가 있을 경우 반복문을 통해 처리
+                        for (const field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                // 각 필드에 대한 오류 메시지를 출력
+                                alert(errors[field].join(', '));
+                            }
+                        }
+                    } else {
+                        // 서버 오류나 다른 네트워크 에러 처리
+                        alert('네티워크 오류 발생');
+                    }
                 }
             });
         }
