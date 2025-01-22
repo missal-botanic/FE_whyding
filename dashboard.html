@@ -37,6 +37,7 @@
     <!-- 사용자 정의 스타일 시트 링크 -->
     <link rel="stylesheet" href="css/dashboard/style.css">
     <link rel="stylesheet" href="css/dashboard/extension.css">
+    <link rel="stylesheet" href="css/dashboard/event_toggle.css">
 
     <!-- 사용자 정의 스크립트 파일들 -->
     <script src="js/dashboard/menu.js"></script>
@@ -45,7 +46,7 @@
     <script src="js/dashboard/script.js"></script>
     <script src="js/dashboard/toggle-spinner.js"></script>
     <script src="js/dashboard/profile.js"></script>
-
+    <script src="js/dashboard/ajax_feedback.js"></script>
 
 
     <style>
@@ -299,8 +300,88 @@
         </div>
     </div>
 
+    <div id="event-toggle" class="position-fixed bottom-0 start-0 p-5" style="z-index: 1050; cursor: pointer;">
+        <img src="img/event.svg" alt="Event Icon" class="" id="eventModalIcon" data-bs-toggle="modal"
+            data-bs-target="#eventModal" style="width: 150px; height: 150px;">
+    </div>
+
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">피드백</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <label for="inputFeed01" class="form-label"></label>
+                            <textarea class="form-control" id="inputFeed01" rows="3" placeholder="피드백을 입력해주세요"
+                                style="resize: none;"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputFeed02" class="form-label"></label>
+                            <textarea class="form-control" id="inputFeed02" rows="3"
+                                placeholder="홈페이지 기능에 대한 피드백을 입력해주세요" style="resize: none;"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputFeed03" class="form-label"></label>
+                            <textarea class="form-control" id="inputFeed03" rows="3" placeholder="AI 성능에 대한 피드백을 입력해주세요"
+                                style="resize: none;"></textarea>
+                        </div>
+
+
+
+                        <!-- 연락처 입력란 추가 -->
+                        <div class="col-8">
+                            <label for="inputPhone" class="form-label"></label>
+                            <input type="tel" class="form-control" id="inputPhone" placeholder=" 전화번호를 입력해주세요.">
+                        </div>
+                        <div class="col-4">
+                            <label for="inputStar" class="form-label"></label>
+                            <select id="inputStar" class="form-select">
+                                <option selected>별점</option>
+                                <option>매우 좋음</option>
+                                <option>좋음</option>
+                                <option>보통</option>
+                                <option>아쉬움</option>
+                                <option>매우 아쉬움</option>
+                            </select>
+                        </div>
+
+                        <!-- 동의 여부 체크박스 -->
+                        <div class="col-12">
+                            <div class="form-check" style="padding-left : 0">
+                                <div class="bg-light p-3 mb-2 rounded-3">
+                                    <p class="fs-7">개인정보 수집 및 이용에 동의해 주세요. <br> 동의한 사람에 한해 이벤트 추첨이 진행됩니다.</p>
+                                    <p class="fs-7">1. 수집 목적: 설문조사 응답자 기프티콘 보상</p>
+                                    <p class="fs-7">2. 수집 항목: 휴대폰 전화번호 </p>
+                                    <p class="fs-7">3. 보유 및 이용 기간: 이벤트 종료 후 1주일</p>
+                                </div>
+                                <input class="form-check-input" type="checkbox" id="gridCheck"
+                                    style="margin-left:1em; margin-top:-0.1em;">
+                                <label class="form-check-label ms-3" for="gridCheck">
+                                    동의합니다.
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-dark" onclick="submitFeedback()">제출하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-    
+
         toggleSpinner100(1, 1);
         initializeProfilePage();
 
@@ -308,7 +389,31 @@
             signOut();
         });
     </script>
+    <script> // 동의 체크 박스 
 
+            // 처음에 버튼은 비활성화 상태로 시작
+            $('#submitBtn').prop('disabled', true);
+
+            // 동의 체크박스 상태 변화 감지
+            $('#gridCheck').change(function () {
+                // 체크박스가 체크되었을 때
+                if ($(this).prop('checked')) {
+                    // 제출하기 버튼 활성화
+                    $('#submitBtn').prop('disabled', false);
+                } else {
+                    // 체크되지 않으면 제출하기 버튼 비활성화
+                    $('#submitBtn').prop('disabled', true);
+                }
+            });
+
+            // 제출 버튼 클릭 시 피드백을 처리하는 함수 (예시로 AJAX 요청)
+            $('#submitBtn').click(function () {
+                // 여기에 제출할 데이터를 수집하고 AJAX 요청을 처리하는 코드 추가
+                alert("피드백이 제출되었습니다.");
+                // 예를 들어, Ajax로 데이터를 서버에 전송하는 코드도 여기에 넣을 수 있음
+            });
+    
+    </script>
 
 
 </body>

@@ -7,3 +7,12 @@ let imageAspectRatioTarget = 0;  // Target 이미지 비율
 var generationsT = false;
 
 var apiGlobalURL = "https://whyding.site"
+// var apiGlobalURL = "http://127.0.0.1:8000"
+
+// 모달
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+    myInput.focus()
+})

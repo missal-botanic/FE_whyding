@@ -1,0 +1,34 @@
+/* 좌우 흔들림 애니메이션 */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    15% {
+        transform: translateX(-5px); /* 왼쪽으로 10px 이동 */
+    }
+    20% {
+        transform: translateX(5px); /* 오른쪽으로 10px 이동 */
+    }
+    35% {
+        transform: translateX(-5px); /* 왼쪽으로 10px 이동 */
+    }
+    45% {
+        transform: translateX(0); /* 원래 위치로 돌아옴 */
+    }
+    55% {
+        transform: translateX(0); /* 원래 위치로 돌아옴 */
+    }
+    65% {
+        transform: translateX(0); /* 원래 위치로 돌아옴 */
+    }
+    75% {
+        transform: translateX(0); /* 원래 위치로 돌아옴 */
+    }
+    100% {
+        transform: translateX(0); /* 원래 위치로 돌아옴 */
+    }
+}
+
+#event-toggle img {
+    animation: shake 5s infinite; /* 3초 대기 후 2초 흔들림, 무한 반복 */
+}
