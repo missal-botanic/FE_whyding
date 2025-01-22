@@ -41,17 +41,17 @@ $(document).ready(function () {
       <div class="col-md-4">
         <div class="gallery-item">
           <div class="gallery-image" style="background-image: url('${item.image || ''}');">
-            <button class="btn-share" data-id="${item.id}">
-              <i class="${item.is_public ? 'ri-lock-unlock-line' : 'ri-lock-fill'}"></i>
-            </button>
+            <button class="btn-share"><i class="ri-share-forward-line"></i></button>
             <button class="btn-download"><i class="ri-file-download-line"></i></button>
             <button class="btn-delete" data-id="${item.id}"><i class="ri-delete-bin-line"></i></button>
           </div>
+
         </div>
-        <div class="gallery-info">
-          <p class="fw-bold mt-2" id="isPublicText"><i class="ri-git-repository-private-fill fs-8"></i> ${item.is_public ? "공개" : "비공개"}</p>
-          <p class="font-small"> <i class="ri-calendar-fill fs-8"></i> ${formatDate(item.created_at)}</p>
-        </div>
+                  <div class="gallery-info ">
+            <p class="fw-bold mt-2"><i class="ri-git-repository-private-fill fs-8"></i> ${item.is_public ? "공개" : "비공개"}</p>
+            <p class="font-small"> <i class="ri-calendar-fill fs-8"></i> ${formatDate(item.created_at)}</p>
+            
+          </div>
       </div>
     `;
   }
@@ -85,7 +85,7 @@ $(document).ready(function () {
     const day = date.getDate().toString().padStart(2, '0'); // 일
 
     return `${year}${month}${day}`;
-  }
+}
 
   // 삭제 버튼 클릭 이벤트
   gallery.on("click", ".btn-delete", function () {
@@ -140,6 +140,12 @@ $(document).ready(function () {
     }
   }
 
+
+  // function formatDate(dateString) {
+  //   const options = { year: "numeric", month: "long", day: "numeric" };
+  //   return new Date(dateString).toLocaleDateString(undefined, options);
+  // } 
+
   // 페이지 번호 버튼 생성 함수
   function createPageButton(pageNum, currentPage) {
     return pageNum === currentPage
@@ -177,6 +183,7 @@ $(document).ready(function () {
   gallery.on("click", ".btn-download", function () {
     const backgroundImage = $(this).closest(".gallery-image").css("background-image");
     const imageUrl = backgroundImage.replace(/url\(["']?/, '').replace(/["']?\)$/, '');
+
     downloadImage(imageUrl);
   });
 
@@ -205,60 +212,6 @@ $(document).ready(function () {
       });
   }
 
-  // 공개/비공개 상태를 변경하는 함수
-  function togglePublicStatus(id, isPublic, button) {
-    
-    const accessToken = localStorage.getItem('access_token');
-    
-    // 보내는 데이터 형식
-    const data = {
-      content: "-",
-      is_public: isPublic
-    };
-    console.log(data,"변경완료")
-    $.ajax({
-      url: apiGlobalURL + `/api/articles/${id}/`,
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken}`,
-      },
-      data: JSON.stringify(data), // data를 JSON 형식으로 변환하여 전송
-      success: function (response) {
-        toggleSpinner75(0.5, 1)
-        // 상태 업데이트 후 아이콘 변경
-        if (isPublic) {
-          button.find('i').removeClass('ri-lock-fill').addClass('ri-lock-unlock-line');
-        } else {
-          button.find('i').removeClass('ri-lock-unlock-line').addClass('ri-lock-fill');
-        }
-        $('#content-area').load('album.html');
-
-
-        
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        let errorMessage = "상태 변경에 실패했습니다.";
-        if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-          errorMessage = jqXHR.responseJSON.message; // 서버에서 보내는 오류 메시지
-        }
-        alert(errorMessage);
-      }
-    });
-  }
-
   // 초기 데이터 로드
   fetchGalleryData(baseUrl);
-
-  // 공유 버튼 클릭 이벤트
-
-  gallery.on("click", ".btn-share", function () {
-    const id = $(this).data("id");
-    
-    // 클릭된 아이콘의 상태 확인 (비공개 상태 = true, 공개 상태 = false)
-    const isPublic = $(this).find('i').hasClass('ri-lock-fill'); // 현재 상태 (비공개)
-    
-    togglePublicStatus(id, isPublic, $(this)); // 상태 반전 후 전송
-  });
-  
 });
