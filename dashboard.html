@@ -62,6 +62,11 @@
             margin: 0;
             font-family: Arial, sans-serif;
         }
+
+        #likeButton:hover {
+    color: red; /* 마우스를 올렸을 때 아이콘 색상을 붉은색으로 변경 */
+    transform: scale(1.5); /* 마우스를 올렸을 때 크기를 3배로 키움 */
+}
     </style>
 
 
@@ -265,6 +270,42 @@
             signOut();
         });
     </script>
+
+
+<!-- 이미지 오버레이 -->
+<div id="imageOverlayPop" style="display: none; overflow: hidden;">
+    <div id="imageOverlayPop2" class="" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background-color: rgba(0, 0, 0, 0.7); display: flex; 
+        align-items: center; justify-content: center; z-index: 1000;">
+        <div class="overlay-content" style="width: 40%; background: #fff; padding: 20px; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <!-- 이미지 -->
+            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                <img id="overlayImage2" class="" src="" alt="" style="width: 100%; height: auto; border-radius: 3px;">
+                
+                <!-- 좋아요 버튼 (좌측 상단) -->
+                <div class="like-btn" id="likeButton" style="position: absolute; top: 10px; left: 10px; width: 60px; height: 60px; font-size: 35px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <!-- 원 배경 -->
+                    <div class="circle-background" style="position: absolute; width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.7); border-radius: 50%; z-index: -1; transition: all 0.3s ease;"></div>
+                    <i class="ri-heart-3-fill" style="z-index: 2;"></i> <!-- 하트 아이콘 -->
+                </div>
+                
+                <!-- 닫기 버튼 (우측 상단) -->
+                <button id="closeOverlay" class="close-btn" style="position: absolute; top: 10px; right: 10px; background: #fff; border-radius: 50%; border: none; font-size: 50px; cursor: pointer; color: #2f2f2f; padding: 0px;">
+                    <i class="ri-close-circle-fill"></i>
+                </button>
+            </div>
+
+            <!-- 정보 -->
+            <div class="d-flex justify-content-center" style="margin-top: 20px; color: #333; ">
+                <p id="overlayAuthor2" style="margin: 5px 0;"></p>
+                <p id="overlayDate2" style="margin: 5px 0;"></p>
+                <p id="overlayViewCount2" style="margin: 5px 0;"></p>
+                <p id="overlayLikeCount2" style="margin: 5px 0;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
