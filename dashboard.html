@@ -106,7 +106,7 @@
                 <h3>Dashboard</h3> <!-- 항목 제목 -->
             </div>
             <!-- 생성 항목 -->
-            <div id="generations" class="item" data-url="generations.html">
+            <div id="generations" class="item" data-url="middle1.html">
                 <i class="ri-women-line"></i>
                 <h3>Generate</h3>
             </div>
@@ -389,31 +389,7 @@
             signOut();
         });
     </script>
-    <script> // 동의 체크 박스 
 
-            // 처음에 버튼은 비활성화 상태로 시작
-            $('#submitBtn').prop('disabled', true);
-
-            // 동의 체크박스 상태 변화 감지
-            $('#gridCheck').change(function () {
-                // 체크박스가 체크되었을 때
-                if ($(this).prop('checked')) {
-                    // 제출하기 버튼 활성화
-                    $('#submitBtn').prop('disabled', false);
-                } else {
-                    // 체크되지 않으면 제출하기 버튼 비활성화
-                    $('#submitBtn').prop('disabled', true);
-                }
-            });
-
-            // 제출 버튼 클릭 시 피드백을 처리하는 함수 (예시로 AJAX 요청)
-            $('#submitBtn').click(function () {
-                // 여기에 제출할 데이터를 수집하고 AJAX 요청을 처리하는 코드 추가
-                alert("피드백이 제출되었습니다.");
-                // 예를 들어, Ajax로 데이터를 서버에 전송하는 코드도 여기에 넣을 수 있음
-            });
-    
-    </script>
 
 
 </body>

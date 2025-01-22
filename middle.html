@@ -1,106 +1,129 @@
+<head>
+    <script src="js/middle/public_album.js"></script>
 
-<div class="banner mt-5">
-    
-    <div class="share">
-        <i class="ri-share-forward-line"></i>
-        <i class="ri-more-fill"></i>
+    <style>
+        /* 이미지 컨테이너를 상대적으로 설정하여 하트를 절대적으로 배치 */
+        /* 이미지 컨테이너를 상대적으로 설정하여 하트를 절대적으로 배치 */
+        .image-container {
+            position: relative;
+            /* 이미지를 기준으로 하트를 위치시킴 */
+        }
+
+        /* 좋아요 버튼을 좌측 상단에 배치 */
+        .like2 {
+            position: absolute;
+            left: 15px;
+            /* 왼쪽 상단에 배치 */
+            top: 15px;
+            /* 상단 여백 */
+            background: rgba(255, 255, 255, 0.6);
+            padding: 8px 8px 5px;
+            font-size: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .like2:hover {
+            color: #f86161;
+        }
+
+        /* 이미지 스타일 */
+        .card-img-top {
+            border-radius: 30px;
+        }
+
+        /* 카드 본문 스타일 */
+        .card-body {
+            padding: 10px;
+            /* background-color: #fff; */
+            /* border-radius: 0 0 30px 30px; */
+            /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        .card-text {
+            font-size: 14px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <div class="banner mt-5">
+        <div class="share">
+            <i class="ri-share-forward-line"></i>
+            <i class="ri-more-fill"></i>
+        </div>
+        <div class="video-info">
+            <div class="item">
+                <h3>Best Image of the Month :</h3>
+            </div>
+            <div class="item">
+                <i class="ri-thumb-up-line"></i>
+                <h3>230</h3>
+            </div>
+            <div class="item">
+                <i class="ri-eye-line"></i>
+                <h3>1920</h3>
+            </div>
+            <div class="item">
+                <i class="ri-calendar-line"></i>
+                <h3>20 Mar</h3>
+            </div>
+            <div class="item">
+                <i class="ri-bookmark-line"></i>
+                <h3>310</h3>
+            </div>
+        </div>
+        <video src="assets/videos/banner.mp4" muted loop autoplay></video>
     </div>
-    <div class="video-info">
-        <div class="item">
-            <h3>Best Image of the Month :</h3>
+
+
+    <div class="container py-4">
+        <div id="pagination" class="d-flex justify-content-center">
+            <!-- 페이지네이션 버튼이 여기에 동적으로 추가됩니다. -->
         </div>
-        <div class="item">
-            <i class="ri-thumb-up-line"></i>
-            <h3>230</h3>
-        </div>
-        <div class="item">
-            <i class="ri-eye-line"></i>
-            <h3>1920</h3>
-        </div>
-        <div class="item">
-            <i class="ri-calendar-line"></i>
-            <h3>20 Mar</h3>
-        </div>
-        <div class="item">
-            <i class="ri-bookmark-line"></i>
-            <h3>310</h3>
+        <div id="gallery" class="row gx-4 px-5 py-3">
+            <!-- JavaScript로 갤러리 아이템이 추가될 영역 -->
         </div>
     </div>
-    <video src="assets/videos/banner.mp4" muted loop autoplay></video>
-</div>
 
-<div class="separator">
-    <!-- 연회장 -->
-    <h3>BANQUET</h3>
-    <div class="categories">
-        <a class="active">신부<br>(Bride)</a>
-        <a>신랑<br>(Groom)</a>
-        <a>커플<br>(Bride and Groom)</a>
-        <a>화이트 드레드<br>(White)</a>
-        <a>블랙 드레스<br>(Black)</a>
-        <a>컬러 드레스<br>(Color)</a>
-    </div>
-</div>
-
-<div class="video-items">
-    <div class="item">
-        <div class="like">
-            <i class="ri-heart-3-fill"></i>
-        </div>
-        <img src="assets/images/001.jpg" style="width: 100%; height: auto; border-radius: 30px;">
-
-        <div class="details">
-            <h3>lunarecho</h3>
-            <div class="info">
-                <div class="location">
-                    <i class="ri-calendar-schedule-line"></i>
-                    <h5>250101</h5>
-                </div>
-                <div class="rate">
-                    <i class="ri-star-fill"></i>
-                    <h5>4.9</h5>
-                </div>
+    <!-- 모달 -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="post-detail">
+                <!-- 게시물 내용이 여기에 동적으로 추가됩니다. -->
             </div>
         </div>
     </div>
-    <div class="item">
-        <div class="like">
-            <i class="ri-heart-3-fill"></i>
-        </div>
-        <img src="assets/images/002.jpg" style="width: 100%; height: auto; border-radius: 30px;">
-        <div class="details">
-            <h3>nebula211</h3>
-            <div class="info">
-                <div class="location">
-                    <i class="ri-calendar-schedule-line"></i>
-                    <h5>250115</h5>
-                </div>
-                <div class="rate">
-                    <i class="ri-star-fill"></i>
-                    <h5>4.3</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="item">
-        <div class="like">
-            <i class="ri-heart-3-fill"></i>
-        </div>
-        <img src="assets/images/003.jpg" style="width: 100%; height: auto; border-radius: 30px;">
-        <div class="details">
-            <h3>93zephyr</h3>
-            <div class="info">
-                <div class="location">
-                    <i class="ri-calendar-schedule-line"></i>
-                    <h5>250111</h5>
-                </div>
-                <div class="rate">
-                    <i class="ri-star-fill"></i>
-                    <h5>4.8</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
+    <!-- 모달 스크립트 -->
+    <script>
+        $(document).ready(function() {
+    fetchGalleryData();  // 페이지가 로드될 때마다 데이터를 로드
+})
+
+        // 모달 관련 변수
+        const modal = document.getElementById('postModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // 모달 닫기
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+</body>
