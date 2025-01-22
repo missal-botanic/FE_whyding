@@ -117,7 +117,7 @@ $(document).on('click', '.like2', function () {
         },
         success: function (response) {
             alert(response.message); // 알림
-            // loadGallery(apiGlobalURL + '/api/articles/public_articles/', '#gallery-middle');
+            loadGallery(apiGlobalURL + '/api/articles/public_articles/', '#gallery-middle');
         },
         error: function () {
             alert('오류가 발생했습니다. 다시 시도해주세요.');
