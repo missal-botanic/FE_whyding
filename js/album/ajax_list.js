@@ -225,16 +225,16 @@ $(document).ready(function () {
       },
       data: JSON.stringify(data), // data를 JSON 형식으로 변환하여 전송
       success: function (response) {
-        toggleSpinner75(0.5, 1)
-        // 상태 업데이트 후 아이콘 변경
+
         if (isPublic) {
           button.find('i').removeClass('ri-lock-fill').addClass('ri-lock-unlock-line');
         } else {
           button.find('i').removeClass('ri-lock-unlock-line').addClass('ri-lock-fill');
         }
-        $('#content-area').load('album.html');
 
-
+//페이지 기억시키고 재로딩
+        const currentPageUrl = `${baseUrl}?page=${currentPage}`;
+        fetchGalleryData(currentPageUrl);
         
       },
       error: function (jqXHR, textStatus, errorThrown) {

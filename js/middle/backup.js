@@ -8,7 +8,7 @@
     
 // 게시물 상세 정보를 모달에 띄우는 함수
 function showPostDetail(postId) {
-    const postUrl = `http://127.0.0.1:8000/api/articles/${postId}/`;
+    const postUrl = apiGlobalURL + `/api/articles/${postId}/`;
     $.get(postUrl, function (data) {
         const postContent = `
             <h1>${data.title}</h1>
@@ -37,7 +37,7 @@ function showPostDetail(postId) {
 // 조회수 증가 함수
 function increaseViewCount(postId) {
     $.ajax({
-        url: `http://127.0.0.1:8000/api/articles/${postId}/`,
+        url: apiGlobalURL + `/api/articles/${postId}/`,
         type: 'PATCH',
         data: {
             view_count: 1
@@ -70,7 +70,7 @@ function toggleLikePost(postId) {
 
         // 서버에 좋아요 취소 요청
         $.ajax({
-            url: `http://127.0.0.1:8000/api/articles/${postId}/like/`,
+            url: apiGlobalURL + `/api/articles/${postId}/like/`,
             type: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -92,7 +92,7 @@ function toggleLikePost(postId) {
 
         // 서버에 좋아요 추가 요청
         $.ajax({
-            url: `http://127.0.0.1:8000/api/articles/${postId}/like/`,
+            url: apiGlobalURL + `/api/articles/${postId}/like/`,
             type: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

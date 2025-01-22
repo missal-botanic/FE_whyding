@@ -96,3 +96,39 @@ pagination.on('click', '#next', function () {
     fetchGalleryData(newPageUrl);
 });
 
+
+$(document).on('click', '.like2', function () {
+    const postId = $(this).closest('.gallery-item').data('id');  // 게시물 ID 가져오기
+    const accessToken = localStorage.getItem('access_token');  // access_token 가져오기
+
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+    const likeButton = $(this); // 클릭된 좋아요 버튼을 변수에 저장
+
+    // 좋아요 버튼 클릭시 AJAX 요청 보내기
+    $.ajax({
+        url: apiGlobalURL + `/api/articles/${postId}/like/`,
+        method: "POST",
+        headers: { 'Authorization': 'Bearer ' + accessToken },
+        dataType: 'json',
+        contentType: 'application/json',
+        timeout: 100000,
+        success: function (response) {
+            // 서버에서 받은 응답 메시지
+            const message = response.message;
+            alert(message);  // 기본 브라우저 알림으로 표시
+
+            // 성공적인 응답 후 like_count를 업데이트
+            // 현재 페이지의 게시물 목록을 다시 가져오고 렌더링
+            fetchGalleryData();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // 에러 처리
+            alert('오류가 발생했습니다. 다시 시도해주세요.');
+        }
+    });
+});
+
