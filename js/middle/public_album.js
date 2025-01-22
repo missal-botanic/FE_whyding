@@ -19,14 +19,17 @@ function renderGalleryItems(items) {
     items.forEach(item => {
         const galleryItem = `
 <div class="col-md-4 mb-4 gallery-item" data-id="${item.id}">
-    <div class="item">
+    <div class="item hover-img">
         <div class="image-container">
             <div class="like2">
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <img src="${item.image}" class="card-img-top" alt="${item.title}" style="width: 100%; height: auto; border-radius: 30px;">
+            <img src="${item.image}" class="card-img-top" alt="${item.title}" 
+                style="width: 100%; height: auto; border-radius: 30px; cursor: pointer;">
             <div class="card-body">
-                <p class="card-text"> <i class="ri-eye-fill"></i> ${item.view_count} | <i class="ri-star-fill"></i> ${item.like_count}</p>
+                <p class="card-text"> 
+                    <i class="ri-eye-fill"></i> ${item.view_count} | <i class="ri-star-fill"></i> ${item.like_count}
+                </p>
             </div>
         </div>
     </div>

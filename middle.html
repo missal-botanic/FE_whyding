@@ -1,5 +1,6 @@
 <head>
     <script src="js/middle/public_album.js"></script>
+    <script src="js/middle/modal.js"></script>
 
     <style>
         /* 이미지 컨테이너를 상대적으로 설정하여 하트를 절대적으로 배치 */
@@ -47,19 +48,30 @@
         }
     </style>
 
+<style>
 
+    /* 마우스 올렸을 때 확대 효과 */
+    .hover-img {
+        width: 100%;
+        height: auto;
+        border-radius: 30px;
+        transition: transform 0.3s ease-in-out;  /* 부드러운 애니메이션 */
+    }
 
+    .hover-img:hover {
+        transform: scale(1.1);  /* 마우스를 올렸을 때 10% 확대 */
+    }
+</style>
 
 </head>
 
 
-
 <body>
     <div class="banner mt-5">
-        <div class="share">
+        <!-- <div class="share">
             <i class="ri-share-forward-line"></i>
             <i class="ri-more-fill"></i>
-        </div>
+        </div> -->
         <div class="video-info">
             <div class="item">
                 <h3>Best Image of the Month :</h3>
@@ -95,36 +107,35 @@
     </div>
 
     <!-- 모달 -->
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="post-detail">
-                <!-- 게시물 내용이 여기에 동적으로 추가됩니다. -->
+    <div id="imageOverlay" style="display: none; overflow: hidden;">
+    <div id="imageOverlay2" class="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0, 0, 0, 0.7); display: flex; 
+    align-items: center; justify-content: center; z-index: 1000;  ">
+        <div class="overlay-content" style="position: relative; width: 40%; max-width: 900px; 
+        background: #fff; padding: 20px; border-radius: 3px; 
+        text-align: center; display: flex; flex-direction: column; 
+        align-items: center; justify-content: center;">
+            <button id="closeOverlay" class="close-btn " style="position: absolute; top: 10px; right: 10px; 
+            background: #fff; border: none; font-size: 50px;  border-radius: 100px;
+            cursor: pointer; color: #2f2f2f;"><i class="ri-close-circle-fill"></i></button>
+            <img id="overlayImage" class="overlay-img" src="" alt=""
+                style="width: 100%; height: auto; border-radius: 3px;">
+            <div class="overlay-info d-flex justify-content-center" style="margin-top: 20px; color: #333;">
+                <p id="overlayAuthor" style="margin: 5px 0;"></p>
+                <p id="overlayDate" style="margin: 5px 0;"></p>
+                <p id="overlayViewCount" style="margin: 5px 0;"></p>
+                <p id="overlayLikeCount" style="margin: 5px 0;"></p>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- 모달 스크립트 -->
     <script>
-        $(document).ready(function() {
-    fetchGalleryData();  // 페이지가 로드될 때마다 데이터를 로드
-})
+        $(document).ready(function () {
+            fetchGalleryData();  // 페이지가 로드될 때마다 데이터를 로드
+        })
 
-        // 모달 관련 변수
-        const modal = document.getElementById('postModal');
-        const closeBtn = document.getElementsByClassName('close')[0];
-
-        // 모달 닫기
-        closeBtn.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
     </script>
 
 
