@@ -1,139 +1,139 @@
-const baseUrl = apiGlobalURL + '/api/articles/public_articles/';
-
-let currentPage = 1;
-const pagination = $('#pagination');
-const gallery = $('#gallery');
-
-// 게시물 데이터를 가져오는 함수
-function fetchGalleryData() {
-    const url = baseUrl + `?page=${currentPage}`;  // 현재 페이지에 맞는 URL 생성
+// 갤러리 로드 함수
+function loadGallery(url, containerId) {
+    // API 호출
     $.get(url, function (data) {
-        renderGalleryItems(data.results);
-        renderPagination(data.next, data.previous, data.count, currentPage);
+        // 받은 데이터에서 'results' 배열을 가져옴
+        const articles = data.results;
+
+        // 갤러리 아이템을 저장할 HTML 내용
+        let galleryHTML = '';
+
+        // 최대 9개의 이미지로 갤러리 구성
+        for (let i = 0; i < Math.min(9, articles.length); i++) {
+            const article = articles[i];
+
+            // 이미지가 있을 때만 처리
+            if (article.image) {
+                galleryHTML += `
+                    <div class="col-md-4 mb-4 gallery-item" data-id="${article.id}">
+                        <div class="item hover-img">
+                            <div class="image-container">
+                                <div class="like2">
+                                    <i class="ri-heart-3-fill"></i>
+                                </div>
+                                <img src="${article.image}" class="card-img-top" alt="${article.title}" 
+                                     style="width: 100%; height: auto; border-radius: 30px; cursor: pointer;">
+                                <div class="card-body">
+                                    <p class="card-text"> 
+                                        <i class="ri-eye-fill"></i> ${article.view_count} | <i class="ri-star-fill"></i> ${article.like_count}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // 갤러리 영역에 HTML 삽입
+        $(containerId).html(galleryHTML);
     });
 }
 
-// 게시물 아이템 렌더링 함수  img/generations/source.jpg ${item.author.username}
-function renderGalleryItems(items) {
-    gallery.empty();
-    items.forEach(item => {
-        const galleryItem = `
-<div class="col-md-4 mb-4 gallery-item" data-id="${item.id}">
-    <div class="item hover-img">
-        <div class="image-container">
-            <div class="like2">
-                <i class="ri-heart-3-fill"></i>
-            </div>
-            <img src="${item.image}" class="card-img-top" alt="${item.title}" 
-                style="width: 100%; height: auto; border-radius: 30px; cursor: pointer;">
-            <div class="card-body">
-                <p class="card-text"> 
-                    <i class="ri-eye-fill"></i> ${item.view_count} | <i class="ri-star-fill"></i> ${item.like_count}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-        `;
-        gallery.append(galleryItem);
+// 페이지네이션 로드 함수
+function loadPagination(url, containerId) {
+    $.get(url, function (data) {
+        const totalCount = data.count;
+        const nextUrl = data.next;
+        const prevUrl = data.previous;
+
+        const itemsPerPage = 9;
+        const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+        // 페이지네이션 버튼 HTML
+        let paginationHTML = '';
+
+        // 이전 버튼
+        if (prevUrl) {
+            paginationHTML += '<button id="prev" class="btn btn-dark mx-2 btn-sm">이전</button>';
+        } else {
+            paginationHTML += '<button id="prev" class="btn btn-secondary mx-2 btn-sm" disabled>이전</button>';
+        }
+
+        // 페이지 번호 버튼
+        const currentPage = getQueryParam('page', url) || 1;
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += `
+                <button class="btn btn-sm mx-1 ${i === currentPage ? 'btn-dark active' : 'btn-secondary'}" 
+                        data-page="${i}">${i}</button>
+            `;
+        }
+
+        // 다음 버튼
+        if (nextUrl) {
+            paginationHTML += '<button id="next" class="btn btn-dark mx-2 btn-sm">다음</button>';
+        } else {
+            paginationHTML += '<button id="next" class="btn btn-secondary mx-2 btn-sm" disabled>다음</button>';
+        }
+
+        // 페이지네이션 삽입
+        $(containerId).html(paginationHTML);
     });
 }
-// 페이지네이션 렌더링 함수
-function renderPagination(nextUrl, prevUrl, totalCount, currentPage) {
-    pagination.empty();
-    const itemsPerPage = 9;
-    const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-    renderPaginationButtons(prevUrl, nextUrl, currentPage, totalPages);
-}
-
-// 페이지네이션 버튼 생성 함수
-function renderPaginationButtons(prevUrl, nextUrl, currentPage, totalPages) {
-    if (prevUrl) {
-        pagination.append('<button id="prev" class="btn btn-dark mx-2 btn-sm">이전</button>');
-    } else {
-        pagination.append('<button id="prev" class="btn btn-secondary mx-2 btn-sm" disabled>이전</button>');
+// 페이지네이션 버튼 클릭 이벤트
+$(document).on('click', '#pagination-middle button', function () {
+    const currentPage = $(this).data('page');
+    if (currentPage) {
+        const url = apiGlobalURL + `/api/articles/public_articles/?page=${currentPage}`;
+        loadGallery(url, '#gallery-middle');
+        loadPagination(url, '#pagination-middle');
     }
 
-    for (let i = 1; i <= totalPages; i++) {
-        pagination.append(createPageButton(i, currentPage));
-    }
-
-    if (nextUrl) {
-        pagination.append('<button id="next" class="btn btn-dark mx-2 btn-sm">다음</button>');
-    } else {
-        pagination.append('<button id="next" class="btn btn-secondary mx-2 btn-sm" disabled>다음</button>');
-    }
-}
-
-// 페이지 번호 버튼 생성 함수
-function createPageButton(pageNum, currentPage) {
-    return pageNum === currentPage
-        ? `<button class="btn btn-dark mx-2 btn-sm active">${pageNum}</button>`
-        : `<button class="btn btn-secondary mx-2 btn-sm">${pageNum}</button>`;
-}
-
-// 페이지 번호 버튼 클릭 이벤트
-pagination.on('click', 'button', function () {
-    const pageNum = $(this).text();
-    if (!isNaN(pageNum)) {
-        currentPage = parseInt(pageNum);
-        const newPageUrl = `${baseUrl}?page=${currentPage}`;
-        fetchGalleryData(newPageUrl);
+    if ($(this).attr('id') === 'prev' || $(this).attr('id') === 'next') {
+        const url = apiGlobalURL + `/api/articles/public_articles/?page=${currentPage + ($(this).attr('id') === 'prev' ? -1 : 1)}`;
+        loadGallery(url, '#gallery-middle');
+        loadPagination(url, '#pagination-middle');
     }
 });
 
-// 이전 페이지 버튼 클릭 이벤트
-pagination.on('click', '#prev', function () {
-    if (currentPage > 1) {
-        currentPage--;
-        const newPageUrl = `${baseUrl}?page=${currentPage}`;
-        fetchGalleryData(newPageUrl);
-    }
-});
-
-// 다음 페이지 버튼 클릭 이벤트
-pagination.on('click', '#next', function () {
-    currentPage++;
-    const newPageUrl = `${baseUrl}?page=${currentPage}`;
-    fetchGalleryData(newPageUrl);
-});
-
-
+// 좋아요 기능 처리
 $(document).on('click', '.like2', function () {
-    const postId = $(this).closest('.gallery-item').data('id');  // 게시물 ID 가져오기
-    const accessToken = localStorage.getItem('access_token');  // access_token 가져오기
+    const postId = $(this).closest('.gallery-item').data('id');
+    const accessToken = localStorage.getItem('access_token');
 
     if (!accessToken) {
         alert("로그인이 필요합니다.");
         return;
     }
 
-    const likeButton = $(this); // 클릭된 좋아요 버튼을 변수에 저장
+    const likeButton = $(this);
 
-    // 좋아요 버튼 클릭시 AJAX 요청 보내기
     $.ajax({
         url: apiGlobalURL + `/api/articles/${postId}/like/`,
-        method: "POST",
-        headers: { 'Authorization': 'Bearer ' + accessToken },
-        dataType: 'json',
-        contentType: 'application/json',
-        timeout: 100000,
-        success: function (response) {
-            // 서버에서 받은 응답 메시지
-            const message = response.message;
-            alert(message);  // 기본 브라우저 알림으로 표시
-
-            // 성공적인 응답 후 like_count를 업데이트
-            // 현재 페이지의 게시물 목록을 다시 가져오고 렌더링
-            fetchGalleryData();
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // 에러 처리
+        success: function (response) {
+            alert(response.message); // 알림
+            // loadGallery(apiGlobalURL + '/api/articles/public_articles/', '#gallery-middle');
+        },
+        error: function () {
             alert('오류가 발생했습니다. 다시 시도해주세요.');
         }
     });
 });
 
+// 쿼리 파라미터 추출 함수
+function getQueryParam(name, url) {
+    const urlParams = new URLSearchParams(url);
+    return urlParams.get(name);
+}
 
-
+// 페이지 로드 시 첫 번째 페이지 로드
+$(document).ready(function () {
+    const firstPageUrl = apiGlobalURL + '/api/articles/public_articles/?page=1';
+    loadGallery(firstPageUrl, '#gallery-middle');
+    loadPagination(firstPageUrl, '#pagination-middle');
+});

@@ -1,5 +1,4 @@
-$(document).ready(function () {
-    fetchGalleryData();  // 페이지가 로드될 때마다 데이터를 로드
+$(document).ready(function () { 
 
     // 이미지 클릭 시 오버레이 띄우기 (이벤트 위임 방식 사용)
     $(document).on("click", ".gallery-item img", function () {

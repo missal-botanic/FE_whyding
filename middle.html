@@ -68,10 +68,6 @@
 
 <body>
     <div class="banner mt-5">
-        <!-- <div class="share">
-            <i class="ri-share-forward-line"></i>
-            <i class="ri-more-fill"></i>
-        </div> -->
         <div class="video-info">
             <div class="item">
                 <h3>Best Image of the Month :</h3>
@@ -98,10 +94,10 @@
 
 
     <div class="container py-4">
-        <div id="pagination" class="d-flex justify-content-center">
+        <div id="pagination-middle" class="d-flex justify-content-center">
             <!-- 페이지네이션 버튼이 여기에 동적으로 추가됩니다. -->
         </div>
-        <div id="gallery" class="row gx-4 px-5 py-3">
+        <div id="gallery-middle" class="row gx-4 px-5 py-3">
             <!-- JavaScript로 갤러리 아이템이 추가될 영역 -->
         </div>
     </div>
@@ -126,21 +122,13 @@
                 <p id="overlayViewCount" style="margin: 5px 0;"></p>
                 <p id="overlayLikeCount" style="margin: 5px 0;"></p>
             </div>
-            <!-- <button id="likeButtonMiddle" class="like-btn" style="padding: 10px 20px; background-color: #f0f0f0; border: none; cursor: pointer; border-radius: 5px; font-size: 16px;">
-                <i class="ri-heart-3-fill"></i> Like
-            </button> -->
-            
         </div>
     </div>
 </div>
 
-
-    <script>
-        $(document).ready(function () {
-            fetchGalleryData();  // 페이지가 로드될 때마다 데이터를 로드
-        })
-
-    </script>
+<script>
+    // fetchGalleryData2("데이터가 성공적으로 로드되었습니다.");
+</script>
 
 
 </body>

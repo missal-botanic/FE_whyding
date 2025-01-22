@@ -1,0 +1,56 @@
+
+/* 이미지 컨테이너를 상대적으로 설정하여 하트를 절대적으로 배치 */
+.image-container {
+    position: relative;
+    /* 이미지를 기준으로 하트를 위치시킴 */
+}
+
+/* 좋아요 버튼을 좌측 상단에 배치 */
+.like2 {
+    position: absolute;
+    left: 15px;
+    /* 왼쪽 상단에 배치 */
+    top: 15px;
+    /* 상단 여백 */
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 8px 5px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.like2:hover {
+    color: #f86161;
+}
+
+/* 이미지 스타일 */
+.card-img-top {
+    border-radius: 30px;
+}
+
+/* 카드 본문 스타일 */
+.card-body {
+    padding: 10px;
+    /* background-color: #fff; */
+    /* border-radius: 0 0 30px 30px; */
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.card-text {
+    font-size: 14px;
+    margin: 0;
+}
+
+    /* 마우스 올렸을 때 확대 효과 */
+.hover-img {
+width: 100%;
+height: auto;
+border-radius: 30px;
+transition: transform 0.3s ease-in-out;  /* 부드러운 애니메이션 */
+}
+
+.hover-img:hover {
+transform: scale(1.1);  /* 마우스를 올렸을 때 10% 확대 */
+}

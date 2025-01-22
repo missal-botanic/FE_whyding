@@ -50,6 +50,11 @@ $(document).ready(function () {
             generationsT = true;
             // $('#gal-quarter option[value="tuxedo"]').prop('selected', true);
         }
+        // if ($(this).attr('id') === "middle") {
+        //     $('#content-area').load('middle.html');
+        // }
+
+        
     });
     
 });

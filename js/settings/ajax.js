@@ -21,7 +21,7 @@ $(document).ready(function () {
                 $('#email').text(data.email || '없음');
                 $('#introduction').text(data.introduction || '');
                 if (data.profile_image) {
-                    $('#profile-image').attr('src', apiGlobalURL + data.profile_image);
+                    $('#profile-image').attr('src', data.profile_image);
                 } else {
                     $('#profile-image').attr('src', 'img/profile/default-profile.jpg');
                 }
