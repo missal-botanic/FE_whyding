@@ -177,33 +177,89 @@ $(document).ready(function () {
   gallery.on("click", ".btn-download", function () {
     const backgroundImage = $(this).closest(".gallery-image").css("background-image");
     const imageUrl = backgroundImage.replace(/url\(["']?/, '').replace(/["']?\)$/, '');
-    downloadImage(imageUrl);
-  });
-
-  // 이미지 다운로드 함수
-  function downloadImage(imageUrl) {
-    fetch(imageUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("이미지를 다운로드할 수 없습니다.");
-        }
-        return response.blob();
-      })
-      .then(blob => {
-        const blobUrl = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = blobUrl;
-        a.download = imageUrl.split('/').pop();
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(blobUrl);
+  
+    // 이미지를 Base64로 변환하여 다운로드 처리
+    convertImageToBase64(imageUrl)
+      .then(base64Image => {
+        downloadBase64Image(base64Image, imageUrl.split('/').pop());
       })
       .catch(error => {
-        console.error("다운로드 오류:", error);
-        alert("이미지를 다운로드할 수 없습니다.");
+        console.error("이미지 변환 오류:", error);
+        alert("이미지를 변환할 수 없습니다.");
       });
+  });
+  
+  // 이미지 URL을 Base64로 변환하는 함수
+  function convertImageToBase64(imageUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'Anonymous'; // CORS 문제를 방지하기 위한 설정
+  
+      img.onload = function () {
+        // Canvas로 이미지를 그리기
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+  
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+  
+        // Base64로 인코딩한 이미지 데이터 얻기
+        const base64Image = canvas.toDataURL("image/jpeg"); // 형식은 필요에 따라 변경 가능
+  
+        resolve(base64Image);
+      };
+  
+      img.onerror = function () {
+        reject("이미지 로드 오류");
+      };
+  
+      img.src = imageUrl; // 이미지 URL 설정
+    });
   }
+  
+  // Base64로 변환된 이미지를 다운로드하는 함수
+  function downloadBase64Image(base64Image, filename) {
+    const a = document.createElement("a");
+    a.href = base64Image;
+    a.download = filename; // 파일명 설정
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
+  
+  
+
+//   // 이미지 다운로드 함수
+//  function downloadImage(imageUrl) {
+//   // 상대 경로일 경우 전체 URL로 변환
+//   if (imageUrl.startsWith('/')) {
+//     imageUrl = window.location.origin + imageUrl;
+//   }
+
+//   fetch(imageUrl)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error("이미지를 다운로드할 수 없습니다.");
+//       }
+//       return response.blob();
+//     })
+//     .then(blob => {
+//       const blobUrl = URL.createObjectURL(blob);
+//       const a = document.createElement("a");
+//       a.href = blobUrl;
+//       a.download = imageUrl.split('/').pop(); // 파일 이름 추출
+//       document.body.appendChild(a);
+//       a.click();
+//       document.body.removeChild(a);
+//       URL.revokeObjectURL(blobUrl);
+//     })
+//     .catch(error => {
+//       console.error("다운로드 오류:", error);
+//       alert("이미지를 다운로드할 수 없습니다.");
+//     });
+// }
 
   // 공개/비공개 상태를 변경하는 함수
   function togglePublicStatus(id, isPublic, button) {
@@ -261,4 +317,4 @@ $(document).ready(function () {
     togglePublicStatus(id, isPublic, $(this)); // 상태 반전 후 전송
   });
   
-});
+}); 

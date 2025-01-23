@@ -13,7 +13,7 @@ $(document).ready(function () {
                 $('#overlayAuthor2').html(`<i class="ri-user-fill"></i> ${data.author.username}&nbsp;|&nbsp;`);
                 $('#overlayDate2').html(`<i class="ri-calendar-fill"></i> ${formatDate(data.created_at)}&nbsp;|&nbsp;`);
                 $('#overlayViewCount2').html(`<i class="ri-eye-fill"></i> ${data.view_count}&nbsp;|&nbsp;`);
-                $('#overlayLikeCount2').html(`<i class="ri-star-fill"></i> ${data.like_count}&nbsp;`);
+                $('#overlayLikeCount2').html(`<i class="ri-heart-3-fill"></i>  ${data.like_count}&nbsp;`);
             
                 // 오버레이 표시
                 $('#imageOverlayPop').fadeIn();

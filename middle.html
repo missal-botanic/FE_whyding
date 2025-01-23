@@ -97,7 +97,7 @@
         <div id="pagination-middle" class="d-flex justify-content-center">
             <!-- 페이지네이션 버튼이 여기에 동적으로 추가됩니다. -->
         </div>
-        <div id="gallery-middle" class="row gx-4 px-5 py-3">
+        <div id="gallery-middle" class="row gx-4 mx-4 px-5 py-3">
             <!-- JavaScript로 갤러리 아이템이 추가될 영역 -->
         </div>
     </div>
@@ -105,18 +105,18 @@
     <!-- 모달 -->
     <div id="imageOverlay" style="display: none; overflow: hidden;">
     <div id="imageOverlay2" class="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background-color: rgba(0, 0, 0, 0.7); display: flex; 
+    background-color: rgba(0, 0, 0, 0.7); display: flex; backdrop-filter: blur(10px);
     align-items: center; justify-content: center; z-index: 1000;  ">
         <div class="overlay-content" style="position: relative; width: 40%; max-width: 900px; 
-        background: #fff; padding: 20px; border-radius: 3px; 
+        background: #ffffff00; padding: 20px; border-radius: 3px; 
         text-align: center; display: flex; flex-direction: column; 
         align-items: center; justify-content: center;">
-            <button id="closeOverlay" class="close-btn " style="position: absolute; top: 10px; right: 10px; 
+            <button id="closeOverlay" class="close-btn " style="position: absolute; top: 10px; right: 10px;  width: 60px; height: 60px;
             background: #fff; border: none; font-size: 50px;  border-radius: 100px;
             cursor: pointer; color: #2f2f2f;"><i class="ri-close-circle-fill"></i></button>
             <img id="overlayImage" class="overlay-img" src="" alt=""
-                style="width: 100%; height: auto; border-radius: 3px;">
-            <div class="overlay-info d-flex justify-content-center" style="margin-top: 20px; color: #333;">
+                style="width: 100%; height: auto; border-radius: 30px;">
+            <div class="overlay-info d-flex justify-content-center" style="margin-top: 20px; color: #ffffff;">
                 <p id="overlayAuthor" style="margin: 5px 0;"></p>
                 <p id="overlayDate" style="margin: 5px 0;"></p>
                 <p id="overlayViewCount" style="margin: 5px 0;"></p>
